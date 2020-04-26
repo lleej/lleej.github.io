@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="107.Go命令之go test">
+
+
+
+
+  <meta name="keywords" content="技术博客 前端 Node Python AI">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深思阁">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.2">
+
+
+
+<link rel="canonical" href="http://blog.go2sts.com/2020/04/15/107Go命令test/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.2">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "qhKGP5WaH1jdzfAxC8naEyh8-gzGzoHsz",
+      appKey: "c1ffihM5AQSGtv4rwj3aaHeI"
+    });
+  </script>
+
+
+
+
+
+<script>
+  window.config = {"leancloud":{"app_id":"qhKGP5WaH1jdzfAxC8naEyh8-gzGzoHsz","app_key":"c1ffihM5AQSGtv4rwj3aaHeI"},"toc":true,"fancybox":true,"pjax":true};
+</script>
+
+    <title> 107.Go命令之go test - 深思阁 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">深思阁</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">深思阁</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          107.Go命令之go test
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2020-04-15
+        </span>
+        
+          <span class="post-category">
+            
+              <a href="/categories/Go命令/">Go命令</a>
+            
+          </span>
+        
+        
+        <span class="post-visits" data-url="/2020/04/15/107Go命令test/" data-title="107.Go命令之go test">
+          阅读次数 0
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#用途"><span class="toc-text">用途</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#命令标记"><span class="toc-text">命令标记</span></a></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <p>摘要：本节介绍<code>Go</code>命令中的<code>go test</code>程序测试…</p>
+<a id="more"></a>
+<h2 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h2><p>对<code>Go</code>语言编写的程序进行测试。这种测试是以代码包为单位的，命令会自动测试每一个指定的代码包。</p>
+<p>被测试代码包中要有对应的测试代码文件，即文件名以<code>_test</code>为后缀，内含若干测试函数的源码文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ go <span class="built_in">test</span> 包名1 [包名2] ...</span><br></pre></td></tr></table></figure>
+<p>可以一次测试多个代码包，代码包使用导入路径格式，多个代码包间使用空格分割。在执行完所有代码包中的测试文件之后，会以代码包为单位打印出测试概要信息。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ go <span class="built_in">test</span> hello hello/other</span><br><span class="line">ok      hello   		0.422s</span><br><span class="line">?       hello/other     [no <span class="built_in">test</span> files]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>第一列代表测试结果。<code>ok</code>表示测试通过</li>
+<li>第二列代表测试包名。<code>hello</code>测试代码包名称</li>
+<li>第三列代表测试用时。<code>0.422s</code>表示测试用时</li>
+</ul>
+<p>注意：第二行没有测试结果和测试时间，是因为<code>hello/other</code>包中没有任何测试文件和测试函数</p>
+<h2 id="命令标记"><a href="#命令标记" class="headerlink" title="命令标记"></a>命令标记</h2><p><code>go build</code>中可使用的标记，大多可以在<code>go test</code>中使用，毕竟后者也要先进行编译的工作。</p>
+<table>
+<thead>
+<tr>
+<th>标记名称</th>
+<th>标记描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-c</td>
+<td>生成用于运行测试的可执行文件，但不执行。<br>可执行文件命名为“pkg.test”，其中“pkg”为被测试代码包的导入路径的最后一个元素名</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>安装/重新安装运行测试所需的依赖包，但不编译和运行测试代码</td>
+</tr>
+<tr>
+<td>-o</td>
+<td>指定用于运行测试的可执行文件的名称。<br>追加该标记不会影响测试代码的运行，除非同时追加了标记<code>-c</code>或<code>-i</code></td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="http://blog.go2sts.com">lleej</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="http://blog.go2sts.com/2020/04/15/107Go命令test/">http://blog.go2sts.com/2020/04/15/107Go命令test/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Go命令/">Go命令</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2020/04/15/109Go命令env/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">109.Go命令之go env</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2020/04/15/110Go命令mod/">
+        <span class="next-text nav-default">110.Go命令之go mod</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:lleej@qq.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/lleej" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2018 - 
+    
+    2020
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">lleej</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.2"></script>
+
+  </body>
+</html>

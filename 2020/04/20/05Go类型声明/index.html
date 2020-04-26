@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="05.Go语言学习笔记-Go类型声明">
+
+
+
+
+  <meta name="keywords" content="技术博客 前端 Node Python AI">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深思阁">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.2">
+
+
+
+<link rel="canonical" href="http://blog.go2sts.com/2020/04/20/05Go类型声明/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.2">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "qhKGP5WaH1jdzfAxC8naEyh8-gzGzoHsz",
+      appKey: "c1ffihM5AQSGtv4rwj3aaHeI"
+    });
+  </script>
+
+
+
+
+
+<script>
+  window.config = {"leancloud":{"app_id":"qhKGP5WaH1jdzfAxC8naEyh8-gzGzoHsz","app_key":"c1ffihM5AQSGtv4rwj3aaHeI"},"toc":true,"fancybox":true,"pjax":true};
+</script>
+
+    <title> 05.Go语言学习笔记-Go类型声明 - 深思阁 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">深思阁</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">深思阁</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          05.Go语言学习笔记-Go类型声明
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2020-04-20
+        </span>
+        
+          <span class="post-category">
+            
+              <a href="/categories/Go语言/">Go语言</a>
+            
+          </span>
+        
+        
+        <span class="post-visits" data-url="/2020/04/20/05Go类型声明/" data-title="05.Go语言学习笔记-Go类型声明">
+          阅读次数 0
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#类型"><span class="toc-text">类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问题"><span class="toc-text">问题</span></a></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <p>摘要：本节介绍<code>Go</code>语言的类型声明</p>
+<a id="more"></a>
+<h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><p>变量或表达式的<strong>类型</strong>定义了对应存储值的属性特征，如：数值在内存的存储大小、在内部是如何表达的、是否支持一些操作符以及自己关联的方法集等。</p>
+<p><code>Go</code>是强类型的语言，不支持隐性的类型转换，当不同类型变量进行互操作时，需要进行显式类型转换。</p>
+<p>相同内部结构（类型）的变量，可以表示完全不同的<strong>概念</strong></p>
+<ul>
+<li><code>int</code>类型，可以表示：循环迭代索引、时间戳、文件描述符、月份等</li>
+<li><code>float64</code>类型，可以表示：速度、温度等</li>
+<li><code>字符串</code>类型，可以表示：密码、颜色名称等</li>
+</ul>
+<p><code>Go</code>语言使用类型声明语句命名新类型来表示不同的<strong>概念</strong>。命名类型即使与现有类型具有相同的底层结构，也是不兼容的</p>
+<p>刻意的区分类型，可以避免一些像无意中使用不同单位的温度（摄氏度、华氏度）混合计算导致的错误。虽然两者底层数据类型相同（都是<code>float64</code>），但语义是不同的，不能直接进行运算</p>
+<p><strong>类型声明</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> 类型名称 底层类型</span><br></pre></td></tr></table></figure>
+<p>示例如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Celsius 	<span class="keyword">float64</span> <span class="comment">// 摄氏温度</span></span><br><span class="line"><span class="keyword">type</span> Fahrenheit <span class="keyword">float64</span> <span class="comment">// 华氏温度</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">    AbsoluteZeroC Celsius = <span class="number">-273.15</span> <span class="comment">// 绝对零度</span></span><br><span class="line">    FreezingC     Celsius = <span class="number">0</span>       <span class="comment">// 结冰点温度</span></span><br><span class="line">    BoilingC      Celsius = <span class="number">100</span>     <span class="comment">// 沸水温度</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">CToF</span><span class="params">(c Celsius)</span> <span class="title">Fahrenheit</span></span> &#123; <span class="keyword">return</span> Fahrenheit(c*<span class="number">9</span>/<span class="number">5</span> + <span class="number">32</span>) &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">FToC</span><span class="params">(f Fahrenheit)</span> <span class="title">Celsius</span></span> &#123; <span class="keyword">return</span> Celsius((f - <span class="number">32</span>) * <span class="number">5</span> / <span class="number">9</span>) &#125;</span><br></pre></td></tr></table></figure>
+<p>每一个类型<code>T</code>，都有一个对应的类型转换操作<code>T(x)</code>，将<code>x</code> 转为<code>T</code>类型。如果<code>T</code>是指针类型，则写成<code>(*T)(x)</code></p>
+<ul>
+<li>只有两个类型的底层类型相同时，才能进行类型转换</li>
+<li>只涉及到类型的改变，<strong>不会影响值本身</strong></li>
+</ul>
+<p>上例所示：如果要在<code>摄氏度</code>和<code>华氏度</code>间进行类型转换，不能直接进行类型转换<code>T(x)</code>，因为不会改变值（摄氏度0与华氏度0不相同），而应该使用<code>CToF</code>和<code>FToC</code>函数实现类型的转换。？？？那有没有可以直接使用类型转换同时实现值改变的方法呢？</p>
+<p><strong>内置运算符支持</strong></p>
+<p>底层数据类型决定了内部结构和表达方式，也决定是否可以像底层类型一样对内置运算符的支持</p>
+<p>类型<code>摄氏度</code>和<code>华氏度</code>的底层类型是<code>float64</code>，也就是说，这两种类型都可以使用<code>float64</code>内置的运算符</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">fmt.Printf(<span class="string">"%g\n"</span>, BoilingC - FreezingC) <span class="comment">// "100" °C</span></span><br><span class="line">boilingF := CToF(BoilingC) <span class="comment">// "212" °F</span></span><br><span class="line">fmt.Printf(<span class="string">"%g\n"</span>, boilingF - CToF(FreezingC)) <span class="comment">// "180" °F</span></span><br><span class="line">fmt.Printf(<span class="string">"%g\n"</span>, boilingF - FreezingC)  <span class="comment">// compile error: type mismatch</span></span><br><span class="line"></span><br><span class="line">fmt.Println(FreezingC == <span class="number">0</span>)  <span class="comment">// "true"</span></span><br><span class="line">fmt.Println(FreezingC &gt;= <span class="number">0</span>)  <span class="comment">// "true"</span></span><br><span class="line">fmt.Println(BoilingC == BoilingF) <span class="comment">// compile error: type mismatch</span></span><br><span class="line">fmt.Println(BoilingC == Celsius(BoilingF)) <span class="comment">// "false" 100 != 212</span></span><br></pre></td></tr></table></figure>
+<p><strong>类型方法</strong></p>
+<p>命名类型还可以为该类型的值定义新行为。这些行为表示为一组关联到该类型的<strong>函数集合</strong>，我们称为类型的<strong>方法集</strong></p>
+<p>这里只简单介绍类型方法的使用，后续章节会进行详细说明。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c Celsius)</span> <span class="title">String</span><span class="params">()</span> <span class="title">string</span></span> &#123; <span class="keyword">return</span> fmt.Sprintf(<span class="string">"%g°C"</span>, c) &#125;</span><br></pre></td></tr></table></figure>
+<p><code>Celsius</code>类型的参数<code>c</code>出现在了函数名的前面，表示声明的是<code>Celsius</code>类型的一个名叫<code>String</code>的方法，该方法返回该类型对象<code>c</code>带着<code>°C</code>温度单位的字符串</p>
+<p>*小技巧：许多类型都会定义一个<code>String</code>方法，当使用<code>fmt</code>包的打印方法时，会优先使用该类型对应的<code>String</code>方法返回的结果打印。类似于<code>Python</code>中的<code>__str__</code>魔法方法</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">c := FToC(<span class="number">212.0</span>)</span><br><span class="line">fmt.Println(c.String()) <span class="comment">// "100°C" 显式调用</span></span><br><span class="line">fmt.Printf(<span class="string">"%v\n"</span>, c)   <span class="comment">// "100°C" 隐式调用</span></span><br><span class="line">fmt.Printf(<span class="string">"%s\n"</span>, c)   <span class="comment">// "100°C" 隐式调用</span></span><br><span class="line">fmt.Println(c)          <span class="comment">// "100°C" 隐式调用</span></span><br><span class="line">fmt.Printf(<span class="string">"%g\n"</span>, c)   <span class="comment">// "100"; 转换为浮点数输出，不会调用</span></span><br><span class="line">fmt.Println(<span class="keyword">float64</span>(c)) <span class="comment">// "100"; 转换为浮点数输出，不会调用</span></span><br></pre></td></tr></table></figure>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><ol>
+<li><p>有没有可以直接使用类型转换，同时实现值改变的方法呢？比如：摄氏度和华氏度的转换，不用函数<code>CToF</code>，而是直接使用<code>Fahrenheit(x)</code></p>
+</li>
+<li><p>类型方法的使用，除了<code>String()</code>外，还有哪些类似于<code>Python</code>的魔法方法？</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="http://blog.go2sts.com">lleej</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="http://blog.go2sts.com/2020/04/20/05Go类型声明/">http://blog.go2sts.com/2020/04/20/05Go类型声明/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Go/">Go</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2020/04/20/04Go常量声明/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">04.Go语言学习笔记-Go常量声明</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2020/04/15/109Go命令env/">
+        <span class="next-text nav-default">109.Go命令之go env</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:lleej@qq.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/lleej" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2018 - 
+    
+    2020
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">lleej</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.2"></script>
+
+  </body>
+</html>

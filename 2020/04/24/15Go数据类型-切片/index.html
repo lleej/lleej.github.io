@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="15.Go语言学习笔记-Go复杂数据类型-切片">
+
+
+
+
+  <meta name="keywords" content="技术博客 前端 Node Python AI">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深思阁">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.2">
+
+
+
+<link rel="canonical" href="http://blog.go2sts.com/2020/04/24/15Go数据类型-切片/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.2">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "qhKGP5WaH1jdzfAxC8naEyh8-gzGzoHsz",
+      appKey: "c1ffihM5AQSGtv4rwj3aaHeI"
+    });
+  </script>
+
+
+
+
+
+<script>
+  window.config = {"leancloud":{"app_id":"qhKGP5WaH1jdzfAxC8naEyh8-gzGzoHsz","app_key":"c1ffihM5AQSGtv4rwj3aaHeI"},"toc":true,"fancybox":true,"pjax":true};
+</script>
+
+    <title> 15.Go语言学习笔记-Go复杂数据类型-切片 - 深思阁 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">深思阁</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">深思阁</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          15.Go语言学习笔记-Go复杂数据类型-切片
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2020-04-24
+        </span>
+        
+          <span class="post-category">
+            
+              <a href="/categories/Go语言/">Go语言</a>
+            
+          </span>
+        
+        
+        <span class="post-visits" data-url="/2020/04/24/15Go数据类型-切片/" data-title="15.Go语言学习笔记-Go复杂数据类型-切片">
+          阅读次数 0
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#切片"><span class="toc-text">切片</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#扩容"><span class="toc-text">扩容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#技巧"><span class="toc-text">技巧</span></a></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <p>摘要：本节介绍<code>Go</code>语言的复杂数据类型：切片。关键字：变长、同构元素</p>
+<a id="more"></a>
+<h2 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h2><p><code>Slice</code>（切片）代表变长的序列，序列中每个元素都有相同的类型</p>
+<p>切片声明的书写格式：<code>[]元素类型</code>，语法和数组很像，只是没有固定长度而已</p>
+<p>切片类型的数据结构包含三部分</p>
+<ul>
+<li>指针，指向第一个<code>slice</code>元素对应底层数组元素的地址</li>
+<li>长度，<code>slice</code>中元素的数量，长度不能大于容量</li>
+<li>容量，从<code>slice</code>的开始位置到底层数组结尾元素的长度</li>
+</ul>
+<p><img src=".\assets\godata3.png" alt="img"></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = []<span class="keyword">int</span>&#123;<span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">11</span>&#125;</span><br><span class="line"><span class="keyword">var</span> y = x[<span class="number">1</span>:<span class="number">3</span>]</span><br><span class="line">fmt.Printf(<span class="string">"%T\t%T"</span>, x, y)	<span class="comment">// []int	[]int</span></span><br><span class="line">fmt.Println(y, <span class="built_in">len</span>(y), y[<span class="number">0</span>], y[<span class="number">1</span>])	<span class="comment">// [3, 5]  2  3  5</span></span><br><span class="line">fmt.Println(y[<span class="number">3</span>])	<span class="comment">// runtime error: index out of range [3] with length 2</span></span><br><span class="line">fmt.Println(y[<span class="number">0</span>:<span class="number">4</span>]) <span class="comment">// [3, 5, 7, 11]</span></span><br></pre></td></tr></table></figure>
+<p>如果切片操作<code>[[start]:[stop]]</code>超出<code>cap(s)</code>的上限将导致一个<code>panic</code>异常，但是超出<code>len(s)</code>则是意味着扩展了<code>slice</code>，因为新<code>slice</code>的长度会变大</p>
+<p>多个<code>slice</code>之间可以共享底层的数据，并且引用的数组部分区间可能重叠</p>
+<p><img src=".\assets\ch4-01.png" alt="img"></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">months := [...]<span class="keyword">string</span>&#123;<span class="number">1</span>: <span class="string">"January"</span>, <span class="comment">/* ... */</span>, <span class="number">12</span>: <span class="string">"December"</span>&#125;</span><br><span class="line">Q2 := months[<span class="number">4</span>:<span class="number">7</span>]</span><br><span class="line">summer := months[<span class="number">6</span>:<span class="number">9</span>]</span><br><span class="line">fmt.Println(Q2)     <span class="comment">// ["April" "May" "June"]</span></span><br><span class="line">fmt.Println(summer) <span class="comment">// ["June" "July" "August"]</span></span><br></pre></td></tr></table></figure>
+<p>因为<code>slice</code>值包含指向第一个<code>slice</code>元素的指针，因此向函数传递<code>slice</code>将允许在函数内部修改底层数组的元素</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">reverse</span><span class="params">(s []<span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> i, j := <span class="number">0</span>, <span class="built_in">len</span>(s)<span class="number">-1</span>; i &lt; j; i, j = i+<span class="number">1</span>, j<span class="number">-1</span> &#123;</span><br><span class="line">		s[i], s[j] = s[j], s[i]</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a := [...]<span class="keyword">int</span>&#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;	<span class="comment">// 数组类型，底层数据存储</span></span><br><span class="line">reverse(a[:])	<span class="comment">// 传入切片，底层共享a数组，处理的是a数组中的数据</span></span><br><span class="line">fmt.Println(a)	<span class="comment">// "[5 4 3 2 1 0]"</span></span><br></pre></td></tr></table></figure>
+<p>而且因为切片的以上特性，甚至可以在不新增变量的基础上对底层元素进行修改</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">s := []<span class="keyword">int</span>&#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;</span><br><span class="line"><span class="comment">// Rotate s left by two positions.</span></span><br><span class="line">reverse(s[:<span class="number">2</span>])</span><br><span class="line">reverse(s[<span class="number">2</span>:])</span><br><span class="line">reverse(s)</span><br><span class="line">fmt.Println(s) <span class="comment">// "[2 3 4 5 0 1]"</span></span><br></pre></td></tr></table></figure>
+<p><strong>切片不能直接比较</strong></p>
+<p>不同于数组类型，切片是不支持直接进行比较的，不能使用<code>==</code>操作符进行比较操作</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">r := []<span class="keyword">int</span>&#123;<span class="number">99</span>: <span class="number">-1</span>&#125;</span><br><span class="line">p := []<span class="keyword">int</span>&#123;<span class="number">99</span>: <span class="number">-1</span>&#125;</span><br><span class="line">fmt.Println(r == p)	<span class="comment">// invalid operation: r == p (slice can only be compared to nil)</span></span><br></pre></td></tr></table></figure>
+<p>原因有两个：</p>
+<ul>
+<li>切片中保存的是数据地址而不是数据拷贝，比较地址相等只能证明指向的是相同的数据而已，与实际需求（切片中数据相等）不符，也容易导致概念模糊</li>
+<li>切片中的数据可能被改变，切片指向的数据块可以被其他代码改变</li>
+</ul>
+<p>唯一可以比较的是<code>nil</code>空指针，也就是切片的<strong>零值</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> summer == <span class="literal">nil</span> &#123; <span class="comment">/* ... */</span> &#125;</span><br></pre></td></tr></table></figure>
+<p>切片的零值有以下特点：</p>
+<ul>
+<li>没有底层数组</li>
+<li>长度为0</li>
+<li>容量为0</li>
+</ul>
+<p>但不只有<code>nil</code>零值的切片长度和容量为<code>0</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s []<span class="keyword">int</span>    <span class="comment">// len(s) == 0, s == nil</span></span><br><span class="line">s = <span class="literal">nil</span>        <span class="comment">// len(s) == 0, s == nil</span></span><br><span class="line">s = []<span class="keyword">int</span>(<span class="literal">nil</span>) <span class="comment">// len(s) == 0, s == nil</span></span><br><span class="line">s = []<span class="keyword">int</span>&#123;&#125;    <span class="comment">// len(s) == 0, s != nil</span></span><br><span class="line"><span class="keyword">var</span> p = <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="number">3</span>)[<span class="number">3</span>:]	<span class="comment">// len(p) == 0, p != nil</span></span><br></pre></td></tr></table></figure>
+<p>判断切片是否为空最好判断长度值<code>len(s)</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="built_in">len</span>(summer) == <span class="number">0</span> &#123; <span class="comment">/* ... */</span> &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="扩容"><a href="#扩容" class="headerlink" title="扩容"></a>扩容</h2><p>因为切片是变长的类型，因此可以对其进行扩容操作。</p>
+<p><code>Go</code>语言内置了<code>append</code>函数，用于处理切片的扩容</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x []<span class="keyword">int</span></span><br><span class="line">x = <span class="built_in">append</span>(x, <span class="number">1</span>)</span><br><span class="line">x = <span class="built_in">append</span>(x, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">x = <span class="built_in">append</span>(x, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>)</span><br><span class="line">x = <span class="built_in">append</span>(x, x...) <span class="comment">// append the slice x</span></span><br><span class="line">fmt.Println(x)      <span class="comment">// "[1 2 3 4 5 6 1 2 3 4 5 6]"</span></span><br></pre></td></tr></table></figure>
+<p><code>append</code>函数可以一次追加多个元素，也可以追加一个<code>slice</code></p>
+<p><strong>追加原理</strong></p>
+<p>如果切片的<code>cap</code>大于<code>len</code>，则在原有底层数组的<code>len(s)</code>位置添加元素，并修改切片的<code>len</code>值</p>
+<p>如果切片的<code>cap</code>小于<code>len</code>，则重新分配一块两倍容量空间<code>cap(s)*2</code>，将原数组拷贝到新数组中，并在后面添加元素</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x []<span class="keyword">int</span></span><br><span class="line"><span class="keyword">for</span> i := <span class="number">1</span>; i &lt; <span class="number">13</span>; i++ &#123;</span><br><span class="line">		x = <span class="built_in">append</span>(x, i)</span><br><span class="line">		fmt.Println(x, <span class="built_in">len</span>(x), <span class="built_in">cap</span>(x), unsafe.Pointer(&amp;x[<span class="number">0</span>]))</span><br><span class="line"><span class="comment">// 输出结果</span></span><br><span class="line">[<span class="number">1</span>] <span class="number">1</span> <span class="number">1</span> <span class="number">0xc0000bc008</span>									<span class="comment">// 初始底层数组地址		 0xc0000bc008</span></span><br><span class="line">[<span class="number">1</span> <span class="number">2</span>] <span class="number">2</span> <span class="number">2</span> <span class="number">0xc0000bc030</span>								<span class="comment">// 扩容重新分配新地址	0xc0000bc030</span></span><br><span class="line">[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>] <span class="number">3</span> <span class="number">4</span> <span class="number">0xc0000c0040</span>							<span class="comment">// 扩容重新分配新地址	0xc0000c0040</span></span><br><span class="line">[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span>] <span class="number">4</span> <span class="number">4</span> <span class="number">0xc0000c0040</span></span><br><span class="line">[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span>] <span class="number">5</span> <span class="number">8</span> <span class="number">0xc0000c2000</span>					<span class="comment">// 扩容重新分配新地址	0xc0000c2000</span></span><br><span class="line">[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span>] <span class="number">6</span> <span class="number">8</span> <span class="number">0xc0000c2000</span></span><br><span class="line">[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span>] <span class="number">7</span> <span class="number">8</span> <span class="number">0xc0000c2000</span></span><br><span class="line">[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span>] <span class="number">8</span> <span class="number">8</span> <span class="number">0xc0000c2000</span></span><br><span class="line">[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span>] <span class="number">9</span> <span class="number">16</span> <span class="number">0xc0000c4000</span>	<span class="comment">// 扩容重新分配新地址	0xc0000c4000</span></span><br><span class="line">[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span> <span class="number">10</span>] <span class="number">10</span> <span class="number">16</span> <span class="number">0xc0000c4000</span></span><br><span class="line">[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span> <span class="number">10</span> <span class="number">11</span>] <span class="number">11</span> <span class="number">16</span> <span class="number">0xc0000c4000</span></span><br><span class="line">[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span> <span class="number">10</span> <span class="number">11</span> <span class="number">12</span>] <span class="number">12</span> <span class="number">16</span> <span class="number">0xc0000c4000</span></span><br></pre></td></tr></table></figure>
+<h2 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h2><p>可以利用切片公用底层数组的特点，在不增加内存开销的情况下，高效实现数据处理。</p>
+<p>举例1：对字符串切片中的空串进行过滤操作</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">nonempty2</span><span class="params">(strings []<span class="keyword">string</span>)</span> []<span class="title">string</span></span> &#123;</span><br><span class="line">    out := strings[:<span class="number">0</span>] <span class="comment">// zero-length slice of original</span></span><br><span class="line">    <span class="keyword">for</span> _, s := <span class="keyword">range</span> strings &#123;</span><br><span class="line">        <span class="keyword">if</span> s != <span class="string">""</span> &#123;</span><br><span class="line">            out = <span class="built_in">append</span>(out, s)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> out</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">		data := []<span class="keyword">string</span>&#123;<span class="string">"one"</span>, <span class="string">""</span>, <span class="string">"three"</span>&#125;</span><br><span class="line">		fmt.Printf(<span class="string">"%q\n"</span>, nonempty(data)) <span class="comment">// `["one" "three"]`</span></span><br><span class="line">		fmt.Printf(<span class="string">"%q\n"</span>, data)           <span class="comment">// `["one" "three" "three"]`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意：因为切片公用底层数据，当改变切片中的元素值，会污染原<code>data</code>变量中的数据。这时，需要重新赋值</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data = nonempty(data)</span><br></pre></td></tr></table></figure>
+<p>举例2：删除切片中的某个元素</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">remove</span><span class="params">(slice []<span class="keyword">int</span>, i <span class="keyword">int</span>)</span> []<span class="title">int</span></span> &#123;</span><br><span class="line">    <span class="built_in">copy</span>(slice[i:], slice[i+<span class="number">1</span>:])</span><br><span class="line">    <span class="keyword">return</span> slice[:<span class="built_in">len</span>(slice)<span class="number">-1</span>]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    s := []<span class="keyword">int</span>&#123;<span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>&#125;</span><br><span class="line">    fmt.Println(remove(s, <span class="number">2</span>)) <span class="comment">// "[5 6 8 9]"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>举例3：旋转切片中的元素</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">rotate</span><span class="params">(slice []<span class="keyword">int</span>)</span> []<span class="title">int</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> i, j := <span class="number">0</span>, <span class="built_in">len</span>(slice)<span class="number">-1</span>; i &lt; j; i, j = i+<span class="number">1</span>, j<span class="number">-1</span> &#123;</span><br><span class="line">		slice[i], slice[j] = slice[j], slice[i]</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> slice</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	s := []<span class="keyword">int</span>&#123;<span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>&#125;</span><br><span class="line">	fmt.Println(rotate(s)) <span class="comment">// "[9 8 7 6 5]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="http://blog.go2sts.com">lleej</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="http://blog.go2sts.com/2020/04/24/15Go数据类型-切片/">http://blog.go2sts.com/2020/04/24/15Go数据类型-切片/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Go/">Go</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2020/04/26/17Go数据类型-结构/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">17.Go语言学习笔记-Go复杂数据类型-结构体</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2020/04/24/14Go数据类型-数组/">
+        <span class="next-text nav-default">14.Go语言学习笔记-Go复杂数据类型-数组</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:lleej@qq.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/lleej" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2018 - 
+    
+    2020
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">lleej</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.2"></script>
+
+  </body>
+</html>

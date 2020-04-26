@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="06.Go语言学习笔记-Go运算符">
+
+
+
+
+  <meta name="keywords" content="技术博客 前端 Node Python AI">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深思阁">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.2">
+
+
+
+<link rel="canonical" href="http://blog.go2sts.com/2020/04/23/06Go运算符/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.2">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "qhKGP5WaH1jdzfAxC8naEyh8-gzGzoHsz",
+      appKey: "c1ffihM5AQSGtv4rwj3aaHeI"
+    });
+  </script>
+
+
+
+
+
+<script>
+  window.config = {"leancloud":{"app_id":"qhKGP5WaH1jdzfAxC8naEyh8-gzGzoHsz","app_key":"c1ffihM5AQSGtv4rwj3aaHeI"},"toc":true,"fancybox":true,"pjax":true};
+</script>
+
+    <title> 06.Go语言学习笔记-Go运算符 - 深思阁 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">深思阁</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">深思阁</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          06.Go语言学习笔记-Go运算符
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2020-04-23
+        </span>
+        
+          <span class="post-category">
+            
+              <a href="/categories/Go语言/">Go语言</a>
+            
+          </span>
+        
+        
+        <span class="post-visits" data-url="/2020/04/23/06Go运算符/" data-title="06.Go语言学习笔记-Go运算符">
+          阅读次数 0
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+
+
+    <div class="post-content">
+      
+        <p>摘要：本节介绍<code>Go</code>语言的各种运算符</p>
+<a id="more"></a>
+<p>下面是Go语言中关于算术运算、逻辑运算和比较运算的二元运算符，它们按照优先级递减的顺序排列：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">*      /      %      &lt;&lt;       &gt;&gt;     &amp;       &amp;^</span><br><span class="line">+      -      |      ^</span><br><span class="line">==     !=     &lt;      &lt;=       &gt;      &gt;=</span><br><span class="line">&amp;&amp;</span><br><span class="line">||</span><br></pre></td></tr></table></figure>
+<p>二元运算符有五种优先级。在同一个优先级，使用左优先结合规则，但是使用括号可以明确优先顺序，使用括号也可以用于提升优先级，例如<code>mask &amp; (1 &lt;&lt; 28)</code>。</p>
+<p>对于上表中前两行的运算符，例如+运算符还有一个与赋值相结合的对应运算符+=，可以用于简化赋值语句。</p>
+<p>算术运算符<code>+</code>、<code>-</code>、<code>*</code>和<code>/</code>可以适用于整数、浮点数和复数，但是取模运算符%仅用于整数间的运算。对于不同编程语言，%取模运算的行为可能并不相同。在Go语言中，%取模运算符的符号和被取模数的符号总是一致的，因此<code>-5%3</code>和<code>-5%-3</code>结果都是-2。除法运算符<code>/</code>的行为则依赖于操作数是否为全为整数，比如<code>5.0/4.0</code>的结果是1.25，但是5/4的结果是1，因为整数除法会向着0方向截断余数。</p>
+<p>一个算术运算的结果，不管是有符号或者是无符号的，如果需要更多的bit位才能正确表示的话，就说明计算结果是溢出了。超出的高位的bit位部分将被丢弃。如果原始的数值是有符号类型，而且最左边的bit位是1的话，那么最终结果可能是负的，例如int8的例子：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> u <span class="keyword">uint8</span> = <span class="number">255</span></span><br><span class="line">fmt.Println(u, u+<span class="number">1</span>, u*u) <span class="comment">// "255 0 1"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> i <span class="keyword">int8</span> = <span class="number">127</span></span><br><span class="line">fmt.Println(i, i+<span class="number">1</span>, i*i) <span class="comment">// "127 -128 1"</span></span><br></pre></td></tr></table></figure>
+<p>两个相同的整数类型可以使用下面的二元比较运算符进行比较；比较表达式的结果是布尔类型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">==    等于</span><br><span class="line">!=    不等于</span><br><span class="line">&lt;     小于</span><br><span class="line">&lt;=    小于等于</span><br><span class="line">&gt;     大于</span><br><span class="line">&gt;=    大于等于</span><br></pre></td></tr></table></figure>
+<p>事实上，布尔型、数字类型和字符串等基本类型都是可比较的，也就是说两个相同类型的值可以用==和!=进行比较。此外，整数、浮点数和字符串可以根据比较结果排序。许多其它类型的值可能是不可比较的，因此也就可能是不可排序的。对于我们遇到的每种类型，我们需要保证规则的一致性。</p>
+<p>这里是一元的加法和减法运算符：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">+      一元加法 (无效果)</span><br><span class="line">-      负数</span><br></pre></td></tr></table></figure>
+<p>对于整数，+x是0+x的简写，-x则是0-x的简写；对于浮点数和复数，+x就是x，-x则是x 的负数。</p>
+<p>Go语言还提供了以下的bit位操作运算符，前面4个操作运算符并不区分是有符号还是无符号数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&amp;      位运算 AND</span><br><span class="line">|      位运算 OR</span><br><span class="line">^      位运算 XOR</span><br><span class="line">&amp;^     位清空 (AND NOT)</span><br><span class="line">&lt;&lt;     左移</span><br><span class="line">&gt;&gt;     右移</span><br></pre></td></tr></table></figure>
+<p>位操作运算符<code>^</code>作为二元运算符时是按位异或（XOR），当用作一元运算符时表示按位取反；也就是说，它返回一个每个bit位都取反的数。位操作运算符<code>&amp;^</code>用于按位置零（AND NOT）：如果对应y中bit位为1的话, 表达式<code>z = x &amp;^ y</code>结果z的对应的bit位为0，否则z对应的bit位等于x相应的bit位的值。</p>
+<p>下面的代码演示了如何使用位操作解释uint8类型值的8个独立的bit位。它使用了Printf函数的%b参数打印二进制格式的数字；其中%08b中08表示打印至少8个字符宽度，不足的前缀部分用0填充。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x <span class="keyword">uint8</span> = <span class="number">1</span>&lt;&lt;<span class="number">1</span> | <span class="number">1</span>&lt;&lt;<span class="number">5</span></span><br><span class="line"><span class="keyword">var</span> y <span class="keyword">uint8</span> = <span class="number">1</span>&lt;&lt;<span class="number">1</span> | <span class="number">1</span>&lt;&lt;<span class="number">2</span></span><br><span class="line"></span><br><span class="line">fmt.Printf(<span class="string">"%08b\n"</span>, x) <span class="comment">// "00100010", the set &#123;1, 5&#125;</span></span><br><span class="line">fmt.Printf(<span class="string">"%08b\n"</span>, y) <span class="comment">// "00000110", the set &#123;1, 2&#125;</span></span><br><span class="line"></span><br><span class="line">fmt.Printf(<span class="string">"%08b\n"</span>, x&amp;y)  <span class="comment">// "00000010", the intersection &#123;1&#125;</span></span><br><span class="line">fmt.Printf(<span class="string">"%08b\n"</span>, x|y)  <span class="comment">// "00100110", the union &#123;1, 2, 5&#125;</span></span><br><span class="line">fmt.Printf(<span class="string">"%08b\n"</span>, x^y)  <span class="comment">// "00100100", the symmetric difference &#123;2, 5&#125;</span></span><br><span class="line">fmt.Printf(<span class="string">"%08b\n"</span>, x&amp;^y) <span class="comment">// "00100000", the difference &#123;5&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i := <span class="keyword">uint</span>(<span class="number">0</span>); i &lt; <span class="number">8</span>; i++ &#123;</span><br><span class="line">    <span class="keyword">if</span> x&amp;(<span class="number">1</span>&lt;&lt;i) != <span class="number">0</span> &#123; <span class="comment">// membership test</span></span><br><span class="line">        fmt.Println(i) <span class="comment">// "1", "5"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fmt.Printf(<span class="string">"%08b\n"</span>, x&lt;&lt;<span class="number">1</span>) <span class="comment">// "01000100", the set &#123;2, 6&#125;</span></span><br><span class="line">fmt.Printf(<span class="string">"%08b\n"</span>, x&gt;&gt;<span class="number">1</span>) <span class="comment">// "00010001", the set &#123;0, 4&#125;</span></span><br></pre></td></tr></table></figure>
+<p>（6.5节给出了一个可以远大于一个字节的整数集的实现。）</p>
+<p>在<code>x&lt;和</code>x&gt;&gt;n<code>移位运算中，决定了移位操作bit数部分必须是无符号数；被操作的x数可以是有符号或无符号数。算术上，一个</code>x&lt;左移运算等价于乘以$2^n$，一个<code>x&gt;&gt;n</code>右移运算等价于除以$2^n$。</p>
+<p>左移运算用零填充右边空缺的bit位，无符号数的右移运算也是用0填充左边空缺的bit位，但是有符号数的右移运算会用符号位的值填充左边空缺的bit位。因为这个原因，最好用无符号运算，这样你可以将整数完全当作一个bit位模式处理。</p>
+<p>尽管Go语言提供了无符号数和运算，即使数值本身不可能出现负数我们还是倾向于使用有符号的int类型，就像数组的长度那样，虽然使用uint无符号类型似乎是一个更合理的选择。事实上，内置的len函数返回一个有符号的int，我们可以像下面例子那样处理逆序循环。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">medals := []<span class="keyword">string</span>&#123;<span class="string">"gold"</span>, <span class="string">"silver"</span>, <span class="string">"bronze"</span>&#125;</span><br><span class="line"><span class="keyword">for</span> i := <span class="built_in">len</span>(medals) - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i-- &#123;</span><br><span class="line">    fmt.Println(medals[i]) <span class="comment">// "bronze", "silver", "gold"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>另一个选择对于上面的例子来说将是灾难性的。如果len函数返回一个无符号数，那么i也将是无符号的uint类型，然后条件<code>i &gt;= 0</code>则永远为真。在三次迭代之后，也就是<code>i == 0</code>时，i–语句将不会产生-1，而是变成一个uint类型的最大值（可能是$2^64-1$），然后medals[i]表达式运行时将发生panic异常（§5.9），也就是试图访问一个slice范围以外的元素。</p>
+<p>出于这个原因，无符号数往往只有在位运算或其它特殊的运算场景才会使用，就像bit集合、分析二进制文件格式或者是哈希和加密操作等。它们通常并不用于仅仅是表达非负数量的场合。</p>
+<p>一般来说，需要一个显式的转换将一个值从一种类型转化位另一种类型，并且算术和逻辑运算的二元操作中必须是相同的类型。虽然这偶尔会导致需要很长的表达式，但是它消除了所有和类型相关的问题，而且也使得程序容易理解。</p>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="http://blog.go2sts.com">lleej</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="http://blog.go2sts.com/2020/04/23/06Go运算符/">http://blog.go2sts.com/2020/04/23/06Go运算符/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Go/">Go</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2020/04/23/11Go数据类型-浮点数/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">11.Go语言学习笔记-Go基本数据类型-浮点数</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2020/04/20/04Go常量声明/">
+        <span class="next-text nav-default">04.Go语言学习笔记-Go常量声明</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:lleej@qq.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/lleej" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2018 - 
+    
+    2020
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">lleej</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.2"></script>
+
+  </body>
+</html>

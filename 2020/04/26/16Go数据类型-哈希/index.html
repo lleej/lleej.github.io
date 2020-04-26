@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="16.Go语言学习笔记-Go复杂数据类型-哈希">
+
+
+
+
+  <meta name="keywords" content="技术博客 前端 Node Python AI">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深思阁">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.2">
+
+
+
+<link rel="canonical" href="http://blog.go2sts.com/2020/04/26/16Go数据类型-哈希/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.2">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "qhKGP5WaH1jdzfAxC8naEyh8-gzGzoHsz",
+      appKey: "c1ffihM5AQSGtv4rwj3aaHeI"
+    });
+  </script>
+
+
+
+
+
+<script>
+  window.config = {"leancloud":{"app_id":"qhKGP5WaH1jdzfAxC8naEyh8-gzGzoHsz","app_key":"c1ffihM5AQSGtv4rwj3aaHeI"},"toc":true,"fancybox":true,"pjax":true};
+</script>
+
+    <title> 16.Go语言学习笔记-Go复杂数据类型-哈希 - 深思阁 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">深思阁</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">深思阁</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          16.Go语言学习笔记-Go复杂数据类型-哈希
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2020-04-26
+        </span>
+        
+          <span class="post-category">
+            
+              <a href="/categories/Go语言/">Go语言</a>
+            
+          </span>
+        
+        
+        <span class="post-visits" data-url="/2020/04/26/16Go数据类型-哈希/" data-title="16.Go语言学习笔记-Go复杂数据类型-哈希">
+          阅读次数 0
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#哈希表"><span class="toc-text">哈希表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Map"><span class="toc-text">Map</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用"><span class="toc-text">使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#延伸"><span class="toc-text">延伸</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <p>摘要：本节介绍<code>Go</code>语言的复杂数据类型：哈希。关键字：常数时间复杂度、可比较类型</p>
+<a id="more"></a>
+<h2 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h2><p>哈希表是一种巧妙并且实用的数据结构。它是一个无序的<code>key/value</code>对的集合，其中所有的<code>key</code>都是不同的，然后通过给定的<code>key</code>可以在常数时间复杂度内检索、更新或删除对应的<code>value</code>。</p>
+<h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><p><code>Go</code>语言中使用<code>map</code>类型表示哈希表</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> 变量 <span class="keyword">map</span>[K]V</span><br></pre></td></tr></table></figure>
+<ul>
+<li>K即Key，同构类型，必须是可比较类型，支持<code>==</code>操作符，不建议使用<code>float</code>类型作为<code>Key</code>类型</li>
+<li>V即Value，同构类型</li>
+</ul>
+<p>也可以使用<code>make</code>函数初始化</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> 变量 = <span class="built_in">make</span>(<span class="keyword">map</span>[K]V)</span><br></pre></td></tr></table></figure>
+<p>或者使用字面量初始化</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> 变量 = <span class="keyword">map</span>[K]V&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>举例如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ages <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span></span><br><span class="line"><span class="keyword">var</span> ages = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>)</span><br><span class="line"><span class="keyword">var</span> ages = <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>&#123;&#125;</span><br><span class="line"><span class="keyword">var</span> ages = <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>&#123;</span><br><span class="line">  <span class="string">"zhangsan"</span>: <span class="number">18</span>,</span><br><span class="line">  <span class="string">"lisi"</span>		: <span class="number">20</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>使用下标访问<code>map</code>中的元素是安全的（与数组和切片不同）。也就是说，如果访问的下标在<code>map</code>中不存在也不会报错，而是自动创建该<code>Key</code>并初始化其值为零值</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ages[<span class="string">"wangwu"</span>] = <span class="number">32</span></span><br><span class="line">ages[<span class="string">"maliu"</span>]++	<span class="comment">// ages["maliu"] == 1</span></span><br></pre></td></tr></table></figure>
+<p>删除元素使用内置的函数<code>delete</code>。该函数没有返回值</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">delete</span>(ages, <span class="string">"maliu"</span>)</span><br></pre></td></tr></table></figure>
+<p>但是，不能对<code>map</code>中的元素进行取址操作。因为，<code>map</code>会自动维护存储空间，重新分配内存，导致地址失效</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_ = &amp;ages[<span class="string">"lisi"</span>] <span class="comment">// compile error: cannot take address of map element</span></span><br></pre></td></tr></table></figure>
+<p>与其他可迭代类型一样，<code>map</code>类型的变量可以使用<code>range</code>关键字，在<code>for</code>循环中遍历其元素</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> name, age := <span class="keyword">range</span> ages &#123;</span><br><span class="line">    fmt.Printf(<span class="string">"%s\t%d\n"</span>, name, age)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是与其他可迭代类型（如：字符串、切片、数组等）不同的是，<code>range</code>关键字返回的是<code>Key</code>和<code>Value</code>，而没有索引</p>
+<p><code>map</code>中的<code>Key</code>是无序的。也就是说，每次遍历<code>map</code>的顺序是不同的。</p>
+<p>如果需要按一定的顺序进行遍历，需要显式的对<code>Key</code>进行排序</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">"sort"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> names []<span class="keyword">string</span></span><br><span class="line"><span class="keyword">for</span> name := <span class="keyword">range</span> ages &#123;	<span class="comment">// 忽略第二个变量：age</span></span><br><span class="line">    names = <span class="built_in">append</span>(names, name)</span><br><span class="line">&#125;</span><br><span class="line">sort.Strings(names)	<span class="comment">// 使用sort包的Strings()函数对字符串切片进行排序</span></span><br><span class="line"><span class="keyword">for</span> _, name := <span class="keyword">range</span> names &#123;	<span class="comment">// 忽略第一个变量：索引</span></span><br><span class="line">    fmt.Printf(<span class="string">"%s\t%d\n"</span>, name, ages[name])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>map</code>类型变量的零值是<code>nil</code>，不能给一个<code>nil</code>的<code>map</code>变量赋值</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ages <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span> <span class="comment">// nil</span></span><br><span class="line">ages[<span class="string">"zhangshan"</span>] = <span class="number">18</span> 	<span class="comment">// panic: assignment to entry in nil map</span></span><br></pre></td></tr></table></figure>
+<p>如果要区分当前<code>map</code>中<code>Key</code>对应的<code>Value</code>为<code>0</code>，还是没有<code>Key</code>值时，可以使用一下方法</p>
+<p>返回的是两个变量，则第二个变量是该<code>Key</code>值是否存在的<code>bool</code>变量</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> age, ok := ages[<span class="string">"zhangsan"</span>]; !ok &#123; <span class="comment">/* ... */</span> &#125;</span><br></pre></td></tr></table></figure>
+<p>同样的，<code>map</code>类型的变量之间不能进行直接比较，使用<code>==</code>操作符。必须通过遍历的方式逐个元素进行比较</p>
+<h3 id="延伸"><a href="#延伸" class="headerlink" title="延伸"></a>延伸</h3><p>因为<code>map</code>中的<code>Key</code>是唯一的（使用哈希算法获得），可以将<code>map</code>扩展为<code>set</code>使用（注：<code>Go</code>中没有<code>set</code>类型）</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    seen := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">bool</span>) <span class="comment">// a set of strings</span></span><br><span class="line">    input := bufio.NewScanner(os.Stdin)</span><br><span class="line">    <span class="keyword">for</span> input.Scan() &#123;</span><br><span class="line">        line := input.Text()</span><br><span class="line">        <span class="keyword">if</span> !seen[line] &#123;</span><br><span class="line">            seen[line] = <span class="literal">true</span></span><br><span class="line">            fmt.Println(line)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> err := input.Err(); err != <span class="literal">nil</span> &#123;</span><br><span class="line">        fmt.Fprintf(os.Stderr, <span class="string">"dedup: %v\n"</span>, err)</span><br><span class="line">        os.Exit(<span class="number">1</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>另外，可以通过一些手段，将不可比较类型应用于<code>Key</code>中，比如：切片或数组类型</p>
+<ul>
+<li>第一步：使用一个辅助函数，将不可比较类型转换为可比较类型（如：转换为字符串）</li>
+<li>第二步：创建一个<code>Key</code>为<code>string</code>类型的<code>map</code>，在每次操作<code>map</code>时，使用辅助函数进行转换</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> m = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">k</span><span class="params">(list []<span class="keyword">string</span>)</span> <span class="title">string</span></span> &#123; <span class="keyword">return</span> fmt.Sprintf(<span class="string">"%q"</span>, list) &#125;	<span class="comment">// 将切片类型转换成字符串</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Add</span><span class="params">(list []<span class="keyword">string</span>)</span></span>       &#123; m[k(list)]++ &#125;	<span class="comment">// 在访问`Key`时，先使用辅助函数进行转换</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Count</span><span class="params">(list []<span class="keyword">string</span>)</span> <span class="title">int</span></span> &#123; <span class="keyword">return</span> m[k(list)] &#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="http://blog.go2sts.com">lleej</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="http://blog.go2sts.com/2020/04/26/16Go数据类型-哈希/">http://blog.go2sts.com/2020/04/26/16Go数据类型-哈希/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Go/">Go</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2020/04/26/17Go数据类型-结构/">
+        <span class="next-text nav-default">17.Go语言学习笔记-Go复杂数据类型-结构体</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:lleej@qq.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/lleej" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2018 - 
+    
+    2020
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">lleej</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.2"></script>
+
+  </body>
+</html>

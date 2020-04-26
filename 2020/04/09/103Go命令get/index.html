@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="103.Go命令之go get">
+
+
+
+
+  <meta name="keywords" content="技术博客 前端 Node Python AI">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深思阁">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.2">
+
+
+
+<link rel="canonical" href="http://blog.go2sts.com/2020/04/09/103Go命令get/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.2">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "qhKGP5WaH1jdzfAxC8naEyh8-gzGzoHsz",
+      appKey: "c1ffihM5AQSGtv4rwj3aaHeI"
+    });
+  </script>
+
+
+
+
+
+<script>
+  window.config = {"leancloud":{"app_id":"qhKGP5WaH1jdzfAxC8naEyh8-gzGzoHsz","app_key":"c1ffihM5AQSGtv4rwj3aaHeI"},"toc":true,"fancybox":true,"pjax":true};
+</script>
+
+    <title> 103.Go命令之go get - 深思阁 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">深思阁</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">深思阁</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          103.Go命令之go get
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2020-04-09
+        </span>
+        
+          <span class="post-category">
+            
+              <a href="/categories/Go命令/">Go命令</a>
+            
+          </span>
+        
+        
+        <span class="post-visits" data-url="/2020/04/09/103Go命令get/" data-title="103.Go命令之go get">
+          阅读次数 0
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#用途"><span class="toc-text">用途</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#命令格式"><span class="toc-text">命令格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码包源"><span class="toc-text">代码包源</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#支持的版本控制系统"><span class="toc-text">支持的版本控制系统</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#自定义代码包远程导入路径"><span class="toc-text">自定义代码包远程导入路径</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装位置"><span class="toc-text">安装位置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输出"><span class="toc-text">输出</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#源代码"><span class="toc-text">源代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#归档文件"><span class="toc-text">归档文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参数"><span class="toc-text">参数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#d只下载不安装"><span class="toc-text">-d只下载不安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fix先修正再编译安装"><span class="toc-text">-fix先修正再编译安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#insecure非安全通道"><span class="toc-text">-insecure非安全通道</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <p>摘要：本节介绍<code>Go</code>命令中常用的<code>go get</code>下载包命令…</p>
+<a id="more"></a>
+<h2 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h2><blockquote>
+<p>类似于<code>Node</code>的<code>npm</code>，<code>Python</code>的<code>pip</code></p>
+</blockquote>
+<p>从互联网下载/更新指定的代码包及其依赖包，对它们进行编译，并安装到环境变量<code>GOPATH</code>中包含的第一个工作目录中</p>
+<p>通俗的讲就是做以下三件事</p>
+<ul>
+<li>从互联网指定位置（支持的版本控制系统）检出代码包并下载到本地</li>
+<li>编译代码包(等同于<code>go build</code>)</li>
+<li>安装代码包到<code>$GOPATH</code>包含的的第一个工作区中(等同于<code>go install</code>)</li>
+</ul>
+<h3 id="命令格式"><a href="#命令格式" class="headerlink" title="命令格式"></a>命令格式</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ go get 代码包导入路径</span><br></pre></td></tr></table></figure>
+<p>举个例子，从<code>github.com</code>版本控制系统获取代码包<code>github.com/hyper-carrot/go_lib/logging</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ go get github.com/hyper-carrot/go_lib/logging</span><br></pre></td></tr></table></figure>
+<p>在<code>.go</code>文件中导入该代码包时，使用如下导入路径</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">"github.com/hyper-carrot/go_lib/logging"</span></span><br></pre></td></tr></table></figure>
+<h3 id="代码包源"><a href="#代码包源" class="headerlink" title="代码包源"></a>代码包源</h3><p><code>go get</code>只能从特定的代码包源获取代码包，包括：支持的版本控制系统，以及根据接口规范开发的自定义<code>Web</code>系统</p>
+<h4 id="支持的版本控制系统"><a href="#支持的版本控制系统" class="headerlink" title="支持的版本控制系统"></a>支持的版本控制系统</h4><p>支持的版本控制系统：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>主命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mercurial</td>
+<td>hg</td>
+<td>轻量级分布式版本控制系统，采用Python语言实现，易于学习和使用，扩展性强</td>
+</tr>
+<tr>
+<td>Git</td>
+<td>git</td>
+<td>广泛使用。进行有效、高速的各种规模项目的版本管理</td>
+</tr>
+<tr>
+<td>Subversion</td>
+<td>svn</td>
+<td>第一个将分支概念和功能纳入到版本控制模型的系统</td>
+</tr>
+<tr>
+<td>Bazaar</td>
+<td>bzr</td>
+<td>开源的分布式版本控制系统。用它来作为VCS的项目并不多</td>
+</tr>
+</tbody>
+</table>
+<p>预置的代码托管站点：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>主域名</th>
+<th>支持的VCS</th>
+<th>代码包远程导入路径示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bitbucket</td>
+<td>bitbucket.org</td>
+<td>Git, Mercurial</td>
+<td>bitbucket.org/user/project bitbucket.org/user/project/sub/directory</td>
+</tr>
+<tr>
+<td>GitHub</td>
+<td>github.com</td>
+<td>Git</td>
+<td>github.com/user/project github.com/user/project/sub/directory</td>
+</tr>
+<tr>
+<td>Google Code Project Hosting</td>
+<td>code.google.com</td>
+<td>Git, Mercurial, Subversion</td>
+<td>code.google.com/p/project code.google.com/p/project/sub/directory code.google.com/p/project.subrepository code.google.com/p/project.subrepository/sub/directory</td>
+</tr>
+<tr>
+<td>Launchpad</td>
+<td>launchpad.net</td>
+<td>Bazaar</td>
+<td>launchpad.net/project launchpad.net/project/series launchpad.net/project/series/sub/directory launchpad.net/<del>user/project/branch launchpad.net/</del>user/project/branch/sub/directory</td>
+</tr>
+<tr>
+<td>IBM DevOps Services</td>
+<td>hub.jazz.net</td>
+<td>Git</td>
+<td>hub.jazz.net/git/user/project hub.jazz.net/git/user/project/sub/directory</td>
+</tr>
+</tbody>
+</table>
+<p>执行步骤：</p>
+<ul>
+<li>首先，检查本地是否已经存在该代码包（根据代码包远程导入路径判断）。若代码包已存在，不会重复下载（除非使用命令参数<code>-u</code>强制下载）</li>
+<li>分析代码包远程导入路径对应的版本控制系统和远程仓库的URL<ul>
+<li>静态分析，与预置的代码托管站点的主域名进行比对</li>
+<li>动态分析，未知</li>
+</ul>
+</li>
+<li>根据分析结果（版本控制系统和远程仓库URL）检出代码包，并在检出目录中增加元数据目录（格式：<code>.{主命令}</code>，如:<code>.git</code>），以此来简化代码包更新时的分析过程</li>
+</ul>
+<h4 id="自定义代码包远程导入路径"><a href="#自定义代码包远程导入路径" class="headerlink" title="自定义代码包远程导入路径"></a>自定义代码包远程导入路径</h4><p>如果你想把你编写的（被托管在不同的代码托管网站上的）代码包的远程导入路径统一起来，或者不希望让你的代码包中夹杂某个代码托管网站的域名，那么你可以选择自定义你的代码包远程导入路径。</p>
+<p>也就是说，在本地库中的代码包的导入路径是以自定义路径开头，而不是各个托管网站路径开头</p>
+<p>实现方式：导入注释。具体写法如下</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> 包名 <span class="comment">// import "自定义的导入路径"</span></span><br></pre></td></tr></table></figure>
+<p>举个例子：</p>
+<p>代码包<code>logging</code>托管在<code>github</code>上，属于项目<code>collsrv</code>，项目网址是<code>https://github.com/lleej/collsrv</code>。标准检出的命令是</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ go get github.com/lleej/collsrv/logging</span><br></pre></td></tr></table></figure>
+<p>如果要使用自定义导入路径，需要做以下工作</p>
+<ul>
+<li><p>修改代码包<code>logging</code>，添加导入注释</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> logging <span class="comment">// import "go2sts.com/collsrv/logging"</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用注释<code>//</code>声明自定义的导入路径</li>
+<li>注释必须是源文件的第一行</li>
+</ul>
+<p>通常情况，替换的是导入路径的主域名和用户名ID部分</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">github.com/lleej/collsrv/logging <span class="comment">// 标准的导入路径</span></span><br><span class="line">go2sts.com      /collsrv/logging <span class="comment">// 导入注释中的导入路径</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在自定义路径中主域名的<code>Web</code>服务器上，部署可以处理<code>HTTP</code>请求的程序</p>
+<ul>
+<li><p>可以处理<code>go2sts.com/collsrv</code>这个请求路径，也就是代码库中项目的访问地址</p>
+</li>
+<li><p>在收到该请求路径后，响应的<code>HTML</code>文件头中加入以下格式的内容</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"go-import"</span> <span class="attr">content</span>=<span class="string">"import-prefix vcs repo-root"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>import-prefix</code>：自定义的远程代码包导入路径的前缀，与处理程序关联的路径一致</p>
+<p><code>vcs</code>：对应的版本控制系统的命令</p>
+<p><code>repo-root</code>：托管代码库中项目的地址</p>
+<p>以本例来说，需要添加的响应头是这样的</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"go-import"</span> <span class="attr">content</span>=<span class="string">"go2stc.cn/collsrv git https://github.com/lleej/collsrv"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>当使用自定义导入路径时，下载到本地的代码库的存储路径是自定义导入路径</p>
+</li>
+</ul>
+<h3 id="安装位置"><a href="#安装位置" class="headerlink" title="安装位置"></a>安装位置</h3><p>安装到环境变量<code>GOPATH</code>中包含的第一个工作目录中</p>
+<p>为了将第三方代码包与个人项目代码包区分，建议在<code>GOPATH</code>中定义两个工作目录，第一个工作目录保存从远端安装的第三方代码包</p>
+<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><h3 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h3><p>使用<code>go get</code>检出的代码库的源文件，存储在<code>GOPATH</code>中定义的第一个工作的<code>src</code>子目录下</p>
+<h3 id="归档文件"><a href="#归档文件" class="headerlink" title="归档文件"></a>归档文件</h3><p>使用<code>go get</code>检出的代码库编译安装后的退档文件<code>.a</code>，存储在<code>GOPATH</code>中定义的第一个工作的<code>pkg</code>子目录下</p>
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p><code>go build</code>和<code>go install</code>中的参数都可以在<code>go get</code>中使用，这里就不再赘述了</p>
+<table>
+<thead>
+<tr>
+<th>标记名称</th>
+<th>标记描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-d</td>
+<td>让命令程序只执行下载动作，而不执行安装动作。</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>仅在使用<code>-u</code>标记时才有效。该标记会让命令程序忽略掉对已下载代码包的导入路径的检查。<br>如果下载并安装的代码包所属的项目是你从别人那里<code>Fork</code>过来的，那么这样做就尤为重要了。</td>
+</tr>
+<tr>
+<td>-fix</td>
+<td>让命令程序在下载代码包后先执行修正动作，而后再进行编译和安装。</td>
+</tr>
+<tr>
+<td>-insecure</td>
+<td>允许命令程序使用非安全的scheme（如HTTP）去下载指定的代码包。<br>如果你用的代码仓库（如公司内部的Gitlab）没有HTTPS支持，可以添加此标记。<br>请在确定安全的情况下使用它。</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>让命令程序同时下载并安装指定的代码包中的测试源码文件中依赖的代码包。</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>让命令利用网络来更新已有代码包及其依赖包。<br>默认情况下，该命令只会从网络上下载本地不存在的代码包，而不会更新已有的代码包。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="d只下载不安装"><a href="#d只下载不安装" class="headerlink" title="-d只下载不安装"></a><code>-d</code>只下载不安装</h3><p>只是将远程代码包下载到工作目录中的<code>src</code>子目录中，并不对代码包进行编译和安装操作，也就是说<code>pkg</code>子目录下没有更新</p>
+<h3 id="fix先修正再编译安装"><a href="#fix先修正再编译安装" class="headerlink" title="-fix先修正再编译安装"></a><code>-fix</code>先修正再编译安装</h3><p>主要是处理向后兼容的问题。如果检出代码包是使用老版本的<code>go</code>进行开发的，可能与当前的<code>go</code>版本在语法上存在不兼容的情况。</p>
+<p>加入<code>-fix</code>参数，当检出代码包后，先对代码包中不符合<code>Go</code>当前版本语言规范的语法进行修正，再下载依赖包，最后进行编译和安装</p>
+<h3 id="insecure非安全通道"><a href="#insecure非安全通道" class="headerlink" title="-insecure非安全通道"></a><code>-insecure</code>非安全通道</h3><p>如果托管的代码库不支持<code>HTTPS</code>安全套接字连接，需要加入该参数，这样就可以使用<code>HTTP</code>连接下载</p>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="http://blog.go2sts.com">lleej</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="http://blog.go2sts.com/2020/04/09/103Go命令get/">http://blog.go2sts.com/2020/04/09/103Go命令get/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Go命令/">Go命令</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2020/04/09/102Go命令install/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">102.Go命令之go install</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2020/04/08/101Go命令build/">
+        <span class="next-text nav-default">101.Go命令之go build</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:lleej@qq.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/lleej" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2018 - 
+    
+    2020
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">lleej</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.2"></script>
+
+  </body>
+</html>

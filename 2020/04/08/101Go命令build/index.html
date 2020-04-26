@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="101.Go命令之go build">
+
+
+
+
+  <meta name="keywords" content="技术博客 前端 Node Python AI">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深思阁">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.2">
+
+
+
+<link rel="canonical" href="http://blog.go2sts.com/2020/04/08/101Go命令build/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.2">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "qhKGP5WaH1jdzfAxC8naEyh8-gzGzoHsz",
+      appKey: "c1ffihM5AQSGtv4rwj3aaHeI"
+    });
+  </script>
+
+
+
+
+
+<script>
+  window.config = {"leancloud":{"app_id":"qhKGP5WaH1jdzfAxC8naEyh8-gzGzoHsz","app_key":"c1ffihM5AQSGtv4rwj3aaHeI"},"toc":true,"fancybox":true,"pjax":true};
+</script>
+
+    <title> 101.Go命令之go build - 深思阁 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">深思阁</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">深思阁</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          101.Go命令之go build
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2020-04-08
+        </span>
+        
+          <span class="post-category">
+            
+              <a href="/categories/Go命令/">Go命令</a>
+            
+          </span>
+        
+        
+        <span class="post-visits" data-url="/2020/04/08/101Go命令build/" data-title="101.Go命令之go build">
+          阅读次数 0
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#用途"><span class="toc-text">用途</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#编译源文件"><span class="toc-text">编译源文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编译代码包"><span class="toc-text">编译代码包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编译依赖包"><span class="toc-text">编译依赖包</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#命令输出"><span class="toc-text">命令输出</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#库源文件-包"><span class="toc-text">库源文件/包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命令源文件-包"><span class="toc-text">命令源文件/包</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#命令标记"><span class="toc-text">命令标记</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#o指定输出文件名称"><span class="toc-text">-o指定输出文件名称</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v显示构建包名"><span class="toc-text">-v显示构建包名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#i安装依赖包"><span class="toc-text">-i安装依赖包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#work显示临时工作目录"><span class="toc-text">-work显示临时工作目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#a强制重新编译涉及到的所有代码包"><span class="toc-text">-a强制重新编译涉及到的所有代码包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#p-n指定编译任务并行数量"><span class="toc-text">-p n指定编译任务并行数量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#输出编译期间执行的指令-n与-x"><span class="toc-text">输出编译期间执行的指令-n与-x</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <p>摘要：本节介绍<code>Go</code>命令中最常用的<code>go build</code>编译命令…</p>
+<a id="more"></a>
+<h2 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h2><p><code>go build</code>编译指定的源文件、代码包以及它们的依赖包</p>
+<p>如果源文件/包 是 命令源文件/包，则编译成功后将输出可执行文件，默认情况下，可执行文件在执行命令的当前目录下</p>
+<h3 id="编译源文件"><a href="#编译源文件" class="headerlink" title="编译源文件"></a>编译源文件</h3><p><strong>命令格式</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ go build [包名/]文件1.go [包名/]文件2.go ...</span><br></pre></td></tr></table></figure>
+<p>可以一次编译多个文件，根据执行命令所在的目录确定是否需要<strong>包名</strong></p>
+<p>注意：编译指定源文件时，所有的源文件<strong>只能在一个包中</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 正确的命令（同一个包中的多个文件）</span></span><br><span class="line">$ go build logging/base.go logging/tag.go</span><br><span class="line"><span class="comment"># 错误的命令（不同包中的文件）</span></span><br><span class="line">$ go build logging/base.go format/log.go</span><br><span class="line"><span class="comment"># 省略包名</span></span><br><span class="line"><span class="built_in">cd</span> logging</span><br><span class="line">$ go build base.go tag.go</span><br></pre></td></tr></table></figure>
+<h3 id="编译代码包"><a href="#编译代码包" class="headerlink" title="编译代码包"></a>编译代码包</h3><p><strong>命令格式</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ go build [包名]</span><br></pre></td></tr></table></figure>
+<p>说明：</p>
+<ul>
+<li>包名作为参数，则可以在任何目录下执行。具体编译的包是 <code>GOPATH/src/包名</code></li>
+<li>没有任何参数，需要在包所在的目录下执行。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 指定包名，可以任何位置执行，编译包：GOPATH/src/net/tcp</span></span><br><span class="line">$ go build net/tcp</span><br><span class="line"><span class="comment"># 在目录中，编译目录中的包：logging</span></span><br><span class="line">~/users/go/src/logging$ go build</span><br></pre></td></tr></table></figure>
+<p>注意：与编译源文件一样，不能同时编译多个包</p>
+<h3 id="编译依赖包"><a href="#编译依赖包" class="headerlink" title="编译依赖包"></a>编译依赖包</h3><p>先明确两个概念，什么是依赖包和触发包？</p>
+<p>如果包A依赖包B，则包B称为包A的依赖包，包A称为包B的触发包</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> app</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"logging"</span></span><br><span class="line">    <span class="string">"basic"</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>包<code>app</code>是<code>logging</code>和<code>basic</code>的触发包</li>
+<li>包<code>logging</code>是包<code>app</code>的依赖包</li>
+<li>包<code>basic</code>是包<code>app</code>的依赖包</li>
+</ul>
+<p>我们知道，编译命令<strong>不能</strong>同时编译多个包，如果一个包一个包编译会非常麻烦</p>
+<p>因此，在编译时，被编译包依赖其它包时，编译器将先编译依赖包，再编译当前包</p>
+<p>举个例子：要编译包<code>app</code>，该包依赖<code>logging</code>和<code>basic</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> app</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">		<span class="string">"logging"</span></span><br><span class="line">    <span class="string">"basic"</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>执行编译命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ go build app</span><br></pre></td></tr></table></figure>
+<p>则编译的顺序是</p>
+<ul>
+<li>编译依赖包<code>logging</code></li>
+<li>编译依赖包<code>basic</code></li>
+<li>编译触发包<code>app</code></li>
+</ul>
+<p>注意：包间不能存在循环依赖，也就是说：包A依赖包B，包B依赖包A。如果存在循环依赖，则编译时会报错误</p>
+<h2 id="命令输出"><a href="#命令输出" class="headerlink" title="命令输出"></a>命令输出</h2><p>编译代码是为了检查代码并输出结果，如：可执行文件、静态链接库、动态链接库等</p>
+<p>我们知道，<code>Go</code>有三种类型的源文件：命令源文件、库源文件、测试源文件。编译命令只对前两种起作用，只有编译命令源文件时才会输出可执行文件</p>
+<h3 id="库源文件-包"><a href="#库源文件-包" class="headerlink" title="库源文件/包"></a>库源文件/包</h3><p>执行编译命令时，不会有任何的输出结果（其实结果保存在临时文件中），<code>Go</code>记录该文件/包已经编译以及编译的状态</p>
+<h3 id="命令源文件-包"><a href="#命令源文件-包" class="headerlink" title="命令源文件/包"></a>命令源文件/包</h3><p>我们知道，<code>Go</code>的每个可执行程序都包含一个命名为<code>main</code>的包，包中包含<code>main()</code>函数的源文件称为命令源文件</p>
+<p>当编译命令包/源文件时，编译通过后会在当前目录下生成可执行文件</p>
+<h2 id="命令标记"><a href="#命令标记" class="headerlink" title="命令标记"></a>命令标记</h2><p>要改变默认的命令执行输出结果，可以使用命令参数。<code>go</code>命令提供了几种常用的参数</p>
+<table>
+<thead>
+<tr>
+<th>标记名称</th>
+<th>标记描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-o</td>
+<td>指定输出文件名称</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>显示构建包名</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>安装依赖包</td>
+</tr>
+<tr>
+<td>-work</td>
+<td>显示临时工作目录</td>
+</tr>
+<tr>
+<td>-p n</td>
+<td>指定编译任务并行数量</td>
+</tr>
+<tr>
+<td>-n -x</td>
+<td>输出编译期间执行的指令，-n只显示不执行</td>
+</tr>
+</tbody>
+</table>
+<h3 id="o指定输出文件名称"><a href="#o指定输出文件名称" class="headerlink" title="-o指定输出文件名称"></a><code>-o</code>指定输出文件名称</h3><p>编译命令源文件/命令包时，在执行编译命令所在目录生成可执行文件，默认情况，该文件名与命令源文件名/包名相同。使用<code>-o</code>参数，可以设置输出可执行文件的名称</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ go build -o collsrv.exe app</span><br></pre></td></tr></table></figure>
+<p>注意：在<code>windows</code>平台下，需要指定文件的扩展名</p>
+<h3 id="v显示构建包名"><a href="#v显示构建包名" class="headerlink" title="-v显示构建包名"></a><code>-v</code>显示构建包名</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ go build -v hello.go</span><br><span class="line"><span class="built_in">command</span>-line-arguments</span><br></pre></td></tr></table></figure>
+<p>这里显示的并不是它们所属的代码包的导入路径<code>other</code>。这是因为，命令程序在分析参数的时候如果发现第一个参数是<code>Go</code>源码文件而不是代码包，则会在内部生成一个虚拟代码包。这个虚拟代码包的导入路径和名称都会是<code>command-line-arguments</code></p>
+<h3 id="i安装依赖包"><a href="#i安装依赖包" class="headerlink" title="-i安装依赖包"></a><code>-i</code>安装依赖包</h3><p>在编译时，自动安装编译目标依赖的且未被安装的代码包。这里的安装意味着产生与代码包对应的归档文件，并将其放置到当前工作区目录的<code>pkg</code>子目录的相应子目录中。<strong>在默认情况下，这些代码包是不会被安装的</strong>。</p>
+<p>工作目录如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">├── hello</span><br><span class="line">│   ├── other</span><br><span class="line">│   │   ├── other.go</span><br><span class="line">│   ├── hello.go</span><br></pre></td></tr></table></figure>
+<p><code>hello.go</code>源文件</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span>(</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"hello/other"</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p><code>other.go</code>源文件</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> other</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	Monday  = <span class="literal">iota</span> <span class="comment">//星期一</span></span><br><span class="line">	Tuesday        <span class="comment">//星期二</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>执行<code>go build -i</code>后，<code>pkg</code>中发生了一些变化</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">├── pkg</span><br><span class="line">│   ├── mod</span><br><span class="line">│   ├── submod</span><br><span class="line">│   ├── windows_amd64 <span class="comment"># 新增目录</span></span><br><span class="line">│   │   ├── hello</span><br><span class="line">│   │   |   ├── other.a <span class="comment"># 安装的other包</span></span><br></pre></td></tr></table></figure>
+<h3 id="work显示临时工作目录"><a href="#work显示临时工作目录" class="headerlink" title="-work显示临时工作目录"></a><code>-work</code>显示临时工作目录</h3><p>默认情况下，编译器会在编译开始时创建临时目录，并且在编译结束后删除该临时目录</p>
+<p>该参数在命令行中打印输出创建的临时目录，并且在编译结束后保留该临时目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ go build -v -work logging</span><br><span class="line">WORK=/tmp/go-build888760008</span><br><span class="line">logging</span><br></pre></td></tr></table></figure>
+<h3 id="a强制重新编译涉及到的所有代码包"><a href="#a强制重新编译涉及到的所有代码包" class="headerlink" title="-a强制重新编译涉及到的所有代码包"></a><code>-a</code>强制重新编译涉及到的所有代码包</h3><p>默认情况下，编译通过的库代码包，在没有改动时不会再次编译</p>
+<p>该参数强制对涉及到的所有代码包进行重新编译，并在命令行输出这些包名</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">$ go build -a -v -work hello</span><br><span class="line">WORK=C:\Users\lijie\AppData\Local\Temp\go-build131882478</span><br><span class="line">runtime/internal/sys</span><br><span class="line">math/bits</span><br><span class="line">runtime/internal/atomic</span><br><span class="line">internal/cpu</span><br><span class="line">runtime/internal/math</span><br><span class="line">unicode/utf8</span><br><span class="line">internal/race</span><br><span class="line">sync/atomic</span><br><span class="line">internal/bytealg</span><br><span class="line">math</span><br><span class="line">unicode</span><br><span class="line">internal/syscall/windows/sysdll</span><br><span class="line">unicode/utf16</span><br><span class="line">internal/testlog</span><br><span class="line">runtime</span><br><span class="line">hello/other</span><br><span class="line">internal/reflectlite</span><br><span class="line">sync</span><br><span class="line">errors</span><br><span class="line">sort</span><br><span class="line">internal/oserror</span><br><span class="line">io</span><br><span class="line">strconv</span><br><span class="line">syscall</span><br><span class="line">reflect</span><br><span class="line">internal/syscall/windows</span><br><span class="line">internal/syscall/windows/registry</span><br><span class="line">time</span><br><span class="line">internal/fmtsort</span><br><span class="line">internal/poll</span><br><span class="line">os</span><br><span class="line">fmt</span><br><span class="line">hello</span><br></pre></td></tr></table></figure>
+<p>看到没有，这一个长长的列表，只有几行代码的源文件，需要依赖这么多的库包</p>
+<h3 id="p-n指定编译任务并行数量"><a href="#p-n指定编译任务并行数量" class="headerlink" title="-p n指定编译任务并行数量"></a><code>-p n</code>指定编译任务并行数量</h3><p>指定编译过程中执行各任务的并行数量（确切地说应该是并发数量）。在默认情况下，该数量等于<code>CPU</code>的逻辑核数。但是在<code>darwin/arm</code>平台（即<code>iPhone</code>和<code>iPad</code>所用的平台）下，该数量默认是<code>1</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">$ go build -a -v -work -p 1 hello</span><br><span class="line">WORK=C:\Users\lijie\AppData\Local\Temp\go-build545214450</span><br><span class="line">internal/cpu</span><br><span class="line">internal/bytealg</span><br><span class="line">runtime/internal/atomic</span><br><span class="line">runtime/internal/sys</span><br><span class="line">runtime/internal/math</span><br><span class="line">runtime</span><br><span class="line">internal/reflectlite</span><br><span class="line">errors</span><br><span class="line">math/bits</span><br><span class="line">math</span><br><span class="line">unicode/utf8</span><br><span class="line">strconv</span><br><span class="line">internal/race</span><br><span class="line">sync/atomic</span><br><span class="line">sync</span><br><span class="line">unicode</span><br><span class="line">reflect</span><br><span class="line">sort</span><br><span class="line">internal/fmtsort</span><br><span class="line">io</span><br><span class="line">internal/oserror</span><br><span class="line">internal/syscall/windows/sysdll</span><br><span class="line">unicode/utf16</span><br><span class="line">syscall</span><br><span class="line">internal/syscall/windows</span><br><span class="line">internal/syscall/windows/registry</span><br><span class="line">time</span><br><span class="line">internal/poll</span><br><span class="line">internal/testlog</span><br><span class="line">os</span><br><span class="line">fmt</span><br><span class="line">hello/other</span><br><span class="line">hello</span><br></pre></td></tr></table></figure>
+<p>注意：指定只有<code>1</code>个并发任务时，输出的包名顺序才是真正体现出包的依赖关系。这个顺序与前面的顺序是不同的</p>
+<h3 id="输出编译期间执行的指令-n与-x"><a href="#输出编译期间执行的指令-n与-x" class="headerlink" title="输出编译期间执行的指令-n与-x"></a>输出编译期间执行的指令<code>-n</code>与<code>-x</code></h3><p>在实际编译期间，编译器会执行一系列的命令，如：代码格式化、语法检查、编译、链接、输出可执行文件等</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">$ go build -x hello</span><br><span class="line">WORK=C:\Users\lijie\AppData\Local\Temp\go-build404782846</span><br><span class="line">mkdir -p <span class="variable">$WORK</span>\b001\</span><br><span class="line">cat &gt;<span class="variable">$WORK</span>\b001\importcfg.link &lt;&lt; <span class="string">'EOF'</span> <span class="comment"># internal</span></span><br><span class="line">packagefile hello=C:\Users\lijie\AppData\Local\go-build\9a\9a35cb461fb41e0758c6b9e08aa353f612f4eac43e709dead41e54c3b7d970cc<span class="_">-d</span></span><br><span class="line">packagefile fmt=c:\go\pkg\windows_amd64\fmt.a</span><br><span class="line">packagefile hello/other=C:\Users\lijie\AppData\Local\go-build\d2\d22494281fc39ba581ff1c507e77f75043507d68feba7dbb8c87d288bdc701f1<span class="_">-d</span></span><br><span class="line">packagefile runtime=c:\go\pkg\windows_amd64\runtime.a</span><br><span class="line">packagefile errors=c:\go\pkg\windows_amd64\errors.a</span><br><span class="line">packagefile internal/fmtsort=c:\go\pkg\windows_amd64\internal\fmtsort.a</span><br><span class="line">packagefile io=c:\go\pkg\windows_amd64\io.a</span><br><span class="line">packagefile math=c:\go\pkg\windows_amd64\math.a</span><br><span class="line">packagefile os=c:\go\pkg\windows_amd64\os.a</span><br><span class="line">packagefile reflect=c:\go\pkg\windows_amd64\reflect.a</span><br><span class="line">packagefile strconv=c:\go\pkg\windows_amd64\strconv.a</span><br><span class="line">packagefile sync=c:\go\pkg\windows_amd64\sync.a</span><br><span class="line">packagefile unicode/utf8=c:\go\pkg\windows_amd64\unicode\utf8.a</span><br><span class="line">packagefile internal/bytealg=c:\go\pkg\windows_amd64\internal\bytealg.a</span><br><span class="line">packagefile internal/cpu=c:\go\pkg\windows_amd64\internal\cpu.a</span><br><span class="line">packagefile runtime/internal/atomic=c:\go\pkg\windows_amd64\runtime\internal\atomic.a</span><br><span class="line">packagefile runtime/internal/math=c:\go\pkg\windows_amd64\runtime\internal\math.a</span><br><span class="line">packagefile runtime/internal/sys=c:\go\pkg\windows_amd64\runtime\internal\sys.a</span><br><span class="line">packagefile internal/reflectlite=c:\go\pkg\windows_amd64\internal\reflectlite.a</span><br><span class="line">packagefile sort=c:\go\pkg\windows_amd64\sort.a</span><br><span class="line">packagefile math/bits=c:\go\pkg\windows_amd64\math\bits.a</span><br><span class="line">packagefile internal/oserror=c:\go\pkg\windows_amd64\internal\oserror.a</span><br><span class="line">packagefile internal/poll=c:\go\pkg\windows_amd64\internal\poll.a</span><br><span class="line">packagefile internal/syscall/windows=c:\go\pkg\windows_amd64\internal\syscall\windows.a</span><br><span class="line">packagefile internal/testlog=c:\go\pkg\windows_amd64\internal\testlog.a</span><br><span class="line">packagefile sync/atomic=c:\go\pkg\windows_amd64\sync\atomic.a</span><br><span class="line">packagefile syscall=c:\go\pkg\windows_amd64\syscall.a</span><br><span class="line">packagefile time=c:\go\pkg\windows_amd64\time.a</span><br><span class="line">packagefile unicode/utf16=c:\go\pkg\windows_amd64\unicode\utf16.a</span><br><span class="line">packagefile unicode=c:\go\pkg\windows_amd64\unicode.a</span><br><span class="line">packagefile internal/race=c:\go\pkg\windows_amd64\internal\race.a</span><br><span class="line">packagefile internal/syscall/windows/sysdll=c:\go\pkg\windows_amd64\internal\syscall\windows\sysdll.a</span><br><span class="line">packagefile internal/syscall/windows/registry=c:\go\pkg\windows_amd64\internal\syscall\windows\registry.a</span><br><span class="line">EOF</span><br><span class="line">mkdir -p <span class="variable">$WORK</span>\b001\exe\</span><br><span class="line"><span class="built_in">cd</span> .</span><br><span class="line"><span class="string">"c:\\go\\pkg\\tool\\windows_amd64\\link.exe"</span> -o <span class="string">"<span class="variable">$WORK</span>\\b001\\exe\\a.out.exe"</span> -importcfg <span class="string">"<span class="variable">$WORK</span>\\b001\\importcfg.link"</span> -buildmode=exe -buildid=hfsXM9iSACNXWQEA-5Ko/3u_Owsxy0L4Uf2HMk_Ao/8gIynBqIWz50y4H6oZx4/hfsXM9iSACNXWQEA-5Ko -extld=gcc <span class="string">"C:\\Users\\lijie\\AppData\\Local\\go-build\\9a\\9a35cb461fb41e0758c6b9e08aa353f612f4eac43e709dead41e54c3b7d970cc-d"</span></span><br><span class="line"><span class="string">"c:\\go\\pkg\\tool\\windows_amd64\\buildid.exe"</span> -w <span class="string">"<span class="variable">$WORK</span>\\b001\\exe\\a.out.exe"</span> <span class="comment"># internal</span></span><br><span class="line">cp <span class="variable">$WORK</span>\b001\exe\a.out.exe hello.exe</span><br><span class="line">rm -r <span class="variable">$WORK</span>\b001\</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="http://blog.go2sts.com">lleej</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="http://blog.go2sts.com/2020/04/08/101Go命令build/">http://blog.go2sts.com/2020/04/08/101Go命令build/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Go命令/">Go命令</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2020/04/09/103Go命令get/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">103.Go命令之go get</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2020/04/07/03Go变量声明/">
+        <span class="next-text nav-default">03.Go语言学习笔记-Go变量声明</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:lleej@qq.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/lleej" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2018 - 
+    
+    2020
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">lleej</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.2"></script>
+
+  </body>
+</html>

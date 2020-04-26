@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+
+
+
+  <meta name="keywords" content="技术博客 前端 Node Python AI">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深思阁">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.2">
+
+
+
+<link rel="canonical" href="http://blog.go2sts.com/page/3/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.2">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "qhKGP5WaH1jdzfAxC8naEyh8-gzGzoHsz",
+      appKey: "c1ffihM5AQSGtv4rwj3aaHeI"
+    });
+  </script>
+
+
+
+
+
+<script>
+  window.config = {"leancloud":{"app_id":"qhKGP5WaH1jdzfAxC8naEyh8-gzGzoHsz","app_key":"c1ffihM5AQSGtv4rwj3aaHeI"},"toc":true,"fancybox":true,"pjax":true};
+</script>
+
+    <title> 深思阁 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">深思阁</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">深思阁</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <section id="posts" class="posts">
+    
+      
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2020/04/08/101Go命令build/">101.Go命令之go build</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2020-04-08
+        </span>
+        
+          <span class="post-category">
+            
+              <a href="/categories/Go命令/">Go命令</a>
+            
+          </span>
+        
+        
+        <span class="post-visits" data-url="/2020/04/08/101Go命令build/" data-title="101.Go命令之go build">
+          阅读次数 0
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>摘要：本节介绍<code>Go</code>命令中最常用的<code>go build</code>编译命令…</p>
+          <div class="read-more">
+            <a href="/2020/04/08/101Go命令build/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+      
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2020/04/07/03Go变量声明/">03.Go语言学习笔记-Go变量声明</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2020-04-07
+        </span>
+        
+          <span class="post-category">
+            
+              <a href="/categories/Go语言/">Go语言</a>
+            
+          </span>
+        
+        
+        <span class="post-visits" data-url="/2020/04/07/03Go变量声明/" data-title="03.Go语言学习笔记-Go变量声明">
+          阅读次数 0
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>摘要：本节介绍<code>Go</code>语言的变量声明</p>
+          <div class="read-more">
+            <a href="/2020/04/07/03Go变量声明/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+      
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2020/04/07/10Go数据类型-整数/">10.Go语言学习笔记-Go基本数据类型-整数</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2020-04-07
+        </span>
+        
+          <span class="post-category">
+            
+              <a href="/categories/Go语言/">Go语言</a>
+            
+          </span>
+        
+        
+        <span class="post-visits" data-url="/2020/04/07/10Go数据类型-整数/" data-title="10.Go语言学习笔记-Go基本数据类型-整数">
+          阅读次数 0
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>摘要：本节介绍<code>Go</code>语言的基本数据类型：整型</p>
+          <div class="read-more">
+            <a href="/2020/04/07/10Go数据类型-整数/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+      
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2020/04/02/02Go语言基础/">02.Go语言学习笔记-Go语言基础</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2020-04-02
+        </span>
+        
+          <span class="post-category">
+            
+              <a href="/categories/Go语言/">Go语言</a>
+            
+          </span>
+        
+        
+        <span class="post-visits" data-url="/2020/04/02/02Go语言基础/" data-title="02.Go语言学习笔记-Go语言基础">
+          阅读次数 0
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>摘要：Go语言有其独特的程序结构和要素，在开始正式学习前，需要了解这些不同点，以免与其它语言语法产生混淆。本节内容包括：命名规则、注释、程序结构、包和文件…</p>
+          <div class="read-more">
+            <a href="/2020/04/02/02Go语言基础/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+      
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2020/03/31/01初识Go语言/">01.Go语言学习笔记-初识Go语言</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2020-03-31
+        </span>
+        
+          <span class="post-category">
+            
+              <a href="/categories/Go语言/">Go语言</a>
+            
+          </span>
+        
+        
+        <span class="post-visits" data-url="/2020/03/31/01初识Go语言/" data-title="01.Go语言学习笔记-初识Go语言">
+          阅读次数 0
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>摘要：正式开始学习<code>Go</code>语言，这几年开发语言学的比较杂，但一个也没有应用到实际的项目中。希望能以<code>Go</code>语言为起点。作为<code>Google</code>开源的<code>21世纪C语言</code>，自2009年发布以来，越来越受IT业界新生态公司的推崇，一些新的技术也是使用其进行开发的，例如：<code>Docker</code>、<code>K8s</code>、<code>区块链</code>等…</p>
+          <div class="read-more">
+            <a href="/2020/03/31/01初识Go语言/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+      
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2020/03/10/一个虚拟化配置的案例/">虚拟化设计的基本常识</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2020-03-10
+        </span>
+        
+          <span class="post-category">
+            
+              <a href="/categories/虚拟化/">虚拟化</a>
+            
+          </span>
+        
+        
+        <span class="post-visits" data-url="/2020/03/10/一个虚拟化配置的案例/" data-title="虚拟化设计的基本常识">
+          阅读次数 0
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>摘要：目前，用户的业务已经完全迁移到云平台，对于自建云平台的项目，在设计阶段涉及到的问题是如何根据业务应用的需要合理的配置硬件资源。</p>
+          <div class="read-more">
+            <a href="/2020/03/10/一个虚拟化配置的案例/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+      
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2019/04/25/Vue工程化实践之项目组织/">Vue工程化实践之项目组织</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-04-25
+        </span>
+        
+          <span class="post-category">
+            
+              <a href="/categories/前端-Vue-Element/">前端 Vue Element</a>
+            
+          </span>
+        
+        
+        <span class="post-visits" data-url="/2019/04/25/Vue工程化实践之项目组织/" data-title="Vue工程化实践之项目组织">
+          阅读次数 0
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>摘要：文本是使用Vue和Element进行前端工程化系列的第一篇文章，重点介绍：前端工程的项目组织、常用库、开发工具和提升效率的插件。对于部门的前端开发可以统一采用此种工程化的思路。</p>
+          <div class="read-more">
+            <a href="/2019/04/25/Vue工程化实践之项目组织/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+      
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2019/04/12/hadoop集群安装/">数据库-hadoop集群安装</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-04-12
+        </span>
+        
+          <span class="post-category">
+            
+              <a href="/categories/数据库/">数据库</a>
+            
+          </span>
+        
+        
+        <span class="post-visits" data-url="/2019/04/12/hadoop集群安装/" data-title="数据库-hadoop集群安装">
+          阅读次数 0
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>摘要：本文章介绍Hadoop集群安装的环境和步骤</p>
+<p>原文作者：张建中</p>
+          <div class="read-more">
+            <a href="/2019/04/12/hadoop集群安装/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+      
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2019/04/03/01-面向对象/">01.Javascript的面向对象</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-04-03
+        </span>
+        
+          <span class="post-category">
+            
+              <a href="/categories/前端/">前端</a>
+            
+          </span>
+        
+        
+        <span class="post-visits" data-url="/2019/04/03/01-面向对象/" data-title="01.Javascript的面向对象">
+          阅读次数 0
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>摘要：文本是使用Git进行代码管理的第六篇文章，重点介绍：适合团队自身的开发流程和开发规范以及版本库的操作。</p>
+          <div class="read-more">
+            <a href="/2019/04/03/01-面向对象/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+      
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2019/03/15/Git-工作流(续)/">6.Git-工作流(续)</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-03-15
+        </span>
+        
+          <span class="post-category">
+            
+              <a href="/categories/配置管理/">配置管理</a>
+            
+          </span>
+        
+        
+        <span class="post-visits" data-url="/2019/03/15/Git-工作流(续)/" data-title="6.Git-工作流(续)">
+          阅读次数 0
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+
+
+    <div class="post-content">
+      
+        
+        
+          
+        
+
+        
+          <p>摘要：文本是使用Git进行代码管理的第六篇文章，重点介绍：适合团队自身的开发流程和开发规范以及版本库的操作。</p>
+          <div class="read-more">
+            <a href="/2019/03/15/Git-工作流(续)/" class="read-more-link">阅读更多</a>
+          </div>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+      
+      
+  <nav class="pagination">
+    
+      <a class="prev" href="/page/2/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text">上一页</span>
+      </a>
+    
+    
+      <a class="next" href="/page/4/">
+        <span class="next-text">下一页</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+    
+  </section>
+
+          </div>
+          
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:lleej@qq.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/lleej" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2018 - 
+    
+    2020
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">lleej</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.2"></script>
+
+  </body>
+</html>

@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="虚拟化设计的基本常识">
+
+
+
+
+  <meta name="keywords" content="技术博客 前端 Node Python AI">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深思阁">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.2">
+
+
+
+<link rel="canonical" href="http://blog.go2sts.com/2020/03/10/一个虚拟化配置的案例/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.2">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "qhKGP5WaH1jdzfAxC8naEyh8-gzGzoHsz",
+      appKey: "c1ffihM5AQSGtv4rwj3aaHeI"
+    });
+  </script>
+
+
+
+
+
+<script>
+  window.config = {"leancloud":{"app_id":"qhKGP5WaH1jdzfAxC8naEyh8-gzGzoHsz","app_key":"c1ffihM5AQSGtv4rwj3aaHeI"},"toc":true,"fancybox":true,"pjax":true};
+</script>
+
+    <title> 虚拟化设计的基本常识 - 深思阁 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">深思阁</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">深思阁</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          虚拟化设计的基本常识
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2020-03-10
+        </span>
+        
+          <span class="post-category">
+            
+              <a href="/categories/虚拟化/">虚拟化</a>
+            
+          </span>
+        
+        
+        <span class="post-visits" data-url="/2020/03/10/一个虚拟化配置的案例/" data-title="虚拟化设计的基本常识">
+          阅读次数 0
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+
+
+    <div class="post-content">
+      
+        <p>摘要：目前，用户的业务已经完全迁移到云平台，对于自建云平台的项目，在设计阶段涉及到的问题是如何根据业务应用的需要合理的配置硬件资源。</p>
+<a id="more"></a>
+<p>对于使用VMWare进行管理的虚拟化环境，有如下一些基本的约束和限制，了解这些对于对于如何配置至关重要</p>
+<ol>
+<li>使用物理机本地的存储(硬盘)资源，将不能实现虚拟机的故障迁移。如果要求实现故障迁移，就必须使用共享存储</li>
+<li>虚拟机的资源不能跨物理机。虚拟机的资源必须全部来源于一台物理主机</li>
+<li>物理主机上配置的全部虚拟机的资源总和，不能高于物理主机的实际资源量。否则当虚拟机资源利用率达到峰值时，会因为物理资源不足而宕机</li>
+<li>在虚拟机层面不存在弹性扩容，要实现应用的弹性配置，必须依赖于更高层面的云平台，实现虚拟机级别的动态配置</li>
+<li>在虚拟机配置中，CPU数量统一指核数，而不是颗数</li>
+</ol>
+<p>下面是一个真实的案例：</p>
+<p>XX省需要对现有云平台进行扩容以支持业务调整，虚拟机的需求如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>应用</th>
+<th>数量</th>
+<th>CPU</th>
+<th>内存</th>
+<th>硬盘</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>路方清分</td>
+<td>2</td>
+<td>8</td>
+<td>32</td>
+<td>1T</td>
+</tr>
+<tr>
+<td>2</td>
+<td>费率、计费</td>
+<td>2</td>
+<td>8</td>
+<td>32</td>
+<td>1T</td>
+</tr>
+<tr>
+<td>3</td>
+<td>部中心清分</td>
+<td>2</td>
+<td>8</td>
+<td>32</td>
+<td>1T</td>
+</tr>
+<tr>
+<td>4</td>
+<td>状态名单</td>
+<td>1</td>
+<td>8</td>
+<td>32</td>
+<td>1T</td>
+</tr>
+<tr>
+<td>5</td>
+<td>路径服务类接口</td>
+<td>3</td>
+<td>16</td>
+<td>32</td>
+<td>1T</td>
+</tr>
+<tr>
+<td>6</td>
+<td>运行监测服务器</td>
+<td>1</td>
+<td>16</td>
+<td>48</td>
+<td>1T</td>
+</tr>
+<tr>
+<td>7</td>
+<td>数据传输监控系统</td>
+<td>3</td>
+<td>16</td>
+<td>32</td>
+<td>1T</td>
+</tr>
+<tr>
+<td>8</td>
+<td>收费管理系统</td>
+<td>1</td>
+<td>16</td>
+<td>32</td>
+<td>1T</td>
+</tr>
+<tr>
+<td>9</td>
+<td>拆分结算系统</td>
+<td>2</td>
+<td>16</td>
+<td>32</td>
+<td>1T</td>
+</tr>
+</tbody>
+</table>
+<p>为了支撑以上业务需要，需要采购的物理主机的数量和配置，才能满足以上的需要</p>
+<p>我们假定物理主机的单机配置是已知的：2颗CPU、单颗&gt;=20核；内存256G；硬盘4T*8</p>
+<p>分析如下：</p>
+<ol>
+<li>由于虚拟机不能跨物理主机分配资源，虚拟机必须最大程度利用物理主机的资源（40核CPU、256G内存）</li>
+<li>从CPU的使用率分析<ol>
+<li>资源满配情况下，一台物理主机分配：5个8核虚拟机 / 2个16核+1个8核虚拟机 / 1个16核+3个8核虚拟机</li>
+<li>实际需求为：10台16核虚拟机以及7台8核虚拟机</li>
+<li>最优配置原则<ol>
+<li>5台物理机：2个16核 + 1个8核</li>
+<li>1台物理机：2个8核（空余3个8核 / 1个16核+1个8核，可以作为故障迁移使用）</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>从内存的使用率分析<ol>
+<li>资源满配情况下，一台物理主机分配：8个32G虚拟机 / 5个48G虚拟机 / 多种组合</li>
+<li>实际需求为：16台32G虚拟机以及1台48G虚拟机</li>
+<li>最优配置原则<ol>
+<li>2台物理机：8个32G</li>
+<li>1台物理机：1个48G</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>结合CPU和内存的最优分配方案<ol>
+<li>4台物理机：2个16核32G + 1个8核32G（分配资源：40核、96G）</li>
+<li>1台物理机：1个16核32G + 1个16核48G + 1个8核32G（分配资源：40核、112G）</li>
+<li>1台物理机：2个8核32G（分配资源：16核、64G）</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="http://blog.go2sts.com">lleej</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="http://blog.go2sts.com/2020/03/10/一个虚拟化配置的案例/">http://blog.go2sts.com/2020/03/10/一个虚拟化配置的案例/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/虚拟化/">虚拟化</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2020/03/31/01初识Go语言/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">01.Go语言学习笔记-初识Go语言</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2019/04/25/Vue工程化实践之项目组织/">
+        <span class="next-text nav-default">Vue工程化实践之项目组织</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:lleej@qq.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/lleej" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2018 - 
+    
+    2020
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">lleej</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.2"></script>
+
+  </body>
+</html>

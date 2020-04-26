@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="5.Git-高级功能">
+
+
+
+
+  <meta name="keywords" content="技术博客 前端 Node Python AI">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深思阁">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.2">
+
+
+
+<link rel="canonical" href="http://blog.go2sts.com/2019/03/14/Git-高级功能/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.2">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "qhKGP5WaH1jdzfAxC8naEyh8-gzGzoHsz",
+      appKey: "c1ffihM5AQSGtv4rwj3aaHeI"
+    });
+  </script>
+
+
+
+
+
+<script>
+  window.config = {"leancloud":{"app_id":"qhKGP5WaH1jdzfAxC8naEyh8-gzGzoHsz","app_key":"c1ffihM5AQSGtv4rwj3aaHeI"},"toc":true,"fancybox":true,"pjax":true};
+</script>
+
+    <title> 5.Git-高级功能 - 深思阁 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">深思阁</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">深思阁</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          5.Git-高级功能
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-03-14
+        </span>
+        
+          <span class="post-category">
+            
+              <a href="/categories/配置管理/">配置管理</a>
+            
+          </span>
+        
+        
+        <span class="post-visits" data-url="/2019/03/14/Git-高级功能/" data-title="5.Git-高级功能">
+          阅读次数 0
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#头指针"><span class="toc-text">头指针</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分离头指针"><span class="toc-text">分离头指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#相对引用"><span class="toc-text">相对引用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变基"><span class="toc-text">变基</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是变基"><span class="toc-text">什么是变基</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#变基操作"><span class="toc-text">变基操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#变基操作原理"><span class="toc-text">变基操作原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#变基的用途"><span class="toc-text">变基的用途</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#变基的几种用法"><span class="toc-text">变基的几种用法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#交互式变基"><span class="toc-text">交互式变基</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#变基操作-1"><span class="toc-text">变基操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cherry-pick变基"><span class="toc-text">Cherry-pick变基</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#变基操作-2"><span class="toc-text">变基操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#适用性"><span class="toc-text">适用性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变基小结"><span class="toc-text">变基小结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在提交树上强制移动分支"><span class="toc-text">在提交树上强制移动分支</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#撤销操作"><span class="toc-text">撤销操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Reset撤销"><span class="toc-text">Reset撤销</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Revert撤销"><span class="toc-text">Revert撤销</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改提交消息"><span class="toc-text">修改提交消息</span></a></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <p>摘要：文本是使用Git进行代码管理的第五篇文章，重点介绍：Git的一些高级用法，包括：分离头指针、变基、Cherry-pick、撤销、提交合并、修改提交消息、强制移动分支、垃圾回收等。这些高级用法让我们可以更加自如的应对出现的各种问题，例如：提交到了错误的分支上、修改已提交的消息、从不同分支中提取部分提交到新的分支上、自由移动分支的指针、让提交历史更简洁等。</p>
+<a id="more"></a>
+<p>我们之前了解了Git的基本用法，包括：初始化仓库、克隆远程仓库、添加文件到暂存区、提交、创建分支、切换分支、删除分支、推动到远程仓库、从远程仓库拉取等等。掌握了这些用法基本满足日常使用的需要，但有时在使用时会出现一些误操作，或者导致分支提交历史的混乱，这就需要使用Git的高级用法来解决。</p>
+<h2 id="头指针"><a href="#头指针" class="headerlink" title="头指针"></a>头指针</h2><p>在分支部分介绍过头指针<code>HEAD</code>，头指针是指向当前分支（更准确的说是提交）的引用。我们在切换工作分支时，头指针指向当前工作分支，工作区的内容切换为分支指向的提交版本。</p>
+<p><img src="/images/branchs-ops-init.png" alt="Git分支初始状态"></p>
+<p>使用检出指令<code>git checkout [分支名称] | [提交哈希]</code>，将改变头指针的指向。</p>
+<h3 id="分离头指针"><a href="#分离头指针" class="headerlink" title="分离头指针"></a>分离头指针</h3><p>分离头指针是头指针的一种非正常状态<code>detached HEAD</code>。当头指针指向的不是本地分支而是某个提交时（即使是分支指向的提交），就处于分离头指针状态。</p>
+<p><img src="/images/branch-detached.png" alt="分离头指针"></p>
+<p>由于远程跟踪分支是只读副本，无法进行提交操作。因此，如果检出一个远程跟踪分支也会处于分离头指针状态。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 检出远程跟踪分支</span></span><br><span class="line">$ git checkout origin/master</span><br><span class="line">$ git status</span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">HEAD detached at origin/master</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检出提交哈希</span></span><br><span class="line">$ git checkout 7c9ca</span><br><span class="line">$ git status</span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">HEAD detached at 7c9ca</span><br></pre></td></tr></table></figure>
+<p>当处于分离头指针状态时，添加暂存区和提交操作能够正常执行。但是，由于新的提交没有关联的分支，当切换到其他分支后，在分离头指针状态下的提交会被 Git 垃圾回收。</p>
+<h3 id="相对引用"><a href="#相对引用" class="headerlink" title="相对引用"></a>相对引用</h3><p>正常情况下，头指针的指向由 Git 负责维护。在切换分支、提交、回退等操作时，头指针都会自动进行移动。</p>
+<p>当我们需要将头指针移动到指定位置（提交）时，通常情况下使用提交的哈希值，而哈希值的查找和记忆比较不方便，因此 Git 引入了相对引用，在分支名或<code>HEAD</code>后使用<code>^</code>和<code>~n</code>快速定位提交。</p>
+<p>在分支章节我们介绍过，分支是一个单向的提交树，相对引用是从分支指向提交，沿着提交树向上移动指定数量提交记录的引用。</p>
+<p><code>^</code>。向上移动一个提交记录</p>
+<p><code>~n</code>。向上移动多个提交记录，n &gt;= 1</p>
+<p><img src="/images/branch-move-head.png" alt="移动头指针"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定位到 b83c0 提交</span></span><br><span class="line">$ git checkout b83c0</span><br><span class="line">$ git checkout HEAD^</span><br><span class="line">$ git checkout HEAD~1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定位到 7c9ca 提交</span></span><br><span class="line">$ git checkout 7c9ca</span><br><span class="line">$ git checkout HEAD^^^</span><br><span class="line">$ git checkout HEAD~3</span><br></pre></td></tr></table></figure>
+<p>相对引用在 Git 高级用法中会经常用到，需要掌握。</p>
+<h2 id="变基"><a href="#变基" class="headerlink" title="变基"></a>变基</h2><p>变基<code>rebase</code>是分支合并的另一种方法。在分支章节，介绍了使用<code>git merge</code>进行分支合并的方法。</p>
+<h3 id="什么是变基"><a href="#什么是变基" class="headerlink" title="什么是变基"></a>什么是变基</h3><p>变基是将一系列提交按照原有次序依次应用到另一分支上，取出提交记录、”复制”它们、逐个提交到另一分支上。</p>
+<ol>
+<li>变基用于分支的合并</li>
+<li>与<code>merge</code>不同的是，变基不会生成合并提交，而是将提交们依次应用到目标分支上</li>
+<li><code>merge</code>是将目标分支合并到当前分支，而<code>rebase</code>是将当前分支合并到目标分支</li>
+<li>变基可以创造更线性的提交历史，保持提交树的整洁、避免分叉，感觉就像串行工作一样</li>
+</ol>
+<h3 id="变基操作"><a href="#变基操作" class="headerlink" title="变基操作"></a>变基操作</h3><p>下面通过一个例子，介绍变基的操作。</p>
+<p>下图是 Git 的分支和提交情况，有两个分支分别为<code>experiment</code>和<code>master</code>，两个分支有一个共同的祖先<code>C2</code>。</p>
+<p><img src="/images/basic-rebase-1.png" alt="变基-源分支"></p>
+<p>如果使用<code>merge</code>进行合并，则合并操作将采用第三方合并的方式，创建一个合并提交<code>C5</code>，提交树出现分叉。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 切换到 master 分支</span></span><br><span class="line">$ git checkout master</span><br><span class="line"><span class="comment"># 合并 experiment 分支</span></span><br><span class="line">$ git merge experiment</span><br></pre></td></tr></table></figure>
+<p>合并操作后，<code>master</code>分支指向合并提交<code>C5</code>，而<code>experiment</code>分支保持不变</p>
+<p><img src="/images/basic-rebase-2.png" alt="变基操作-merge"></p>
+<p>如果采用<code>rebase</code>进行合并，则合并操作将创建与<code>C4</code>提交相同的<code>C4&#39;</code>提交并指向<code>C3</code>，而<code>C4</code>提交被废弃，提交树不会出现分叉。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 切换到 experiment 分支</span></span><br><span class="line">$ git checkout experiment</span><br><span class="line"><span class="comment"># 变基到 master 分支</span></span><br><span class="line">$ git rebase master</span><br></pre></td></tr></table></figure>
+<p>合并操作后，<code>experiment</code>分支指向提交<code>C4&#39;</code>，而<code>master</code>分支保持不变。</p>
+<p><img src="/images/basic-rebase-3.png" alt="变基操作-rebase"></p>
+<p>如果要移动<code>master</code>分支指向合并后的提交<code>C4&#39;</code>，则需要执行快速合并操作<code>merge</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 切换到 master 分支</span></span><br><span class="line">$ git checkout master</span><br><span class="line"><span class="comment"># 合并 experiment 分支</span></span><br><span class="line">$ git merge experiment</span><br></pre></td></tr></table></figure>
+<p><img src="/images/basic-rebase-4.png" alt="变基操作-merge"></p>
+<h3 id="变基操作原理"><a href="#变基操作原理" class="headerlink" title="变基操作原理"></a>变基操作原理</h3><ol>
+<li>找到两个分支（即当前分支 <code>experiment</code>、基底分支 <code>master</code>）的最近共同祖先 <code>C2</code></li>
+<li>对比当前分支相对于该祖先<code>C2</code>的历次提交，提取相应的修改并存为临时文件</li>
+<li>将当前分支指向目标基底 <code>C3</code></li>
+<li>将之前另存为临时文件的修改依序应用在当前分支</li>
+</ol>
+<h3 id="变基的用途"><a href="#变基的用途" class="headerlink" title="变基的用途"></a>变基的用途</h3><ol>
+<li>创造更线性的提交历史，保持提交树的整洁、避免分叉</li>
+<li>保持远程仓库中分支的整洁，便于团队内部更好的协同工作</li>
+</ol>
+<h3 id="变基的几种用法"><a href="#变基的几种用法" class="headerlink" title="变基的几种用法"></a>变基的几种用法</h3><ol>
+<li>将特性分支变基到基底分支</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 完整语法 可以在任意工作分支上执行</span></span><br><span class="line"><span class="comment"># 指定 特性分支 则在操作前会自动切换到 特性分支</span></span><br><span class="line">$ git rebase [基底分支] [特性分支]</span><br><span class="line">$ git rebase master experiment</span><br><span class="line"></span><br><span class="line"><span class="comment"># 简写语法 当前工作分支为 特性分支</span></span><br><span class="line">$ git rebase [基底分支]</span><br><span class="line">$ git rebase master</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>将特性分支的子分支变基到基底分支</li>
+</ol>
+<p>下图有三个分支，基底分支<code>master</code>、特性分支<code>server</code>、特性分支的子分支<code>client</code></p>
+<p>如果，直接将子分支<code>client</code>变基到<code>master</code>上，则会包含提交<code>C3</code>；而我们只想把<code>C8</code>和<code>C9</code>变基到<code>master</code>上</p>
+<p><img src="/images/interesting-rebase-1.png" alt="变基操作-三分支"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 只将 client 子分支(C8、C9) 变基到 master</span></span><br><span class="line"><span class="comment"># 1. client 变基到 server, 提取出 C8 C9</span></span><br><span class="line"><span class="comment"># 2. 指定--onto 分支，变基操作重定向到 --onto 分支，即 master 分支</span></span><br><span class="line">$ git rebase --onto master server client</span><br></pre></td></tr></table></figure>
+<p><img src="/images/interesting-rebase-2.png" alt="变基操作-三分支"></p>
+<h2 id="交互式变基"><a href="#交互式变基" class="headerlink" title="交互式变基"></a>交互式变基</h2><p>交互式变基就是在进行变基操作时，可以通过交互方式来调整提交的顺序或者设置提交的操作方式。</p>
+<ol>
+<li>不用过多考虑变基分支和变基提交的关系</li>
+<li>可以调整变基提交的顺序</li>
+<li>可以设置变基提交的操作方式</li>
+</ol>
+<p>交互式变基操作时，对提交的可操作方式有以下几种：</p>
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pick</td>
+<td>应用提交</td>
+</tr>
+<tr>
+<td>reword</td>
+<td>修改提交消息</td>
+</tr>
+<tr>
+<td>edit</td>
+<td>对提交进行编辑，然后使用<strong>git commit -amend</strong>进行提交</td>
+</tr>
+<tr>
+<td>squash</td>
+<td>把多个提交合并成一个提交</td>
+</tr>
+<tr>
+<td>drop</td>
+<td>不应用提交</td>
+</tr>
+</tbody>
+</table>
+<h3 id="变基操作-1"><a href="#变基操作-1" class="headerlink" title="变基操作"></a>变基操作</h3><p>还是上一章节中三分支变基的例子，我们需要实现如下图所示的提交树，看看使用交互式变基如何操作。<strong>注意：<code>C8&#39;</code>和<code>C9&#39;</code>顺序发生了变化。 </strong></p>
+<p><img src="/images/rebase-i-src.png" alt="交互式变基"></p>
+<p>首先，执行交互式变基指令，将分支<code>client</code>变基到分支<code>master</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 交互式变基 使用 -i 开关</span></span><br><span class="line">$ git rebase -i master client</span><br></pre></td></tr></table></figure>
+<p>Git 会出现一个可供编辑的交互界面</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">pick 54032aa C3</span><br><span class="line">pick ec8e417 C8</span><br><span class="line">pick 2a5c4a5 C9</span><br><span class="line"></span><br><span class="line"><span class="comment"># Rebase 126494c..2a5c4a5 onto 126494c (3 commands)</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Commands:</span></span><br><span class="line"><span class="comment"># p, pick &lt;commit&gt; = use commit</span></span><br><span class="line"><span class="comment"># r, reword &lt;commit&gt; = use commit, but edit the commit message</span></span><br><span class="line"><span class="comment"># e, edit &lt;commit&gt; = use commit, but stop for amending</span></span><br><span class="line"><span class="comment"># s, squash &lt;commit&gt; = use commit, but meld into previous commit</span></span><br><span class="line"><span class="comment"># f, fixup &lt;commit&gt; = like "squash", but discard this commit's log message</span></span><br><span class="line"><span class="comment"># x, exec &lt;command&gt; = run command (the rest of the line) using shell</span></span><br><span class="line"><span class="comment"># d, drop &lt;commit&gt; = remove commit</span></span><br><span class="line"><span class="comment"># l, label &lt;label&gt; = label current HEAD with a name</span></span><br><span class="line"><span class="comment"># t, reset &lt;label&gt; = reset HEAD to a label</span></span><br><span class="line"><span class="comment"># m, merge [-C &lt;commit&gt; | -c &lt;commit&gt;] &lt;label&gt; [# &lt;oneline&gt;]</span></span><br><span class="line"><span class="comment"># .       create a merge commit using the original merge commit's</span></span><br><span class="line"><span class="comment"># .       message (or the oneline, if no original merge commit was</span></span><br><span class="line"><span class="comment"># .       specified). Use -c &lt;commit&gt; to reword the commit message.</span></span><br></pre></td></tr></table></figure>
+<p>根据提示的变基操作方式，进行如下修改</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 不应用该提交</span></span><br><span class="line">drop 54032aa C3</span><br><span class="line"><span class="comment"># 先是 C9</span></span><br><span class="line">pick 2a5c4a5 C9</span><br><span class="line"><span class="comment"># 再是 C8</span></span><br><span class="line">pick ec8e417 C8</span><br></pre></td></tr></table></figure>
+<p>保存并退出后，变基操作完成</p>
+<h2 id="Cherry-pick变基"><a href="#Cherry-pick变基" class="headerlink" title="Cherry-pick变基"></a>Cherry-pick变基</h2><p><code>Cherry-pick</code>也是一种变基操作，它从任意提交树上选取任意数量的提交，变基到当前分支，可以形象的称为”摘樱桃”。</p>
+<ol>
+<li>语法简单，只需指定要变基的提交哈希</li>
+<li>可以指定任意提交树上的任意数量的提交</li>
+<li>对于变基提交的数量和顺序，相比交互式变基要简单得多，不用该考虑分支的关系，还需手动进行调整</li>
+<li>对于变基提交的指定，相比交互式变基要麻烦很多，要通过日志查看提交的哈希值</li>
+<li>变基操作完成后，基底分支移动到分支的末尾</li>
+</ol>
+<h3 id="变基操作-2"><a href="#变基操作-2" class="headerlink" title="变基操作"></a>变基操作</h3><p>继续沿用上一章节三分支变基的例子，我们需要实现如下图所示的提交树，看看使用<code>cherry-pick</code>变基如何操作。<strong>注意：<code>master</code>分支的变化。</strong></p>
+<blockquote>
+<p>我们可以想想，如果用变基操作、交互式变基操作如何实现，需要几个步骤。</p>
+</blockquote>
+<p><img src="/images/cherry-pick.png" alt="cherry-pick变基"></p>
+<p>使用<code>cherry-pick</code>对上例进行变基操作，则只需两步即可</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 切换到 master 分支</span></span><br><span class="line">$ git checkout master</span><br><span class="line"><span class="comment"># 将 C4 C9 C10 提交变基到 master 分支</span></span><br><span class="line">$ git cherry-pick C4 C9 C10</span><br></pre></td></tr></table></figure>
+<p>是不是非常简单！</p>
+<h3 id="适用性"><a href="#适用性" class="headerlink" title="适用性"></a>适用性</h3><ol>
+<li>在工作流中，将主干分支的某个补丁提交应用到其他分支上（如：版本分支、生产分支等）</li>
+<li>重新整理提交树，清理不需要的提交、调整提交的先后顺序</li>
+</ol>
+<h2 id="变基小结"><a href="#变基小结" class="headerlink" title="变基小结"></a>变基小结</h2><ol>
+<li>变基是一种改变提交历史的操作，可以为一些特殊需求提供便利性</li>
+<li>变基操作只能针对本地分支，对于已经推动到远程仓库的分支，禁止进行变基操作</li>
+<li>变基操作的三种方式：变基、交互式变基、<code>Cherry-pick</code></li>
+<li><code>rebase</code>操作不会移动基底分支的指向，<code>Cherry-pick</code>操作会移动基底分支的指向</li>
+<li>变基适用于分支合并，为了让提交树保持整洁和线性</li>
+<li>交互式变基适用于分支的整理，包括清除不需要的提交或改变提交的顺序</li>
+<li><code>Cherry-pick</code>适用于针对提交的变基，将一个提交应用到多个分支，或者将多个分支中的提交应用到一个分支</li>
+<li>变基操作改变了提交历史，需要慎重操作</li>
+</ol>
+<h2 id="在提交树上强制移动分支"><a href="#在提交树上强制移动分支" class="headerlink" title="在提交树上强制移动分支"></a>在提交树上强制移动分支</h2><p>有时，我们需要在提交树上移动分支指向特定的提交，这是可以使用强制移动分支的指令</p>
+<ol>
+<li>变基、合并、提交、撤销等操作，Git 都会移动分支，但有时候我们需要更简单直接的方式</li>
+<li>强制移动分支操作，可以在提交树上随意移动</li>
+<li>Git 不会对该操作进行任何警示，因此需要格外谨慎</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 强制移动分支 使用 -f 选项</span></span><br><span class="line">$ git branch -f [分支名] [提交哈希]</span><br><span class="line"><span class="comment"># 示例 强制将 master 分支 指向 C0</span></span><br><span class="line">$ git branch -f master C0</span><br></pre></td></tr></table></figure>
+<h2 id="撤销操作"><a href="#撤销操作" class="headerlink" title="撤销操作"></a>撤销操作</h2><p>在入门章节介绍过 Git 的撤销指令<code>git reset</code>，Git 还提供了另外一种撤销指令<code>git revert</code>，下面详细说说两者的区别和具体用法。</p>
+<h3 id="Reset撤销"><a href="#Reset撤销" class="headerlink" title="Reset撤销"></a>Reset撤销</h3><p><code>reset</code>撤销指令可以撤销暂存区内的文件修改，也可以撤销提交（移动分支的引用）。</p>
+<p><strong>撤销暂存区</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 撤销暂存区</span></span><br><span class="line">$ git reset HEAD --[文件名]</span><br><span class="line"><span class="comment"># 示例 撤销暂存区中C1.txt文件的修改，将当前提交中的文件覆盖暂存区</span></span><br><span class="line">$ git reset HEAD --C1.txt</span><br></pre></td></tr></table></figure>
+<p><strong>撤销提交</strong></p>
+<p>撤销提交是将分支引用回退到之前的某个提交，执行撤销提交操作后，当前的提交将被废弃（不在任何分支中）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 撤销提交</span></span><br><span class="line">$ git reset &lt;mode&gt; [提交哈希]</span><br><span class="line"><span class="comment"># 示例</span></span><br><span class="line">$ git reset HEAD~2</span><br><span class="line">$ git reset C1</span><br></pre></td></tr></table></figure>
+<p>注意：撤销提交的分支将不能推送到远程仓库中</p>
+<h3 id="Revert撤销"><a href="#Revert撤销" class="headerlink" title="Revert撤销"></a>Revert撤销</h3><p>如果一个分支推动到远程仓库中，就不能使用<code>reset</code>进行撤销操作了。这时你需要使用<code>revert</code>完成撤销操作。</p>
+<p>如果想撤销多个提交（哪怕不是连续的）也可以使用<code>revert</code>实现</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 撤销提交</span></span><br><span class="line">$ git revert [提交列表]</span><br><span class="line"><span class="comment"># 示例</span></span><br><span class="line">$ git revert C1 C3</span><br></pre></td></tr></table></figure>
+<p>不同于<code>reset</code>只是将分支指向某个提交，<code>revert</code>是在当前分支上增加新的提交的方式实现撤销，新的提交中将去除提交列表中包含的变更部分，也就是说新的提交中删除了要撤销的变更部分。</p>
+<p>由于是新增提交，所以分支指向的提交树上增加了新的节点，可以认为是一次提交操作（特殊而已），所以<code>revert</code>后的分支是能够推送到远程仓库中的。</p>
+<h2 id="修改提交消息"><a href="#修改提交消息" class="headerlink" title="修改提交消息"></a>修改提交消息</h2><p>修改提交消息也是一个经常使用的操作。我们知道，每个提交对 Git 来说都相当于一个版本，提交消息就是对这个版本修订内容的一个注释，在团队协作时，他人可以通过提交消息了解提交包含的内容；当我们查找问题时，也可以通过提交消息快速的检索到提交。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改提交消息</span></span><br><span class="line">$ git commit --amend -m<span class="string">'新的提交消息'</span></span><br></pre></td></tr></table></figure>
+<p>该指令将修改当前分支的提交（不能指定），使用”新的提交消息”替换原有提交，并生成新的提交替换原有提交。因此，执行该指令<strong>不会在当前分支中增加新的提交</strong></p>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="http://blog.go2sts.com">lleej</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="http://blog.go2sts.com/2019/03/14/Git-高级功能/">http://blog.go2sts.com/2019/03/14/Git-高级功能/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/GIT/">GIT</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2019/03/15/Git-工作流(续)/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">6.Git-工作流(续)</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2019/03/01/Git-工作流/">
+        <span class="next-text nav-default">4.Git-工作流</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:lleej@qq.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/lleej" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2018 - 
+    
+    2020
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">lleej</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.2"></script>
+
+  </body>
+</html>

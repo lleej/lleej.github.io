@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="1.Git-入门">
+
+
+
+
+  <meta name="keywords" content="技术博客 前端 Node Python AI">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深思阁">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.2">
+
+
+
+<link rel="canonical" href="http://blog.go2sts.com/2018/12/12/Git-入门/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.2">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "qhKGP5WaH1jdzfAxC8naEyh8-gzGzoHsz",
+      appKey: "c1ffihM5AQSGtv4rwj3aaHeI"
+    });
+  </script>
+
+
+
+
+
+<script>
+  window.config = {"leancloud":{"app_id":"qhKGP5WaH1jdzfAxC8naEyh8-gzGzoHsz","app_key":"c1ffihM5AQSGtv4rwj3aaHeI"},"toc":true,"fancybox":true,"pjax":true};
+</script>
+
+    <title> 1.Git-入门 - 深思阁 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">深思阁</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">深思阁</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          1.Git-入门
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-12-12
+        </span>
+        
+          <span class="post-category">
+            
+              <a href="/categories/配置管理/">配置管理</a>
+            
+          </span>
+        
+        
+        <span class="post-visits" data-url="/2018/12/12/Git-入门/" data-title="1.Git-入门">
+          阅读次数 0
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#版本控制系统"><span class="toc-text">版本控制系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#版本控制必要性"><span class="toc-text">版本控制必要性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么使用GIT"><span class="toc-text">为什么使用GIT</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GIT的由来"><span class="toc-text">GIT的由来</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原理"><span class="toc-text">原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#文件管理"><span class="toc-text">文件管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#工作区域"><span class="toc-text">工作区域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件状态"><span class="toc-text">文件状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#忽略的文件"><span class="toc-text">忽略的文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结"><span class="toc-text">小结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#环境搭建"><span class="toc-text">环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置"><span class="toc-text">配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开发工具"><span class="toc-text">开发工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#资源管理器"><span class="toc-text">资源管理器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#版本控制"><span class="toc-text">版本控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分支管理"><span class="toc-text">分支管理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本操作"><span class="toc-text">基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建版本库"><span class="toc-text">创建版本库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编辑文件"><span class="toc-text">编辑文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#比较差异"><span class="toc-text">比较差异</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#撤销修改"><span class="toc-text">撤销修改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#放入暂存区"><span class="toc-text">放入暂存区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移除暂存区"><span class="toc-text">移除暂存区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#提交版本库"><span class="toc-text">提交版本库</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结-1"><span class="toc-text">小结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#附录：常用命令"><span class="toc-text">附录：常用命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#学习资源"><span class="toc-text">学习资源</span></a></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <p>摘要：文本是使用Git进行代码管理的第一篇文章，重点介绍：Git的由来、原理、安装、配置、常用命令和工具，并通过一个示例演示创建和使用本地Git仓库。</p>
+<a id="more"></a>
+<h2 id="版本控制系统"><a href="#版本控制系统" class="headerlink" title="版本控制系统"></a>版本控制系统</h2><p>GIT是一款版本控制系统。什么是版本控制呢？版本控制，是一种记录一个或若干文件内容变化，以便将来查阅特定版本修订情况的系统。理论上可以对任何类型的文件进行版本控制。</p>
+<h3 id="版本控制必要性"><a href="#版本控制必要性" class="headerlink" title="版本控制必要性"></a>版本控制必要性</h3><p>在软件开发领域，版本控制是必备的。在一个软件产品的生命周期中，需要很多开发人员参与，经历多次的修改（BUG修复、功能增加、软件重构），尤其是当前软件迭代的速度越来越快，若缺少有效的版本控制，是无法想象的。</p>
+<p>有效的版本控制系统意味着，就算把整个项目中的文件改的改删的删，也照样可以轻松恢复到原先的样子，工作量却微乎其微。</p>
+<h3 id="为什么使用GIT"><a href="#为什么使用GIT" class="headerlink" title="为什么使用GIT"></a>为什么使用GIT</h3><p>我们在工作中很早就在使用版本控制系统，如：VSS、TFS、SNV。为什么要迁移到GIT上来呢？</p>
+<p><strong>分布式版本控制系统。</strong>相对于集中式版本控制系统（VSS、TFS、SNV），分布式不会过度依赖服务端，减少对资源使用的冲突，更利于多人间协作开发；而且，GIT的分支设计可以将本地仓库的代码一次提交到不同的远端仓库中，避免因服务端故障而影响开发工作。</p>
+<p><strong>强大的分支模型</strong>。相比其它版本控制系统，Git的分支更轻量和便捷，支持开发工作有序高效的演进。</p>
+<p><strong>业界普遍在使用。</strong>既然是业界普遍使用的，足以说明其有很多优点、稳定性和可靠性得到了验证，而且不需要对开发人员进行单独的培训。</p>
+<p><strong>可视化管理平台。</strong>大家耳熟能详的Github、Gitlab、Coding、Gitee等，就是基于GIT的可视化管理平台。这些平台提供了可视化的用户管理、权限管理、分支管理、ISSUE管理、代码评审、第三方服务集成等功能，打通了需求、设计、开发、测试、部署整个环节，大大提升了软件开发效率。其中，Gitlab的社区版提供本地化部署。</p>
+<p><strong>成熟的DevOps能力。</strong>业界基于GIT有很多DevOps解决方案，可以提升研发团队的持续集成、持续交付能力。</p>
+<h2 id="GIT的由来"><a href="#GIT的由来" class="headerlink" title="GIT的由来"></a>GIT的由来</h2><p>Linux 内核开源项目有着为数众多的参与者。 绝大多数的 Linux 内核维护工作都花在了提交补丁和保存归档的繁琐事务上（1991－2002年间）。到 2002 年，整个项目组开始启用一个专有的分布式版本控制系统 BitKeeper 来管理和维护代码。</p>
+<p>到了 2005 年，开发 BitKeeper 的商业公司同 Linux 内核开源社区的合作关系结束，他们收回了 Linux 内核社区免费使用 BitKeeper 的权力。 这就迫使 Linux 开源社区（特别是 Linux 的缔造者 Linus Torvalds）基于使用 BitKeeper 时的经验教训，开发出自己的版本系统。 </p>
+<blockquote>
+<p>合作关系结束是因为：Linux开源社区的某个成员尝试破解BitKeeper的通信协议，导致厂家翻脸；而Linus Torvalds用了2周时间就完成Git原型的开发</p>
+</blockquote>
+<p>他们对新的系统制订了若干目标：</p>
+<ul>
+<li>速度</li>
+<li>对非线性开发模式的强力支持（允许成千上万个并行开发的分支）</li>
+<li>完全分布式</li>
+<li>有能力高效管理类似 Linux 内核一样的超大规模项目（速度和数据量）</li>
+</ul>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>在正式使用GIT前，先对GIT的工作原理进行一个简单的介绍，将有助于在工作中更好的运用它。</p>
+<h3 id="文件管理"><a href="#文件管理" class="headerlink" title="文件管理"></a>文件管理</h3><p>作为一个版本控制系统，GIT有其特有的文件管理方式。</p>
+<p><strong>本地文件操作</strong>。基于<strong>速度</strong>的设计目标，GIT操作基本在本地完成（除了与远程库交换数据外），GIT将文件保存在隐藏目录中（工作目录下的<code>.git</code>），作为分布式版本控制系统，不需要频繁的访问<strong>服务器</strong>。</p>
+<p><strong>存储空间更小</strong>。GIT只对有差异的文件版本进行独立存储，而且对内容相同的不同文件也只保留一份。</p>
+<p><strong>操作更便捷</strong>。GIT采用快照的版本管理方式，每个版本都保存着全量的受控文件。基于快照的管理方式使得分支控制更便捷和高效。</p>
+<p><img src="/images/snapshots.png" alt="snapshots"></p>
+<p><strong>文件完整性</strong>。GIT采用<code>SHA-1</code>对文件计算校验和，并将该校验和作为文件名存储在仓库中。因此GIT可以根据校验和判断出哪个文件发生了变化，且文件也不会出现重名现象。</p>
+<h3 id="工作区域"><a href="#工作区域" class="headerlink" title="工作区域"></a>工作区域</h3><p>作为一款分布式版本控制系统，GIT的工作区域概念与SVN的不同，如下图所示</p>
+<p><img src="/images/git-workarea-relation.png" alt="GIT 工作区"></p>
+<p>GIT使用了三个工作区域，分别是：工作区（Working）、暂存区（Index）、版本库（Resository）</p>
+<p><strong>工作区</strong>，就是我们放置代码的目录，我们可以在这里进行开发工作（添加文件、修改文件、删除文件、重命名文件），工作区中的文件（含目录结构）受GIT的管理，当进行分支和版本切换时，工作区中的文件与相应的版本保持一致。</p>
+<p><strong>暂存区</strong>，顾名思义是暂时存放受控文件的区域，如上图所示版本库内的Index区域。暂存区存放在版本库中，与版本库公用一个存储对象。暂存区的作用是在提交操作时，将暂存区内的文件一次性更新到版本库（Repository）中</p>
+<p><strong>版本库</strong>，存放受控文件的仓库。版本库中存放着已提交受控文件的历史版本，每次提交操作都会在版本库中创建一个新的版本。版本库采用分支和HEAD指针对当前操作的版本进行管理。</p>
+<h3 id="文件状态"><a href="#文件状态" class="headerlink" title="文件状态"></a>文件状态</h3><p>为了让GIT用户直观的了解工作目录中文件所处的状态和位置，提出了文件状态的概念。</p>
+<p><img src="/images/lifecycle.png" alt="GIT 文件状态"></p>
+<p>如上图所示，在GIT中文件共有四种状态</p>
+<p><strong>未跟踪</strong>（Untracked）。文件没有纳入版本控制。常见于在<strong>工作区</strong>新创建的文件</p>
+<p><strong>已修改</strong>（Modified）。纳入版本控制的文件，在<strong>工作区</strong>内被修改（内容改变、被删除、重命名）</p>
+<p><strong>已暂存</strong>（Staged）。纳入版本控制的文件放置到<strong>暂存区</strong>中</p>
+<p><strong>未修改</strong>（Unmodified）。纳入版本控制的文件，在提交到仓库（Repository）后没有被修改</p>
+<h3 id="忽略的文件"><a href="#忽略的文件" class="headerlink" title="忽略的文件"></a>忽略的文件</h3><p>需要明确的一点是<strong>GIT管理的是源代码和资源文件</strong>，而不是编译后的可执行程序、依赖的包文件或者数据库备份等。因此，工作区内的部分文件和目录是不需要纳入GIT进行管理的。</p>
+<p>GIT已经考虑到了这一点，工作区根目录下的<code>.gitignore</code>文件来设置忽略掉的文件。</p>
+<p>下面是一个<code>.gitignore</code>文件的示例，列出需要忽略的文件和目录。注意：支持通配符、目录需要在结尾加入<code>/</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.DS_Store</span><br><span class="line">Thumbs.db</span><br><span class="line">db.json</span><br><span class="line">*.log</span><br><span class="line">node_modules/</span><br><span class="line">public/</span><br><span class="line">.deploy*/</span><br></pre></td></tr></table></figure>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>以上介绍了GIT的一些基本概念，相对比较抽象，在这里简要总结以下</p>
+<p><strong>为什么使用版本控制？</strong></p>
+<ul>
+<li>能有效的管理文件的变更，能高效的在不同版本间进行切换。</li>
+<li>帮助软件团队更好的协同工作，降低版本整合的复杂度。</li>
+<li>提升版本管理思路，合理规划产品版本和研发进度。</li>
+</ul>
+<p><strong>为什么迁移到GIT？</strong></p>
+<ul>
+<li>分布式版本管理，不过度依赖服务器，每个人都可单独工作。</li>
+<li>其设计理念使得其能适应目前快速迭代的开发模式</li>
+<li>强大的分支模型支持大规模开发的有序和高效</li>
+<li>软件开发全生命周期管理，从需求到部署完整的生态。</li>
+</ul>
+<p><strong>GIT的基本原理</strong></p>
+<ul>
+<li><p>通过划分<strong>工作区域</strong>的方式清晰操作的边界。<strong>工作区</strong>可以自由的进行文件的编辑；<strong>暂存区</strong>为了提交操作的方便；<strong>仓库</strong>保存版本历史。</p>
+</li>
+<li><p>自动检测文件的变化，用<strong>文件状态</strong>使其可视化。用户只需要关注将哪些修改存储到仓库中。</p>
+</li>
+</ul>
+<hr>
+<p>下面重点介绍如何使用GIT在本机进行版本的管理，暂不涉及分支和远程仓库。</p>
+<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>在Windows环境下搭建GIT环境，其他系统的搭建请参照<a href="https://git-scm.com" target="_blank" rel="noopener">官方指南</a>。</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>GIT的安装非常简单，这里就不赘述了。</p>
+<ul>
+<li>GIT安装，<a href="https://git-scm.com/download/win" target="_blank" rel="noopener">下载地址</a></li>
+<li>图形工具，<a href="https://tortoisegit.org/download/" target="_blank" rel="noopener">下载地址</a></li>
+</ul>
+<p>按上面给出的下载地址下载对应的版本（64位和32位），先安装GIT，再安装图形工具及其汉化包（如果使用集成了GIT的开发工具可以不安装图形工具）</p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><blockquote>
+<p>安装好Git后，需要在正式使用前先进行配置</p>
+</blockquote>
+<p>考虑到用户操作的便利性，GIT引入了<strong>作用域</strong>的概念</p>
+<p><strong>系统作用域</strong>，配置信息对当前终端的所有用户和仓库均有效（<strong>很少使用</strong>）</p>
+<p><strong>全局作用域</strong>，配置信息仅对当前用户的所有仓库有效（<strong>默认值</strong>）</p>
+<p><strong>局部作用域</strong>，配置信息只对当前仓库有效</p>
+<p>在配置操作时，通过添加<strong>作用域可选项</strong>对作用域进行限制，默认的作用域是<strong>全局作用域</strong>。不同作用域的配置信息存储在不同位置，不会相互影响。当多个作用域的配置信息同时存在时，其优先级为<strong>局部 &gt; 全局 &gt; 系统</strong></p>
+<blockquote>
+<p>什么时候需要多个配置信息呢？可以考虑这样的场景：你同时维护两个代码库，一个是公司的代码库使用公司的邮箱作为账号；另一个是github上的个人代码库，使用个人邮箱作为账号。这时就需要配置多个参数信息。</p>
+</blockquote>
+<p><strong>配置用户信息</strong></p>
+<p>大部分可视化版本控制平台的用户名均采用邮箱地址，因此建议用户名=邮箱。邮箱单独设置，是因为可以在仓库发生变化（PR）时通知相关人员。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置用户信息为全局作用域</span></span><br><span class="line">$ git config --global user.name <span class="string">'&lt;用户名&gt;'</span></span><br><span class="line">$ git config --global user.email <span class="string">'&lt;邮箱&gt;'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置用户信息为局部作用域</span></span><br><span class="line">$ git config --<span class="built_in">local</span> user.name <span class="string">'&lt;用户名&gt;'</span></span><br><span class="line">$ git config --<span class="built_in">local</span> user.email <span class="string">'&lt;邮箱&gt;'</span></span><br></pre></td></tr></table></figure>
+<p><strong>查看配置信息</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看全部配置信息</span></span><br><span class="line">$ git config --list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看某项配置</span></span><br><span class="line">$ git config user.name</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看作用域下的配置(叠加作用域参数)</span></span><br><span class="line">$ git config --<span class="built_in">local</span> user.name</span><br></pre></td></tr></table></figure>
+<p><strong>删除配置信息</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 --unset 参数</span></span><br><span class="line"><span class="comment"># 如果用户名和邮箱设置错误，需要先删除</span></span><br><span class="line">$ git config --<span class="built_in">local</span> --<span class="built_in">unset</span> user.name</span><br><span class="line">$ git config --<span class="built_in">local</span> --<span class="built_in">unset</span> user.email</span><br></pre></td></tr></table></figure>
+<p>好了，完成用户信息的配置后，我们就可以开始使用GIT。</p>
+<h2 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h2><p>很多开发工具已经深度集成了GIT功能，以图形化方式直观的进行管理。下面以<code>VS Code</code>为例进行介绍，使用其它开发工具可以参考。</p>
+<h3 id="资源管理器"><a href="#资源管理器" class="headerlink" title="资源管理器"></a>资源管理器</h3><p>在<code>VS Code</code>中打开版本库所在的目录后，在资源管理器中就可以看到如下的界面</p>
+<ul>
+<li>左上角黄框表示当前在资源管理器页面</li>
+<li>右侧的红框表示有文件变更发生，如果文件处于子目录中则用圆点表示，否则用文件状态表示。</li>
+</ul>
+<p><img src="/images/VSCode-GIT-working.png" alt="VSCode 资源管理器"></p>
+<h3 id="版本控制"><a href="#版本控制" class="headerlink" title="版本控制"></a>版本控制</h3><p>版本控制页面，标题显示<code>SOURCE CONTROL: GIT</code>表示当前的版本控制系统是<code>GIT</code></p>
+<ul>
+<li>左侧红框表示当前在版本控制页面，数字表示当前有4个文件发生了变化</li>
+<li>右上角的<code>对勾</code>表示把暂存区中的文件提交到仓库中</li>
+<li>下面的<code>message</code>是编辑提交消息的区域</li>
+<li><strong>暂存的更改</strong>即暂存区。待提交的文件显示在这里</li>
+<li><strong>更改</strong>即工作区内自上一次提交后的文件变化情况</li>
+<li><strong>M</strong>表示文件内容被修改</li>
+<li><strong>D</strong>表示文件被删除或者重命名（重命名=删除+新建）</li>
+<li><strong>U</strong>表示新创建的文件或者重命名</li>
+</ul>
+<p><img src="/images/VSCode-GIT-SrcControl.png" alt="VSCode-GIT-Control"></p>
+<h3 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h3><p>简单提一下分支管理，在<code>VS Code</code>的左下角显示当前工作的分支（默认为<code>master</code>）</p>
+<p><img src="/images/VSCode-GIT-branch.png" alt="VSCode-GIT-branch"></p>
+<p>点击该区域可以切换分支、创建新分支</p>
+<p><img src="/images/VSCode-GIT-branch1.png" alt="VSCode-GIT-branch"></p>
+<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><p>本章节只介绍在个人电脑上GIT的基本操作，创建版本库、编辑文件、放入暂存区、提交版本库。分支管理、标签管理和远程库的操作在后续章节介绍。</p>
+<h3 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h3><p>在本机创建版本库非常简单，使用<code>git init</code>命令即可完成。<strong>仓库名即为工作目录名</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建版本库同时创建工作目录</span></span><br><span class="line">$ git init [仓库名称]</span><br><span class="line"><span class="comment"># 示例</span></span><br><span class="line">$ git init <span class="built_in">test</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 在已有工作目录中初始化版本库</span></span><br><span class="line">$ <span class="built_in">cd</span> <span class="built_in">test</span></span><br><span class="line">$ git init</span><br></pre></td></tr></table></figure>
+<p>创建完版本库后，就可以使用GIT对其中的文件进行管理。</p>
+<h3 id="编辑文件"><a href="#编辑文件" class="headerlink" title="编辑文件"></a>编辑文件</h3><p>在<code>VS Code</code>中可以很方便的创建文件和目录，编辑文件，删除文件。在这里就不赘述了。</p>
+<p>GIT会自动检测发生变更的文件，并在文件的末尾显示其所处状态的图标</p>
+<h3 id="比较差异"><a href="#比较差异" class="headerlink" title="比较差异"></a>比较差异</h3><p><code>VS Code</code>提供了快速比较文件版本差异的功能，包括暂存区与版本库的差异，以及工作区与版本库的差异</p>
+<p><strong>暂存区与版本库的差异</strong></p>
+<p>在版本管理页面中，点击<strong>暂存的更改</strong>中的文件，显示版本差异。左侧为版本库中的内容，右侧为暂存区的内容</p>
+<p><img src="/images/VSCode-GIT-diff-index.png" alt="VSCode-GIT-diff-index"></p>
+<p><strong>工作区与版本库的差异</strong></p>
+<p>在版本管理页面中，点击<strong>更改</strong>中的文件，显示版本差异。左侧为版本库中的内容，右侧为工作区的内容</p>
+<p><img src="/images/VSCode-GIT-diff-working.png" alt="VSCode-GIT-diff-working"></p>
+<h3 id="撤销修改"><a href="#撤销修改" class="headerlink" title="撤销修改"></a>撤销修改</h3><p>在版本管理页面中，点击图中黄框图标，撤销文件的修改。<strong>撤销后修改的内容无法恢复</strong></p>
+<p><img src="/images/VSCode-GIT-reset.png" alt="VSCode-GIT-reset"></p>
+<h3 id="放入暂存区"><a href="#放入暂存区" class="headerlink" title="放入暂存区"></a>放入暂存区</h3><p>在版本管理页面中，点击图中黄框图标，将该文件添加到暂存区中。<strong>鼠标点击“更改”，出现的+图标可以把所有修改的文件一次添加到暂存区中</strong></p>
+<p><img src="/images/VSCode-GIT-add.png" alt="VSCode-GIT-add"></p>
+<h3 id="移除暂存区"><a href="#移除暂存区" class="headerlink" title="移除暂存区"></a>移除暂存区</h3><p>在版本管理页面中，点击图中黄框图标，将该文件从暂存区中移除。<strong>鼠标点击“暂存的更改”，出现的–图标可以把暂存区中所有文件一次清除</strong></p>
+<p><img src="/images/VSCode-GIT-rm.png" alt="VSCode-GIT-rm"></p>
+<h3 id="提交版本库"><a href="#提交版本库" class="headerlink" title="提交版本库"></a>提交版本库</h3><p>在版本管理页面中，检查<strong>暂存的更改</strong>中是否包含全部需要提交的文件，并根据需要添加、移除。</p>
+<p>在提交消息输入框中，编辑本次版本提交变更的内容，点击“提交”按钮，将本次变更提交到版本库中</p>
+<p><img src="/images/VSCode-GIT-commit.png" alt="VSCode-GIT-commit"></p>
+<h2 id="小结-1"><a href="#小结-1" class="headerlink" title="小结"></a>小结</h2><p>GIT的使用非常简单，配合集成GIT功能的开发工具，不需要过多的学习成本。</p>
+<p>在本机创建并使用GIT进行版本管理，需要以下几个步骤</p>
+<ul>
+<li><strong>创建版本库</strong>。可以在初始化时创建新的工作目录</li>
+<li><strong>文件编辑</strong>。在工作目录中新建、修改、删除文件</li>
+<li><strong>放入暂存区</strong>。将发生变化的文件放入暂存区，准备提交到版本库中</li>
+<li><strong>提交版本库</strong>。为本次提交添加<strong>备注</strong>即提交消息，将暂存区中的所有文件一次性提交到版本库中。<strong>注意：提交消息要求把修改内容进行详细描述，便于理解版本的差异</strong></li>
+</ul>
+<h2 id="附录：常用命令"><a href="#附录：常用命令" class="headerlink" title="附录：常用命令"></a>附录：常用命令</h2><p>本章节涉及到的GIT命令如下</p>
+<p><strong>创建版本库</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git init [仓库名称]</span><br></pre></td></tr></table></figure>
+<p><strong>将文件添加到暂存区</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加所有变化的文件</span></span><br><span class="line">$ git add .</span><br><span class="line"><span class="comment"># 添加指定修改的文件</span></span><br><span class="line">$ git add [文件名]</span><br><span class="line"><span class="comment"># 添加所有版本库中文件的变更</span></span><br><span class="line">$ git add -u</span><br></pre></td></tr></table></figure>
+<p><strong>比较文件差异</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 比较工作区与版本库的差异</span></span><br><span class="line">$ git diff [文件名]</span><br><span class="line"><span class="comment"># 比较暂存区与版本库的差异</span></span><br><span class="line">$ git diff --cached [文件名]</span><br></pre></td></tr></table></figure>
+<p><strong>移除暂存文件</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git rm --cached [文件名]</span><br><span class="line">$ git reset HEAD [文件名]</span><br></pre></td></tr></table></figure>
+<p><strong>取消工作区中文件的修改</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout --[文件名]</span><br></pre></td></tr></table></figure>
+<p><strong>提交版本</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git commit -m<span class="string">'提交消息'</span></span><br></pre></td></tr></table></figure>
+<h2 id="学习资源"><a href="#学习资源" class="headerlink" title="学习资源"></a>学习资源</h2><p>先介绍几个学习 Git 的资源</p>
+<p><a href="https://learngitbranching.js.org/" target="_blank" rel="noopener">Learn Git Branching</a> 一个开源的Git练习网站</p>
+<p><a href="https://lab.github.com/" target="_blank" rel="noopener">Github实验室</a> Github的练习网站</p>
+<p><a href="https://git-scm.com/book/zh/v2" target="_blank" rel="noopener">Git 官网</a> 官方的帮助文档，非常全面</p>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="http://blog.go2sts.com">lleej</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="http://blog.go2sts.com/2018/12/12/Git-入门/">http://blog.go2sts.com/2018/12/12/Git-入门/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/GIT/">GIT</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2019/01/25/Git-分支/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">2.Git-分支</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:lleej@qq.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/lleej" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2018 - 
+    
+    2020
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">lleej</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.2"></script>
+
+  </body>
+</html>

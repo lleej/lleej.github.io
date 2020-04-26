@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="108.Go命令之go fmt">
+
+
+
+
+  <meta name="keywords" content="技术博客 前端 Node Python AI">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深思阁">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.2">
+
+
+
+<link rel="canonical" href="http://blog.go2sts.com/2020/04/15/108Go命令fmt/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.2">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "qhKGP5WaH1jdzfAxC8naEyh8-gzGzoHsz",
+      appKey: "c1ffihM5AQSGtv4rwj3aaHeI"
+    });
+  </script>
+
+
+
+
+
+<script>
+  window.config = {"leancloud":{"app_id":"qhKGP5WaH1jdzfAxC8naEyh8-gzGzoHsz","app_key":"c1ffihM5AQSGtv4rwj3aaHeI"},"toc":true,"fancybox":true,"pjax":true};
+</script>
+
+    <title> 108.Go命令之go fmt - 深思阁 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">深思阁</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">深思阁</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          108.Go命令之go fmt
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2020-04-15
+        </span>
+        
+          <span class="post-category">
+            
+              <a href="/categories/Go命令/">Go命令</a>
+            
+          </span>
+        
+        
+        <span class="post-visits" data-url="/2020/04/15/108Go命令fmt/" data-title="108.Go命令之go fmt">
+          阅读次数 0
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#用途"><span class="toc-text">用途</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#改写规则"><span class="toc-text">改写规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#命令标记"><span class="toc-text">命令标记</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#r自定义替换"><span class="toc-text">-r自定义替换</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <p>摘要：本节介绍<code>Go</code>命令中的<code>go fmt</code>代码格式化命令…</p>
+<a id="more"></a>
+<h2 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h2><p>按照<code>Go</code>语言代码规范，格式化指定代码包中所有<code>Go</code>语言源码文件的代码。通俗的讲，就是一个代码格式化的命令。</p>
+<p><strong>命令格式</strong></p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ go fmt 包名</span><br></pre></td></tr></table></figure>
+<p>与<code>go doc</code>与<code>godoc</code>的关系相同，<code>go fmt</code>也有一个对应的<code>gofmt</code>的命令。其实，<code>go fmt</code>是<code>gofmt</code>的一个简单的封装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ go fmt -n hello</span><br><span class="line">c:\go\bin\gofmt.exe -l -w hello_test.go</span><br><span class="line">c:\go\bin\gofmt.exe -l -w hello.go</span><br></pre></td></tr></table></figure>
+<p>可以看到，格式化具体执行的指令是<code>gofmt -l -w</code>，而且只格式化<code>hello</code>包中的所有源代码文件</p>
+<h2 id="改写规则"><a href="#改写规则" class="headerlink" title="改写规则"></a>改写规则</h2><p>在默认情况下，对源码文件的改写操作包括如下几个方面</p>
+<ul>
+<li>依赖包导入，以字典序排序代码包导入路径的先后顺序</li>
+<li>标准化各个语言或语句块之间的缩进、空格和换行。比如，把所有的<code>\r\n</code>转换成<code>\n</code></li>
+<li>对代码语法的小修正。比如，消除用于判断变量类型的switch语句块中多余的圆括号</li>
+</ul>
+<p>对代码的简化操作包括以下几个方面</p>
+<ul>
+<li>消除在数组/切片初始化中不必要的类型声明</li>
+<li>消除在字典初始化中不必要的类型声明</li>
+<li>消除在数组/切片切片操作时不必要的索引指定</li>
+<li>消除迭代时的非必要临时变量赋值操作</li>
+</ul>
+<h2 id="命令标记"><a href="#命令标记" class="headerlink" title="命令标记"></a>命令标记</h2><p>这里介绍的其实是<code>gofmt</code>的命令标记，同样适用于<code>go fmt</code>命令</p>
+<table>
+<thead>
+<tr>
+<th>标记名称</th>
+<th>标记描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-cpuprofile</td>
+<td>把CPU概要写入指定文件。文件的路径应该作为此标记的值</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>显示格式化前后的不同（如果有的话），而不是直接格式化那些代码</td>
+</tr>
+<tr>
+<td>-e</td>
+<td>报告目标源码文件中的所有错误。默认情况下，仅会显示前10个错误</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>仅把那些不符合格式化规范的、需要被命令程序改写的源码文件的绝对路径打印到标准输出。<br>而不是把改写后的全部内容都打印到标准输出。</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>添加形如“a[b:len(a)] -&gt; a[b:]”的重写规则。如果需要自定义额外的格式化规则，就需要用到它<br>规则字符串应该作为此标记的值</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>简化文件中的代码</td>
+</tr>
+<tr>
+<td>-w</td>
+<td>把改写后的内容直接写入到文件中，而不是作为结果打印到标准输出</td>
+</tr>
+</tbody>
+</table>
+<h3 id="r自定义替换"><a href="#r自定义替换" class="headerlink" title="-r自定义替换"></a><code>-r</code>自定义替换</h3><p>可以在执行命令时，使用自定义的替换规则，对源代码文件进行修正</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gofmt -r=<span class="string">"a[b:len(a)] -&gt; a[b:]"</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用<code>-r=</code>命令标记</li>
+<li><code>-&gt;</code>标记值中必须包含该字符</li>
+<li><code>-&gt;</code>左侧是被替代表达式</li>
+<li><code>-&gt;</code>右侧是替代表达式</li>
+<li>必须使用””包含</li>
+</ul>
+<p>使用<code>-r</code>标记后，在解析源码文件之前，会将此标记值中的被替换表达式和替换表达式，分别解析为抽象语法树的表达式节点。也就是说：不是通常意义上说的文字替换<code>replace</code>，而是语法层面的替换</p>
+<p><code>gofmt</code>默认支持以下替换操作</p>
+<ul>
+<li>程序实体名替换，包括变量、常量、函数、结构体和接口。如：<code>-r=&quot;array1 -&gt; array2&quot;</code>和<code>-r=&quot;FuncA -&gt; FuncB&quot;</code></li>
+<li>程序实体类型替换，包含函数的参数和结果的类型替换。比如：<code>-r=&quot;string-&gt;bool&quot;</code>和<code>-r=&quot;interface{}-&gt;int&quot;</code></li>
+<li>多余圆括号的清除。比如：<code>-r=&quot;(x)-&gt;x&quot;</code>作用于代码就是：<code>a = (-x.s)</code>替换为<code>a = -x.s</code>、<code>((b = -x.f()))</code>替换为<code>b = -x.f()</code>、<code>c = -(x).f</code>替换为<code>c = -x.f</code>，但不会去掉<code>d = (&amp;x).s</code>和<code>e = (-x).f()</code>中的圆括号。在不改变语义和不产生语法歧义的前提下清除代码中多余的圆括号</li>
+<li>数值操作的替换。比如：<code>-r=&quot;x+x -&gt; x*2&quot;</code>作用于代码就是：<code>x + x</code>替换为<code>x * 2</code>。如果需要被替换的表达式中包含注释，会去掉这些注释。比如，<code>x /* It&#39;s comment */ + x</code>替换为<code>x * 2</code></li>
+<li>基于参数列表的函数调用替换。比如：<code>-r=&quot;funcA(a) -&gt; FuncA(a, c)&quot;</code>作用于目标代码，则所有函数名为<code>funcA</code>并以一个变量作为参数（不关心参数名是什么）的语句都会被替换为调用函数<code>FuncA</code>并以变量<code>a</code>和变量<code>c</code>作为参数的语句。</li>
+</ul>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="http://blog.go2sts.com">lleej</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="http://blog.go2sts.com/2020/04/15/108Go命令fmt/">http://blog.go2sts.com/2020/04/15/108Go命令fmt/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Go命令/">Go命令</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2020/04/15/106Go命令run/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">106.Go命令之go run</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2020/04/10/105Go命令doc/">
+        <span class="next-text nav-default">105.Go命令之go doc</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:lleej@qq.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/lleej" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2018 - 
+    
+    2020
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">lleej</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.2"></script>
+
+  </body>
+</html>

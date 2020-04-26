@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="3.Git-远程分支">
+
+
+
+
+  <meta name="keywords" content="技术博客 前端 Node Python AI">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深思阁">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.2">
+
+
+
+<link rel="canonical" href="http://blog.go2sts.com/2019/02/20/Git-远程分支/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.2">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "qhKGP5WaH1jdzfAxC8naEyh8-gzGzoHsz",
+      appKey: "c1ffihM5AQSGtv4rwj3aaHeI"
+    });
+  </script>
+
+
+
+
+
+<script>
+  window.config = {"leancloud":{"app_id":"qhKGP5WaH1jdzfAxC8naEyh8-gzGzoHsz","app_key":"c1ffihM5AQSGtv4rwj3aaHeI"},"toc":true,"fancybox":true,"pjax":true};
+</script>
+
+    <title> 3.Git-远程分支 - 深思阁 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">深思阁</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">深思阁</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          3.Git-远程分支
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-02-20
+        </span>
+        
+          <span class="post-category">
+            
+              <a href="/categories/配置管理/">配置管理</a>
+            
+          </span>
+        
+        
+        <span class="post-visits" data-url="/2019/02/20/Git-远程分支/" data-title="3.Git-远程分支">
+          阅读次数 0
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#回顾"><span class="toc-text">回顾</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#远程仓库"><span class="toc-text">远程仓库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#用途"><span class="toc-text">用途</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#裸仓库"><span class="toc-text">裸仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用远程仓库"><span class="toc-text">常用远程仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#准备工作"><span class="toc-text">准备工作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#管理远程引用"><span class="toc-text">管理远程引用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#添加远程引用"><span class="toc-text">添加远程引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除远程引用"><span class="toc-text">删除远程引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重命名远程引用"><span class="toc-text">重命名远程引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看远程引用"><span class="toc-text">查看远程引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#小结"><span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#远程分支"><span class="toc-text">远程分支</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#查看远程分支"><span class="toc-text">查看远程分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#远程跟踪分支"><span class="toc-text">远程跟踪分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#跟踪分支"><span class="toc-text">跟踪分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#小结-1"><span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分支操作"><span class="toc-text">分支操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#克隆远程仓库"><span class="toc-text">克隆远程仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#从远程仓库拉取分支"><span class="toc-text">从远程仓库拉取分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#向远程仓库推送分支"><span class="toc-text">向远程仓库推送分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#案例演示"><span class="toc-text">案例演示</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <p>摘要：文本是使用Git进行代码管理的第三篇文章，重点介绍：如何使用远程仓库、远程分支进行代码的共享与集成。通过本文可以了解什么是远程仓库、如何在本地管理远程仓库、如何访问远程仓库，什么是远程分支、远程跟踪分支、跟踪分支、如何拉取和推送分支。</p>
+<a id="more"></a>
+<h2 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h2><p>上文重点介绍了Git分支，包括提交、提交树、分支的概念和作用，如何创建分支、切换分支、合并分支以及删除分支。并结合<code>VS Code</code>开发工具，介绍在本地Git仓库使用分支的操作方法和注意事项。</p>
+<p><strong>提交</strong>。是Git进行版本控制的基本单位，可以理解为每个提交是一个版本的快照。</p>
+<p><strong>提交树</strong>。提交通过<code>parent</code>属性建立与父提交的联系组成一条提交树。通过这种关联可以反向遍历提交历史。</p>
+<p><strong>分支</strong>。可以理解为一个动态的指针，其总是指向某条提交树中最后的提交。使用分支可以方便的切换工作场景（如：功能开发、代码重构、Bug修复…）而不用过多的考虑不同工作场景下代码的版本。</p>
+<h2 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h2><p>在开始介绍<strong>远程分支</strong>之前，先聊聊<strong>远程仓库</strong>。远程仓库是指托管在因特网或其他网络中的版本库。作为一款分布式版本控制系统，理论上可以有好几个远程仓库，通常有些仓库对你只读，有些则可以读写。</p>
+<h3 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h3><p>远程仓库主要的用途就是为了共享，包括：与他人协作以及本地仓库的备份等。</p>
+<p>分布式版本管理系统是去中心化的，也就是说不依赖于一个所谓的中心仓库就可以开展工作。原则上，每个分布式节点通过配置<code>https</code>或<code>ssh</code>并设置用户的访问权限，就可以与他人进行仓库的共享。</p>
+<p>不过，为了方便协作和数据备份，一般情况下我们会部署一个专门供大家共享的仓库。这个仓库与我们使用的本地仓库有一些不同。</p>
+<h3 id="裸仓库"><a href="#裸仓库" class="headerlink" title="裸仓库"></a>裸仓库</h3><p>作为共享用途的仓库，通过分支的推送和拉取实现与本地仓库的数据交换，原则上不需要直接对远程仓库进行代码的编辑和提交，因此远程仓库不需要创建工作区，我们称这样的仓库为<strong>裸仓库</strong>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 我们可以在本地创建一个裸仓库</span></span><br><span class="line"><span class="comment"># 裸仓库没有工作区，因此仓库名称采用[项目名.git]的形式</span></span><br><span class="line"><span class="comment"># 我们不能对裸仓库进行编辑和提交操作，如git add、git commit等</span></span><br><span class="line">$ git init test.git --bare</span><br></pre></td></tr></table></figure>
+<h3 id="常用远程仓库"><a href="#常用远程仓库" class="headerlink" title="常用远程仓库"></a>常用远程仓库</h3><p>作为当今最受欢迎的分布式版本控制系统，Git 的生态非常完善。不需要我们自行安装和配置相关的工具、协议、权限信息来实现远程仓库的部署，基于 Git 的可视化托管平台可以简化这个过程。</p>
+<p><strong>Github</strong>。是目前最大的开源代码托管平台，有1亿用户和超过1亿个代码库，所有知名的开源项目都托管在这个平台上。2018年微软收购 Github 后，允许免费用户创建私有化仓库。</p>
+<p><strong>Gitlab</strong>。仅次于 Github 的代码托管平台，提供的社区版本 Gitab CE 允许私有化部署，也是很多软件公司使用的内部代码管理平台，提供容器方式部署。 </p>
+<p><strong>国内托管平台</strong>。如 Coding 和 OSChina等。优势是相对于 Github 访问速度更快。 </p>
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><p>Git 远程仓库支持<code>https</code>和<code>ssh</code>加密协议进行数据的交换。而<code>ssh</code>协议通过公钥进行身份认证，这样就不用每次访问都输入用户名和密码，因此推荐采用这种方式。下面以 Github 为例介绍如何配置<code>ssh</code>，其他托管平台查看相关的配置说明。</p>
+<p><strong>注册用户</strong>。具体的操作步骤就不再赘述了，需要注意的是：建议使用邮箱作为用户名进行注册。</p>
+<p><strong>安装Git</strong>。具体的操作步骤见第一篇文章。安装 Git 后，使用<code>Git config</code>配置用户名和邮箱地址。<strong>注意：用户名与注册用户一致</strong>。</p>
+<p><strong>生成ssh key</strong>。在本机的命令行输入如下命令创建<code>ssh key</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 按三次回车键即可</span></span><br><span class="line">$ ssh-keygen -t rsa -C <span class="string">"用户名"</span></span><br><span class="line"><span class="comment"># 示例</span></span><br><span class="line">$ ssh-keygen -t rsa -C <span class="string">"lleej@qq.com"</span></span><br></pre></td></tr></table></figure>
+<p>Windows 系统，在<code>C:\Users\[登录用户名]\.ssh</code>目录中创建两个文件：私钥文件<code>id_rsa</code>和公钥文件<code>id_rsa.pub</code></p>
+<p><strong>设置ssh</strong>。打开<code>github</code>的<code>ssh</code>设置页面，将公钥文件<code>id_rsa.pub</code>的内容复制并创建一个新的<code>ssh key</code>。</p>
+<p><img src="/images/remote-github-ssh.png" alt="设置github的ssh"></p>
+<p><strong>测试连接</strong>。设置完成后，通过以下指令测试是否设置成功。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 测试是否成功</span></span><br><span class="line">$ ssh git@github.com</span><br><span class="line"><span class="comment"># 出现以下提示，表示设置成功</span></span><br><span class="line">Hi lleej! You ve successfully authenticated, but GitHub does not provide shell access.</span><br></pre></td></tr></table></figure>
+<p>如果我们需要通过在本机访问多个远程仓库，例如：个人的<code>github</code>、公司的<code>gitlab</code>…，需要进行如下操作。</p>
+<p><strong>为每个远程仓库创建SSH key</strong>。最好为不同的远程仓库创建不同的<code>ssh key</code>，即使用户名一样。由于默认情况下创建的密钥文件名称为<code>id_rsa</code>，因此需要在创建多个平台的<code>ssh key</code>时指定密钥文件名。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 指定密钥文件</span></span><br><span class="line">$ ssh-keygen -t rsa -C <span class="string">"用户名"</span> -f ~/.ssh/[平台简称]_rsa</span><br><span class="line"><span class="comment"># 示例: 为 github 创建 ssh key</span></span><br><span class="line">$ ssh-keygen -t rsa -C <span class="string">"lleej@qq.com"</span> -f ~/.ssh/github_rsa</span><br></pre></td></tr></table></figure>
+<p>注意：使用<code>-f</code>参数指定文件名时，需要指定文件放置的目录，可以写成<code>C:\Users\[登录用户名]\.ssh</code>，也可以用示例中的<code>~/.ssh/</code>表示。</p>
+<p><strong>添加配置文件</strong>。在<code>C:\Users\[登录用户名]\.ssh</code>目录中添加<code>config</code>文件，在配置文件中可以设置访问不同远程仓库时使用不同的公钥文件进行认证。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Gitlab Private Server</span></span><br><span class="line">Host localhost</span><br><span class="line">  Hostname localhost</span><br><span class="line">  IdentityFile ~/.ssh/gitlab_rsa</span><br><span class="line">  User xxx@boco.com.cn</span><br><span class="line"></span><br><span class="line"><span class="comment"># Github Server</span></span><br><span class="line">Host github.com</span><br><span class="line">  Hostname github.com</span><br><span class="line">  IdentityFile ~/.ssh/github_rsa</span><br><span class="line">  User xxx@qq.com</span><br><span class="line"></span><br><span class="line"><span class="comment"># Coding Server</span></span><br><span class="line">Host git.dev.tencent.com</span><br><span class="line">  Hostname git.dev.tencent.com</span><br><span class="line">  IdentityFile ~/.ssh/coding_rsa</span><br><span class="line">  User xxx@qq.com</span><br></pre></td></tr></table></figure>
+<p><strong>Host</strong>。远程仓库的名称，通常情况下这个值与<code>Hostname</code>一致</p>
+<p><strong>Hostname</strong>。远程仓库的主机名称，通常情况下是仓库的域名或IP地址</p>
+<p><strong>IdentityFile</strong>。使用的公钥文件的名称（不包括扩展名）</p>
+<p><strong>User</strong>。登录远程仓库的用户名</p>
+<h2 id="管理远程引用"><a href="#管理远程引用" class="headerlink" title="管理远程引用"></a>管理远程引用</h2><blockquote>
+<p>本章节重点介绍远程仓库的管理，涉及到远程分支的部分在后面章节说明</p>
+</blockquote>
+<p>为了能够操作远程仓库，需要在本机 Git 中添加一个具名的指向远程仓库地址的引用，称为<strong>远程引用</strong>。Git 中远程引用的默认名称是<code>origin</code>（类似默认分支名称为<code>master</code>），在本地 Git 中远程引用不能重名，但可以设置指向同一个远程仓库地址的多个远程引用。</p>
+<p>管理远程引用包括：添加远程引用、移除无效的远程引用、重命名远程引用等。</p>
+<h3 id="添加远程引用"><a href="#添加远程引用" class="headerlink" title="添加远程引用"></a>添加远程引用</h3><p>在本地仓库中添加远程引用有两种方式。</p>
+<p><strong>克隆仓库</strong></p>
+<p>如果我们使用<code>git clone</code>从远程克隆仓库到本地，Git 会自动添加远程引用，命名为<code>origin</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 通过克隆方式添加远程引用</span></span><br><span class="line">$ git <span class="built_in">clone</span> [远程仓库]</span><br><span class="line"><span class="comment"># 示例</span></span><br><span class="line">$ git <span class="built_in">clone</span> git@github.com:lleej/test.git</span><br></pre></td></tr></table></figure>
+<p>注意：使用<code>ssh</code>协议时远程仓库的命名格式，<code>git@[主机名]:[用户名]/[仓库名]</code></p>
+<p><strong>手动添加</strong></p>
+<p>如果需要将本地仓库与多个远程仓库建立联系，比如：公司的集成仓库和备份仓库。就需要通过手动方式添加远程引用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 手动添加远程引用</span></span><br><span class="line">$ git remote add [远程引用] [远程仓库地址]</span><br><span class="line"><span class="comment"># 示例</span></span><br><span class="line">$ git remote add origin git@github.com:lleej/test.git</span><br></pre></td></tr></table></figure>
+<p>添加远程引用后，就可以在本地对远程仓库进行分支的推送和抓取操作。</p>
+<h3 id="删除远程引用"><a href="#删除远程引用" class="headerlink" title="删除远程引用"></a>删除远程引用</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 删除远程引用</span></span><br><span class="line">$ git remote rm [远程引用]</span><br><span class="line"><span class="comment"># 示例</span></span><br><span class="line">$ git remote rm origin</span><br></pre></td></tr></table></figure>
+<h3 id="重命名远程引用"><a href="#重命名远程引用" class="headerlink" title="重命名远程引用"></a>重命名远程引用</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 重命名远程引用</span></span><br><span class="line">$ git remote rename [OLD] [NEW]</span><br><span class="line"><span class="comment"># 示例</span></span><br><span class="line">$ git remote rename origin ori</span><br></pre></td></tr></table></figure>
+<p>重命名后，需要使用新的远程引用进行访问。</p>
+<h3 id="查看远程引用"><a href="#查看远程引用" class="headerlink" title="查看远程引用"></a>查看远程引用</h3><p>查看在本地 Git 仓库中连接了哪些远程仓库，以及这些仓库的地址和分支的跟踪情况。</p>
+<p><strong>简要信息</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看远程引用</span></span><br><span class="line">$ git remote</span><br><span class="line"><span class="comment"># 查看远程引用和远程仓库地址</span></span><br><span class="line">$ git remote -v</span><br></pre></td></tr></table></figure>
+<p><strong>注：以上三部分的操作只能通过命令行方式或者使用 Git 客户端工具实现，<code>VS Code</code>中并没有提供相应的功能。</strong></p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p><strong>远程引用</strong>。指向远端 Git 仓库的引用，通过这个引用可以拉取或推送分支。</p>
+<p><strong>远程引用名称唯一</strong>。为远程仓库设置的名称必须在本地仓库中唯一。</p>
+<h2 id="远程分支"><a href="#远程分支" class="headerlink" title="远程分支"></a>远程分支</h2><p>顾名思义，远程分支是指远程仓库中的分支。我们通常不会直接在远程仓库上进行代码的编辑和提交，而是在本地仓库中完成相关工作后将本地分支推送到远程仓库，Git 会识别出推送的本地分支与远程分支存在哪些提交变化，只将变化的提交推送到远程仓库中。</p>
+<h3 id="查看远程分支"><a href="#查看远程分支" class="headerlink" title="查看远程分支"></a>查看远程分支</h3><p>在本地仓库添加远程仓库引用后，我们就可以查看远程仓库中的分支情况了。注意：以下操作查看的是远程仓库当前的实时状态。</p>
+<p><strong>摘要信息</strong>。使用<code>git ls-remote</code>指令，可以查看远程分支和指向的提交信息。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看远程分支</span></span><br><span class="line">$ git ls-remote &lt;远程仓库&gt;</span><br><span class="line"><span class="comment"># 不指定 &lt;远程仓库&gt; 时默认 origin</span></span><br><span class="line">$ git ls-remote</span><br><span class="line"><span class="comment">## 输出结果</span></span><br><span class="line">From git@github.com:lleej/test.git</span><br><span class="line">deddea3c1264a59f7695e5acf357134ba58f80fc	HEAD</span><br><span class="line">deddea3c1264a59f7695e5acf357134ba58f80fc	refs/heads/from-remote</span><br><span class="line">deddea3c1264a59f7695e5acf357134ba58f80fc	refs/heads/master</span><br></pre></td></tr></table></figure>
+<p><strong>详细信息</strong>。使用<code>git remote show (远程仓库)</code>指令，可以查看更多远程仓库和分支的信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看远程分支详细信息</span></span><br><span class="line">$ git remote show [远程仓库]</span><br><span class="line"><span class="comment"># 输出内容如下</span></span><br><span class="line">* remote origin</span><br><span class="line">  Fetch URL: git@github.com:lleej/test.git</span><br><span class="line">  Push  URL: git@github.com:lleej/test.git</span><br><span class="line">  HEAD branch: master</span><br><span class="line">  Remote branch:</span><br><span class="line">    from-remote new (next fetch will store <span class="keyword">in</span> remotes/origin)</span><br><span class="line">    master tracked</span><br><span class="line">  Local branch configured <span class="keyword">for</span> <span class="string">'git pull'</span>:</span><br><span class="line">    master merges with remote master</span><br><span class="line">  Local ref configured <span class="keyword">for</span> <span class="string">'git push'</span>:</span><br><span class="line">    master pushes to master (up to date)</span><br></pre></td></tr></table></figure>
+<p><strong>Fetch URL</strong>。从远程仓库拉取数据的URL地址</p>
+<p><strong>Push URL</strong>。向远程仓库推送数据的URL地址</p>
+<p><strong>HEAD branch</strong>。远程仓库的分支头指针</p>
+<p><strong>Remote branch</strong>。远程仓库的所有分支。标注为<code>tracked</code>表示分支已经拉取到本地，标注为<code>new</code>表示分支没有拉取到本地。</p>
+<p><strong>Local branch configured for “git pull”</strong>。可以使用<code>git pull</code>指令从远程仓库抓取的分支。没有列出的分支需要使用<code>git fetch</code>进行拉取操作。</p>
+<p><strong>Local branch configured for “git push”</strong>。曾经使用<code>git push</code>指令推送过的分支。</p>
+<h3 id="远程跟踪分支"><a href="#远程跟踪分支" class="headerlink" title="远程跟踪分支"></a>远程跟踪分支</h3><p>远程分支以及其指向的提交树是存储在远程仓库中的，不可能每次访问远程分支都与远程仓库通信来读取数据，Git 把远程仓库中的分支及其指向的提交树下载到本地仓库中，只有当需要更新数据时才与远程仓库进行通信。下载到本地的远程分支称为<strong>远程跟踪分支</strong>。</p>
+<p>远程跟踪分支是远程分支状态的引用。它们是不能移动的本地引用，当你与远程仓库进行通信操作（推送和拉取）时，它们会自动移动。 远程跟踪分支像是你上次连接到远程仓库时，那些分支所处状态的书签。</p>
+<p>远程跟踪分支是存储在本地仓库中的分支，以 <code>(远程仓库)/(分支)</code> 形式命名。可以通过<code>git branch -r</code>查看</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看远程跟踪分支</span></span><br><span class="line">$ git branch -r</span><br><span class="line">$ git branch -r -v</span><br></pre></td></tr></table></figure>
+<p>在<code>VS Code</code>中，使用<code>git history</code>插件可以看到远程跟踪分支（红色背景）。</p>
+<p><img src="/images/remote-gitlog-vscode.png" alt="远程跟踪分支"></p>
+<h3 id="跟踪分支"><a href="#跟踪分支" class="headerlink" title="跟踪分支"></a>跟踪分支</h3><p>我们已经了解”远程分支”和”远程跟踪分支”的概念。远程分支存储在远端，远程跟踪分支是远程分支在本地仓库的只读副本，这两种分支我们在本地仓库都不能直接进行提交操作。</p>
+<p>跟踪分支是与远程分支有直接关系的本地分支。当从一个远程跟踪分支检出一个本地分支，Git 会自动创建一个”跟踪分支”。 Git 使用”跟踪分支”不仅简化推送和拉取操作，而且可以提示本地分支与远程分支的差异。</p>
+<p>跟踪分支是一种特殊的本地分支，它与远程跟踪分支建立跟踪关系，我们在本地仓库操作的是”跟踪分支”</p>
+<p>Git 提供了三种创建”跟踪分支”的操作方式</p>
+<p><strong>克隆仓库</strong>。当将远程仓库克隆到本地时，Git 会自动创建<code>origin</code>远程仓库引用，以及<code>master</code>跟踪分支。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 通过克隆仓库的方式创建跟踪分支</span></span><br><span class="line">$ git <span class="built_in">clone</span> git@github.com:lleej/test.git</span><br></pre></td></tr></table></figure>
+<p>注意：如果远程仓库中存在多个分支，克隆操作将所有远程分支拉取到本地并创建对应的远程跟踪分支，但只创建一个<code>master</code>跟踪分支。</p>
+<p><strong>检出分支</strong>。当从一个远程跟踪分支检出一个本地分支，Git 会自动创建一个”跟踪分支”。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 通过检出方式创建跟踪分支</span></span><br><span class="line">$ git checkout -b [跟踪分支] [远程仓库]/[分支]</span><br><span class="line"><span class="comment"># 或者使用简写方式 跟踪分支与分支名称相同</span></span><br><span class="line">$ git checkout --track [远程仓库]/[分支]</span><br><span class="line"><span class="comment"># 示例</span></span><br><span class="line">$ git checkout -b fix origin/fix</span><br><span class="line">$ git checkout --track origin/fix</span><br></pre></td></tr></table></figure>
+<p>注意：这种方式会创建一个本地分支，因此确保本地没有这个分支存在。</p>
+<p><strong>设置跟踪分支</strong>。Git 提供了单独设置本地分支与远程分支的跟踪关系的指令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 单独设置跟踪关系 跟踪分支 和 远程跟踪分支 都存在的情况</span></span><br><span class="line"><span class="comment"># 如果当前工作分支为跟踪分支，则可以省略&lt;跟踪分支&gt;选项</span></span><br><span class="line">$ git branch -u [远程仓库]/[分支] &lt;跟踪分支&gt;</span><br><span class="line">$ git branch --<span class="built_in">set</span>-upstream-to=[远程仓库]/[分支] &lt;跟踪分支&gt;</span><br><span class="line"><span class="comment"># 示例</span></span><br><span class="line">$ git branch -u origin/fix fix</span><br><span class="line">$ git branch --<span class="built_in">set</span>-upstream-to=origin/fix fix</span><br></pre></td></tr></table></figure>
+<p>注意：这种方式是建立本地分支和远程跟踪分支的跟踪关系，两个分支必须都存在。</p>
+<p><strong>查看跟踪分支</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看跟踪分支</span></span><br><span class="line">$ git branch -vv</span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">* fix    ac560f9 [origin/fix: ahead 1] add file c.md</span><br><span class="line">  login  deddea3 Create remote.md</span><br><span class="line">  master deddea3 [origin/master] Create remote.md</span><br><span class="line"><span class="comment"># 当前本地仓库有三个分支</span></span><br><span class="line"><span class="comment"># login 不是跟踪分支</span></span><br><span class="line"><span class="comment"># master 是跟踪分支，与origin/master建立了跟踪关系</span></span><br><span class="line"><span class="comment"># fix 是跟踪分支，与origin/fix建立跟踪关系，且有1个提交领先于远程分支</span></span><br></pre></td></tr></table></figure>
+<h3 id="小结-1"><a href="#小结-1" class="headerlink" title="小结"></a>小结</h3><p><strong>远程分支</strong>指远程仓库中的分支，用于共享、集成或备份使用。远程分支只能通过<code>git push</code>方式进行更新</p>
+<p><strong>远程跟踪分支</strong>指远程分支在本地仓库的只读副本，拉取远程仓库将更新或创建它，除此之外不允许更改</p>
+<p><strong>跟踪分支</strong>是一种特殊的本地分支，它与远程跟踪分支建立了跟踪关系，可以简化推送和拉取操作。创建跟踪分支的三种方法：克隆仓库（只创建主分支<code>master</code>的跟踪分支）、检出分支（创建检出远程跟踪分支的跟踪关系）、设置跟踪关系（指定本地分支和远程跟踪分支）。</p>
+<h2 id="分支操作"><a href="#分支操作" class="headerlink" title="分支操作"></a>分支操作</h2><p>本节介绍如何创建和使用远程分支、远程跟踪分支和跟踪分支，以及如何从远程仓库拉取分支、推送分支到远程仓库。</p>
+<h3 id="克隆远程仓库"><a href="#克隆远程仓库" class="headerlink" title="克隆远程仓库"></a>克隆远程仓库</h3><p>克隆仓库是最常用的方法，我们参与维护项目代码时，首先需要将远程仓库克隆到本地。</p>
+<p>克隆仓库完成以下工作：</p>
+<ol>
+<li>创建本地仓库</li>
+<li>创建远程仓库引用</li>
+<li>从远程仓库中拉取所有的分支（以及标签）</li>
+<li>在本地仓库创建对应的远程跟踪分支</li>
+<li>创建<code>master</code>跟踪分支</li>
+</ol>
+<h3 id="从远程仓库拉取分支"><a href="#从远程仓库拉取分支" class="headerlink" title="从远程仓库拉取分支"></a>从远程仓库拉取分支</h3><p>一个团队项目，远程仓库会被多人不定期更新，本地仓库的远程跟踪分支可能滞后于远程仓库，需要手动将远程仓库中最新的分支数据拉取到本地。这也是 Git 进行多人协作时需要额外付出的成本。</p>
+<p>Git 提供两种从远程仓库拉取分支的方法</p>
+<p><strong>Fetch</strong></p>
+<p>使用<code>git fetch</code>指令，从远程仓库抓取<strong>所有分支</strong>或指定分支到本地仓库。抓取操作将更新（或创建）本地仓库中的远程跟踪分支，并不会与本地分支或跟踪分支进行合并，因此该操作不会影响当前工作目录中的文件。<strong>是安全的</strong></p>
+<p>一般情况下，我们在本地完成开发任务后，需要先执行该操作与远程仓库同步数据，然后在本地合并分支检查是否有冲突，然后再将分支推送到远程仓库。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 抓取远程仓库 所有分支</span></span><br><span class="line">$ git fetch [远程仓库]</span><br><span class="line"><span class="comment"># 示例</span></span><br><span class="line">$ git fetch origin</span><br><span class="line"><span class="comment"># 当不指定远程仓库时使用默认的origin</span></span><br><span class="line">$ git fetch</span><br><span class="line"><span class="comment"># 抓取远程仓库 指定分支</span></span><br><span class="line">$ git fetch [远程仓库] [远程分支]</span><br><span class="line"><span class="comment"># 示例</span></span><br><span class="line">$ git fetch origin master</span><br></pre></td></tr></table></figure>
+<p><strong>Pull</strong></p>
+<p>我们从远程仓库抓取的分支，需要合并到本地分支中才能使用，因此 Git 提供了一个集两步操作为一体的指令<code>git pull</code>。<strong>Pull</strong>操作分两步执行：首先，从远程仓库<strong>Fetch</strong>分支到本地仓库并更新或创建远程跟踪分支；其次，将远程跟踪分支与本地分支进行合并。</p>
+<p>因为要进行分支的合并操作，因此需要告诉 Git 远程跟踪分支要与哪个分支进行合并，而这就是<strong>跟踪分支</strong>的作用。上节介绍的跟踪分支就是为此而生的。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 拉取远程仓库</span></span><br><span class="line">$ git pull [远程仓库] [分支]</span><br><span class="line"><span class="comment"># 示例</span></span><br><span class="line"><span class="comment"># 从origin指向的远程仓库拉取master分支</span></span><br><span class="line">$ git pull origin master</span><br><span class="line"><span class="comment"># 如果从远程仓库拉取当前工作分支(跟踪分支)，则可以省略掉远程仓库和分支</span></span><br><span class="line"><span class="comment"># 当前工作分支为master</span></span><br><span class="line">$ git pull</span><br><span class="line"></span><br><span class="line"><span class="comment"># 建立远程跟踪分支与本地分支的跟踪关系</span></span><br><span class="line">$ git branch --<span class="built_in">set</span>-upstream-to=[远程仓库]/[分支] [本地分支]</span><br></pre></td></tr></table></figure>
+<p>在<code>VS Code</code>中集成了拉取功能，使用的就是<code>git pull</code>指令。</p>
+<h3 id="向远程仓库推送分支"><a href="#向远程仓库推送分支" class="headerlink" title="向远程仓库推送分支"></a>向远程仓库推送分支</h3><p>在多人协作的场景中，当工作完成后需要将其推送到远程仓库，便于他人拉取最新的版本信息。在进行分支推送时我们一般会遇到以下两种情况。</p>
+<p><strong>远程仓库没有该分支</strong></p>
+<p>假设，我们为了完成特性开发工作在本地创建了<code>fea_login</code>分支（远程仓库中并不存在），在开发并测试完成后，要推送到远程仓库中。因为不存在远程分支和远程跟踪分支，因此必须指定推送分支名称。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 推动只在本地存在的分支到远程仓库</span></span><br><span class="line">$ git push [远程仓库] [分支]</span><br><span class="line"><span class="comment"># 示例</span></span><br><span class="line">$ git push origin fea_login</span><br></pre></td></tr></table></figure>
+<p>推送操作将完成以下工作：</p>
+<ol>
+<li>在远程仓库创建<code>fea_login</code>分支</li>
+<li>将本地<code>fea_login</code>分支的提交历史推送到远程分支</li>
+<li>将远程仓库的<code>fea_login</code>分支抓取到本地并创建<code>origin/fea_login</code>远程跟踪分支</li>
+</ol>
+<p>注意：推送操作不会自动创建跟踪分支，即建立远程跟踪分支<code>origin/fea_login</code>与本地分支<code>fea_login</code>的跟踪关系。</p>
+<p><strong>远程仓库有该分支</strong></p>
+<p>如果远程分支存在，我们就不能贸然推送，因为远程分支的提交可能已经领先本地分支了，本地远程跟踪分支的数据是滞后的，Git 会拒绝执行推送操作。</p>
+<p>正常的操作流程如下：</p>
+<ol>
+<li>从远程仓库<strong>Fetch</strong>分支到本地，如果已经建立了跟踪关系也可以<strong>Pull</strong></li>
+<li>合并本地分支与远程跟踪分支，保证推送的分支提交历史领先远程分支</li>
+<li>推送本地分支到远程仓库</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 推送到远程仓库 </span></span><br><span class="line">$ git push [远程仓库] [分支]</span><br><span class="line"><span class="comment"># 示例 推送本地master分支到远程仓库</span></span><br><span class="line">$ git push origin master</span><br><span class="line"><span class="comment"># 如果本地master分支是远程分支的跟踪分支，可以采用简写方式</span></span><br><span class="line"><span class="comment"># 推送当前工作分支到远程仓库中对应的远程分支</span></span><br><span class="line">$ git push</span><br></pre></td></tr></table></figure>
+<h3 id="案例演示"><a href="#案例演示" class="headerlink" title="案例演示"></a>案例演示</h3><p>通过一个项目案例，了解如何操作远程分支。实际项目中的操作可能存在差异，具体要看团队的开发流程。</p>
+<p>假设，要开发博客系统，为此创建了名为<code>blog</code>的远程仓库，仓库访问地址为<a href="mailto:`git@github.com" target="_blank" rel="noopener">`git@github.com</a>:lleej/blog.git<code>。由项目负责人创建</code>dev`分支，并提交了一些代码。</p>
+<p>作为一名项目开发人员，我需要执行以下步骤完成开发工作。</p>
+<p><strong>克隆远程仓库</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> git@github.com:lleej/blog.git</span><br></pre></td></tr></table></figure>
+<p>这将完成以下操作</p>
+<ol>
+<li><p>在本地创建名为<code>blog</code>的仓库</p>
+</li>
+<li><p>在仓库中添加远程引用<code>origin</code></p>
+</li>
+<li><p>拉取远程仓库<code>master</code>和<code>dev</code>分支，创建<code>origin/master</code>和<code>origin/dev</code>远程跟踪分支，从<code>origin/master</code>分支检出<code>master</code>分支并建立跟踪关系</p>
+</li>
+</ol>
+<p><strong>检出dev跟踪分支</strong></p>
+<p>一般情况下<code>master</code>分支禁止直接推送，而采用<code>PR</code>或<code>MR</code>的方式进行更新，这部分我们会在后面工作流程中详细介绍。</p>
+<p>我们需要基于<code>origin/dev</code>分支进行开发工作</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout -b dev origin/dev</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">$ git checkout --track origin/dev</span><br></pre></td></tr></table></figure>
+<p>这将完成以下操作：</p>
+<ol>
+<li>基于<code>origin/dev</code>创建本地分支<code>dev</code></li>
+<li>设置<code>origin/dev</code>和<code>dev</code>的跟踪关系</li>
+<li>检出<code>dev</code>分支为工作分支</li>
+</ol>
+<p><strong>进行开发工作</strong></p>
+<p>这时，我们就可以在<code>dev</code>分支上进行代码的创建、修改、提交等操作</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ vi index.html</span><br><span class="line">$ vi main.css</span><br><span class="line">...</span><br><span class="line">$ git add .</span><br><span class="line">$ git commit -m<span class="string">'完成了主页面的开发工作'</span></span><br></pre></td></tr></table></figure>
+<p><strong>推送到远程仓库</strong></p>
+<p>个人的开发工作完成后，需要把最新的提交推送到远程仓库中。项目负责人会根据版本计划将<code>dev</code>分支合并到<code>master</code>分支中，进行上线前的测试和部署工作。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 第一步：从远程仓库拉取最新dev分支的最新提交</span></span><br><span class="line">$ git pull</span><br><span class="line"><span class="comment"># 如果出现合并冲突的情况，参照"2.Git-分支"一文中分支合并章节进行冲突的处理</span></span><br><span class="line"><span class="comment"># 第二步：将dev分支推动到远程仓库</span></span><br><span class="line">$ git push</span><br></pre></td></tr></table></figure>
+<p>这将完成以下操作：</p>
+<ol>
+<li>将远程仓库<code>blog</code>中的<code>dev</code>分支拉取到本地并更新<code>origin/dev</code>远程跟踪分支</li>
+<li>将<code>origin/dev</code>分支合并到<code>dev</code>分支中</li>
+<li>如果有冲突则提示进行冲突处理，处理完成后再次提交完成合并</li>
+<li>推送<code>dev</code>分支到远程仓库中，远程仓库更新<code>dev</code>分支的提交历史</li>
+<li>更新<code>origin/dev</code>分支的提交历史与<code>dev</code>分支一致</li>
+</ol>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="http://blog.go2sts.com">lleej</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="http://blog.go2sts.com/2019/02/20/Git-远程分支/">http://blog.go2sts.com/2019/02/20/Git-远程分支/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/GIT/">GIT</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2019/03/01/Git-工作流/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">4.Git-工作流</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2019/02/18/数据库-品悟性能优化/">
+        <span class="next-text nav-default">数据库-性能优化</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:lleej@qq.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/lleej" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2018 - 
+    
+    2020
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">lleej</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.2"></script>
+
+  </body>
+</html>

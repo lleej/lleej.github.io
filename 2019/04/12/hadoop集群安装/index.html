@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="数据库-hadoop集群安装">
+
+
+
+
+  <meta name="keywords" content="技术博客 前端 Node Python AI">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深思阁">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.2">
+
+
+
+<link rel="canonical" href="http://blog.go2sts.com/2019/04/12/hadoop集群安装/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.2">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "qhKGP5WaH1jdzfAxC8naEyh8-gzGzoHsz",
+      appKey: "c1ffihM5AQSGtv4rwj3aaHeI"
+    });
+  </script>
+
+
+
+
+
+<script>
+  window.config = {"leancloud":{"app_id":"qhKGP5WaH1jdzfAxC8naEyh8-gzGzoHsz","app_key":"c1ffihM5AQSGtv4rwj3aaHeI"},"toc":true,"fancybox":true,"pjax":true};
+</script>
+
+    <title> 数据库-hadoop集群安装 - 深思阁 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">深思阁</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">深思阁</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          数据库-hadoop集群安装
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-04-12
+        </span>
+        
+          <span class="post-category">
+            
+              <a href="/categories/数据库/">数据库</a>
+            
+          </span>
+        
+        
+        <span class="post-visits" data-url="/2019/04/12/hadoop集群安装/" data-title="数据库-hadoop集群安装">
+          阅读次数 0
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#环境准备"><span class="toc-text">环境准备</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#部署hadoop"><span class="toc-text">部署hadoop</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#注意事项"><span class="toc-text">注意事项</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#部署zookeeper"><span class="toc-text">部署zookeeper</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#部署hbase"><span class="toc-text">部署hbase</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#部署hive"><span class="toc-text">部署hive</span></a></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <p>摘要：本文章介绍Hadoop集群安装的环境和步骤</p>
+<p>原文作者：张建中</p>
+<a id="more"></a>
+<h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><ol>
+<li><p>集群结构</p>
+<blockquote>
+<p>三个结点：一个主节点master，两个从节点，内存1G以上，磁盘20G以上</p>
+</blockquote>
+<p>| IP地址        | 主机名 | 功能                                           |<br>| ————- | —— | ———————————————- |<br>| 192.168.1.100 | master | NameNode、Secondary NameNode、Resource Manager |<br>| 192.168.1.101 | slave1 | Datanode、NodeManager                          |<br>| 192.168.1.102 | slave2 | Datanode、NodeManager                          |</p>
+</li>
+<li><p>安装项目</p>
+<blockquote>
+<p>Zookeeper-3.4.6<br>  Hadoop-2.7.1<br>  HBase-1.2.1<br>  Hive-2.3.4</p>
+</blockquote>
+</li>
+<li><p>操作系统版本</p>
+<blockquote>
+<p>安装的操作系统是CentOS 7以上</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# cat /etc/redhat-release</span><br><span class="line">CentOS Linux release 7.6.1810 (Core)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改HostName</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># master</span></span><br><span class="line"><span class="comment"># 方法1：通过命令修改，不需要重启</span></span><br><span class="line">[root@master hadoop]<span class="comment"># hostnamectl set-hostname master</span></span><br><span class="line"><span class="comment"># 方法2：修改配置文件，需要重启</span></span><br><span class="line">[root@master hadoop]<span class="comment"># vi /etc/hostname</span></span><br><span class="line">master</span><br><span class="line"></span><br><span class="line"><span class="comment"># slave1</span></span><br><span class="line"><span class="comment"># 方法1：通过命令修改，不需要重启</span></span><br><span class="line">[root@slave1 hadoop]<span class="comment"># hostnamectl set-hostname slave1</span></span><br><span class="line"><span class="comment"># 方法2：修改配置文件，需要重启</span></span><br><span class="line">[root@slave1 hadoop]<span class="comment"># vi /etc/hostname</span></span><br><span class="line">slave1</span><br><span class="line"></span><br><span class="line"><span class="comment"># slave2</span></span><br><span class="line"><span class="comment"># 方法1：通过命令修改，不需要重启</span></span><br><span class="line">[root@slave2 hadoop]<span class="comment"># hostnamectl set-hostname slave2</span></span><br><span class="line"><span class="comment"># 方法2：修改配置文件，需要重启</span></span><br><span class="line">[root@slave2 hadoop]<span class="comment"># vi /etc/hostname</span></span><br><span class="line">slave2</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="5">
+<li><p>IP地址和DNS</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># master</span></span><br><span class="line">[root@master hadoop]<span class="comment"># cat /etc/sysconfig/network-scripts/ifcfg-ens33</span></span><br><span class="line">BOOTPROTO=<span class="string">"static"</span></span><br><span class="line">IPADDR=192.168.1.100</span><br><span class="line">NETMASK=255.255.255.0</span><br><span class="line">GATEWAY=192.168.1.1</span><br><span class="line">DNS1=8.8.8.8</span><br><span class="line"></span><br><span class="line"><span class="comment"># slave1</span></span><br><span class="line">[root@slave1 hadoop]<span class="comment"># cat /etc/sysconfig/network-scripts/ifcfg-ens33</span></span><br><span class="line">BOOTPROTO=<span class="string">"static"</span></span><br><span class="line">IPADDR=192.168.1.101</span><br><span class="line">NETMASK=255.255.255.0</span><br><span class="line">GATEWAY=192.168.1.1</span><br><span class="line">DNS1=8.8.8.8</span><br><span class="line"></span><br><span class="line"><span class="comment"># slave2</span></span><br><span class="line">[root@slave2 hadoop]<span class="comment"># cat /etc/sysconfig/network-scripts/ifcfg-ens33</span></span><br><span class="line">BOOTPROTO=<span class="string">"static"</span></span><br><span class="line">IPADDR=192.168.1.102</span><br><span class="line">NETMASK=255.255.255.0</span><br><span class="line">GATEWAY=192.168.1.1</span><br><span class="line">DNS1=8.8.8.8</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改/etc/hosts，三台服务器配置一样，以master服务器为例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@master hadoop]<span class="comment"># cat /etc/hosts</span></span><br><span class="line">127.0.0.1        localhost</span><br><span class="line">192.168.1.100  master</span><br><span class="line">192.168.1.101  slave1</span><br><span class="line">192.168.1.102  slave2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>关闭防火墙和selinux，三台服务器配置一样，以master服务器为例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看防火墙状态</span></span><br><span class="line">[root@master hadoop]<span class="comment"># systemctl status firewalld</span></span><br><span class="line">Active: active (running) 开启状态</span><br><span class="line"><span class="comment"># 关闭防火墙</span></span><br><span class="line">[root@master hadoop]<span class="comment"># systemctl stop firewalld</span></span><br><span class="line"><span class="comment"># 禁用防火墙</span></span><br><span class="line">[root@master hadoop]<span class="comment"># systemctl disable firewalld</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看selinux状态</span></span><br><span class="line">[root@master hadoop]<span class="comment"># getenforce</span></span><br><span class="line"><span class="comment"># 永久关闭selinux</span></span><br><span class="line">[root@master hadoop]<span class="comment"># vi /etc/selinux/config</span></span><br><span class="line">SELINUX=disabled   <span class="comment"># change to disabled</span></span><br><span class="line"><span class="comment"># 重启系统</span></span><br><span class="line">[root@master hadoop]<span class="comment"># reboot</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建用户并配置sudo权限，三台服务器配置一样，以master服务器为例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建组</span></span><br><span class="line">[root@master ~]<span class="comment"># groupadd hadoop</span></span><br><span class="line">创建用户并指定用户所属组</span><br><span class="line">[root@master ~]<span class="comment"># useradd hadoop -g hadoop</span></span><br><span class="line"><span class="comment"># 修改用户密码</span></span><br><span class="line">passwd hadoop</span><br><span class="line"></span><br><span class="line">[root@master ~]<span class="comment"># visudo</span></span><br><span class="line"><span class="comment"># add at the last line: user 'hadoop' can use all root privilege</span></span><br><span class="line">hadoop    ALL=(ALL)       ALL</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置ssh无密码登录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建密钥对，输入ssh-keygen -t rsa，一路回车</span></span><br><span class="line">[hadoop@master ~]$ ssh-keygen -t rsa</span><br><span class="line">[hadoop@slave1 ~]$ ssh-keygen -t rsa</span><br><span class="line">[hadoop@slave2 ~]$ ssh-keygen -t rsa</span><br><span class="line"><span class="comment"># 秘钥生成后在~/.ssh/目录下，有两个文件id_rsa(私钥)和id_rsa.pub（公钥）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将master服务器的公钥复制到authorized_keys</span></span><br><span class="line">[hadoop@master ~]$ cp ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将本机的公钥拷贝到其他节点上，与后面的合并公钥的方式相同（二选一）</span></span><br><span class="line"><span class="comment"># 需要先切换到root用户</span></span><br><span class="line"><span class="comment"># 执行完命令后，自动生成authorized_keys文件</span></span><br><span class="line">[root@master hadoop]<span class="comment"># ssh-copy-id root@slave1</span></span><br><span class="line">[root@master hadoop]<span class="comment"># ssh-copy-id root@slave2</span></span><br><span class="line"></span><br><span class="line">[root@slave1 hadoop]<span class="comment"># ssh-copy-id root@master</span></span><br><span class="line">[root@slave1 hadoop]<span class="comment"># ssh-copy-id root@slave2</span></span><br><span class="line"></span><br><span class="line">[root@slave2 hadoop]<span class="comment"># ssh-copy-id root@slave1</span></span><br><span class="line">[root@slave2 hadoop]<span class="comment"># ssh-copy-id root@master</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 合并公钥,将三台服务器的id_rsa.pub合并到master服务器的authorized_keys中</span></span><br><span class="line">[hadoop@master ~]$ cat  ~/.ssh/id_rsa.pub </span><br><span class="line">ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDRQo7+LxndxDYyBGJZGD+0jC7LBFfGDlxWCh0aK4OvNVrs0Sf6+B/Xq3us3SJpX6YdeEgyCzfInw8L2pe1cu+XZpYuVoVevs/5bT9G3Wqtb8Ixk7nOP8EVDY5LNfDlhPp2iehxCVodpUVN09KyGPgCE8ffN4LRgVJ7SUZibtBmHn/Vdog09yZqjlYx845ZP8M8ifSMjcAQ0voSvRvWFTMvqqx5vpqDHkZhM5CA/+VOKgeNyUphV79o6SDnIHCxnLqG+m8v9U6sMRx2N4d+c59Pw5b1g112gKtF/Y86+EbQOMda8fYJMgkTnIJnKhPPOcEun/CdtinNYW1CP4pQsgCb hadoop@master</span><br><span class="line"></span><br><span class="line">[hadoop@slave1 ~]$ cat  ~/.ssh/id_rsa.pub</span><br><span class="line">ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCdc3xdmHR4qY5lf0EyhD6cHRSOCOkp0H3heCeLso11hkSMVxowRZg+YCoRwTqfEWD+VkVGyws9EkRjLXXKJ8ND0l+1urlVzpM3tXMZeRfqF5YBHGlIQeAJ4lk1MnR9jev1TbITcKQLVA5GzAZx5MVQxE418UYnLYG2pLS1xIzMyFgr0CwpfpwA7owriclTIQOCa4nieUxYJDLdxmBsumBgPRp+195MCr1zrzwtb3UMEP+DLTHAw3+RBB15QoF3HEVVVhWSAN9ZjYjnit20dPwFnM2amGqpRS4p5wLxwkeyEsrdXkNsrtW+XbhtuxYo0YeusEp4spFhOTmv7lPhdfkv hadoop@slave1</span><br><span class="line"></span><br><span class="line">[hadoop@slave2 ~]$ cat  ~/.ssh/id_rsa.pub</span><br><span class="line">ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDtoqqsF2s8FfffiY7sZ545anJ69kf914nENQjwJd2GkgZSUujX4DJnXDSthyLUGr22cN3iaUmATQPm6qzpus/rag+QKms8fHMkaCLG6qeS9CCJZunJ2uWdTAd25H1d9RyTReTQ9tPqHZ4dFXlXeY4QYxiKHVCkOkXWrWLqCcKilDLkU7Z5HiqfPW23pt4WDmXerCIDZbM55152pcK3UF9AwFTBFA0ofQaq7IhrVHSpEsTHYQNWQxgEGYqyUT+ep3bGtvfu6a0621DIUScGlRsptrIFTFZPtO5Enih62VY/aKrA/YhHq1slTsh/tDSs29r6ZVtPNyNF0Ruu0kmPRveR hadoop@slave2</span><br><span class="line"></span><br><span class="line"><span class="comment"># master服务器中authorized_keys的内容如下</span></span><br><span class="line">[hadoop@master ~]$ cat ~/.ssh/authorized_keys </span><br><span class="line">ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCakZ3tpFGp1rgwpRCtdWnXH8mdaBdESwBgrMRftGi3Dj9Lh1icOnLozXmuHaZnm4DVlqkgtlZtq+KDVu2picJ1vPtM9mpCCFAwrYiLsxB+f6bETiWUjZhYJqaTCbxdQIOyHvgeFMqe/nQfSC2c+RXyd/FD6IqV4Im02khEp820pfqVhChgXibk6czORvhC08ChfafCvH1YXaKCKp7lHKzA3iDUdaYTWNK8PdzTx8E6eEdH2w7yOXyVpnsfQS0oercsn5euiEdmXM3XkAnMPD1toWw5yyIprvwO7q9OUXFdMLXzeJILQ/TfeZA/9q4onDnOyqBGgpRfJVGpE1JT9Er/ hadoop@master</span><br><span class="line"></span><br><span class="line">ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCdc3xdmHR4qY5lf0EyhD6cHRSOCOkp0H3heCeLso11hkSMVxowRZg+YCoRwTqfEWD+VkVGyws9EkRjLXXKJ8ND0l+1urlVzpM3tXMZeRfqF5YBHGlIQeAJ4lk1MnR9jev1TbITcKQLVA5GzAZx5MVQxE418UYnLYG2pLS1xIzMyFgr0CwpfpwA7owriclTIQOCa4nieUxYJDLdxmBsumBgPRp+195MCr1zrzwtb3UMEP+DLTHAw3+RBB15QoF3HEVVVhWSAN9ZjYjnit20dPwFnM2amGqpRS4p5wLxwkeyEsrdXkNsrtW+XbhtuxYo0YeusEp4spFhOTmv7lPhdfkv hadoop@slave1</span><br><span class="line"></span><br><span class="line">ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDtoqqsF2s8FfffiY7sZ545anJ69kf914nENQjwJd2GkgZSUujX4DJnXDSthyLUGr22cN3iaUmATQPm6qzpus/rag+QKms8fHMkaCLG6qeS9CCJZunJ2uWdTAd25H1d9RyTReTQ9tPqHZ4dFXlXeY4QYxiKHVCkOkXWrWLqCcKilDLkU7Z5HiqfPW23pt4WDmXerCIDZbM55152pcK3UF9AwFTBFA0ofQaq7IhrVHSpEsTHYQNWQxgEGYqyUT+ep3bGtvfu6a0621DIUScGlRsptrIFTFZPtO5Enih62VY/aKrA/YhHq1slTsh/tDSs29r6ZVtPNyNF0Ruu0kmPRveR hadoop@slave2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将master中的authoized_keys远程到slave1和slave2中</span></span><br><span class="line">[hadoop@master ~]$ scp ~/.ssh/authorized_keys slave1:~/.ssh/</span><br><span class="line">[hadoop@master ~]$ scp ~/.ssh/authorized_keys slave2:~/.ssh/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证是否免密登录（第一次登录会有提示）,三台服务器都验证，如下以master为例</span></span><br><span class="line">[hadoop@master ~]$ ssh localhost</span><br><span class="line">[hadoop@master ~]$ ssh master</span><br><span class="line">[hadoop@master ~]$ ssh slave1</span><br><span class="line">[hadoop@master ~]$ ssh slave2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装jdk，配置环境变量，三台服务器配置一样，以master服务器为例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将jdk-8u77-linux-x64.rpm拷贝到/home/hadoop/中</span></span><br><span class="line">[root@master hadoop]<span class="comment"># rpm -ivh /home/hadoop/jdk-8u77-linux-x64.rpm</span></span><br><span class="line"><span class="comment"># 切换到hadoop用户</span></span><br><span class="line">[hadoop@master ~]$ vi ~/.bash_profile</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/java/jdk1.8.0_77</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$JAVA_HOME</span>/bin</span><br><span class="line"><span class="built_in">export</span> CLASSPATH=.:<span class="variable">$JAVA_HOME</span>/jre/lib:<span class="variable">$JAVA_HOME</span>/lib:<span class="variable">$JAVA_HOME</span>/lib/tools.jar</span><br><span class="line"></span><br><span class="line"><span class="built_in">source</span> ~/.bash_profile</span><br><span class="line"><span class="comment"># 验证jdk安装成功</span></span><br><span class="line">[hadoop@master ~]$ java -version</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="12">
+<li><p>安装mysql5.7</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line">mysql只安装在master服务器中</span><br><span class="line">添加mysql用户和组</span><br><span class="line">[root@master ~]# groupadd mysql</span><br><span class="line">[root@master ~]# useradd -g mysql mysql</span><br><span class="line">[root@master ~]# passwd mysql</span><br><span class="line">将mysql用户的密码修改为mysql</span><br><span class="line"></span><br><span class="line">将mysql-5.7.19-linux-glibc2.12-x86_64.tar.gz拷贝到master中</span><br><span class="line">创建mysql软件目录</span><br><span class="line">[root@master ~]# mkdir -p /usr/local/mysql-5.7.19</span><br><span class="line">将软件目录属主修改为mysql</span><br><span class="line">[root@master ~]# chown -R mysql:mysql /usr/local/mysql-5.7.19/</span><br><span class="line">创建mysql数据目录</span><br><span class="line">[root@master ~]# mkdir -p /var/lib/mysql/data</span><br><span class="line">创建mysql日志目录</span><br><span class="line">[root@master ~]# mkdir -p /var/lib/mysql/logs</span><br><span class="line">[root@master ~]# touch /var/lib/mysql/logs/mariadb.log</span><br><span class="line">[root@master ~]# touch /var/lib/mysql/logs/mariadb.pid</span><br><span class="line">将数据目录属主修改为mysql</span><br><span class="line">[root@master ~]# chown -R mysql:mysql /var/lib/mysql</span><br><span class="line">[root@master ~]# chmod -R 777 /var/lib/mysql</span><br><span class="line">设置文件my.cnf的权限</span><br><span class="line">[root@master ~]# chmod 644 /etc/my.cnf</span><br><span class="line">[root@master ~]# ln -s /var/lib/mysql/mysql.sock /tmp/mysql.sock</span><br><span class="line">解压mysql</span><br><span class="line">[root@master ~]# tar -zxvf /home/mysql/mysql-5.7.19-linux-glibc2.12-x86_64.tar.gz -C /usr/local/mysql-5.7.19 --strip-components 1</span><br><span class="line">编辑my.conf</span><br><span class="line">[root@master ~]# vi /etc/my.cnf</span><br><span class="line">[mysqld]</span><br><span class="line">datadir=/var/lib/mysql/data</span><br><span class="line">socket=/var/lib/mysql/mysql.sock</span><br><span class="line">basedir=/usr/local/mysql-5.7.19</span><br><span class="line">port=3306</span><br><span class="line">user=mysql</span><br><span class="line"></span><br><span class="line">[mysqld_safe]</span><br><span class="line">log-error=/var/lib/mysql/logs/mariadb.log</span><br><span class="line">pid-file=/var/lib/mysql/logs/mariadb.pid</span><br><span class="line"></span><br><span class="line">进入mysql软件目录</span><br><span class="line">[root@master ~]# cd /usr/local/mysql-5.7.19</span><br><span class="line">初始化数据库</span><br><span class="line">[root@master mysql-5.7.19]# ./bin/mysqld --initialize --user=mysql --basedir=/usr/local/mysql-5.7.19 --datadir=/var/lib/mysql/data</span><br><span class="line">将会出现如下提示</span><br><span class="line">[Note] A temporary password is generated for root@localhost: W/&amp;Itv7Y%f1,</span><br><span class="line">用户root@localhost被赋予随机生成的一个密码，（W/&amp;Itv7Y%f1,），该密码直接写在日志文件中，路径为</span><br><span class="line">~/.mysql_secret</span><br><span class="line"></span><br><span class="line">启动数据库</span><br><span class="line">[root@master mysql-5.7.19]# ./bin/mysqld --defaults-file=/etc/my.cnf</span><br><span class="line">该窗口将一直运行，重新启动一个窗口</span><br><span class="line">[root@master ~]# cd /usr/local/mysql-5.7.19/</span><br><span class="line">[root@master mysql-5.7.19]# ./bin/mysql -uroot -p</span><br><span class="line">输入上面的密码（W/&amp;Itv7Y%f1,）</span><br><span class="line">修改root用户的密码</span><br><span class="line">mysql&gt; alter user user() identified by &quot;mysql&quot;;</span><br><span class="line"></span><br><span class="line">添加启动服务</span><br><span class="line">[root@master mysql-5.7.19]# cp support-files/mysql.server /etc/init.d/mysqld</span><br><span class="line">[root@master mysql-5.7.19]# chown -R mysql:mysql /etc/init.d/mysqld</span><br><span class="line">赋予可执行权限</span><br><span class="line">[root@master mysql-5.7.19]# chmod +x /etc/init.d/mysqld</span><br><span class="line">添加服务</span><br><span class="line">[root@master mysql-5.7.19]# chkconfig --add mysqld</span><br><span class="line">[root@master mysql-5.7.19]# chkconfig --level 6 mysqld on</span><br><span class="line">显示服务列表</span><br><span class="line">chkconfig --list</span><br><span class="line"></span><br><span class="line">环境变量配置</span><br><span class="line">[root@master mysql-5.7.19]# ln -s /usr/local/mysql-5.7.19 /usr/local/mysql</span><br><span class="line">[root@master mysql-5.7.19]# vi /etc/profile</span><br><span class="line">在最后添加如下行</span><br><span class="line">export PATH=/usr/local/mysql/bin:$PATH</span><br><span class="line">配置生效</span><br><span class="line">[root@master mysql-5.7.19]# source /etc/profile</span><br><span class="line"></span><br><span class="line">重启</span><br><span class="line">[root@master mysql-5.7.19]# reboot</span><br><span class="line">检查mysql是否启动</span><br><span class="line">[root@master bin]# systemctl status mysqld</span><br><span class="line"></span><br><span class="line">创建数据库用户并授权</span><br><span class="line">[hadoop@master ~]$ mysql -uroot -pmysql</span><br><span class="line">mysql&gt; create user hive identified by &apos;hive&apos;;</span><br><span class="line">mysql&gt; grant all privileges on *.* to &apos;hive&apos;@&apos;%&apos; with grant option;</span><br><span class="line">mysql&gt; flush privileges;</span><br><span class="line">mysql&gt; exit;</span><br><span class="line"></span><br><span class="line">创建数据库</span><br><span class="line">[hadoop@master ~]$ mysql -h192.168.139.100 -uhive -phive</span><br><span class="line">mysql&gt; create database hive;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="部署hadoop"><a href="#部署hadoop" class="headerlink" title="部署hadoop"></a>部署hadoop</h1><h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
+<li><p>鉴于hadoop用户的home目录可能挂载在NFS上，Hadoop系统最好不要安装在该目录下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">% <span class="built_in">cd</span> /usr/<span class="built_in">local</span></span><br><span class="line">% sudo tar xzf hadoop-x.y.z.tar.gz</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>需要将Hadoop文件的拥有者改为hadoop用户和组</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">% sudo chown -R hadoop:hadoop hadoop-x.y.z</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加Hadoop执行程序所在目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">% <span class="built_in">export</span> HADOOP_HOME=/usr/<span class="built_in">local</span>/hadoop-x.y.z</span><br><span class="line">% <span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$HADOOP_HOME</span>/bin:<span class="variable">$HADOOP_HOME</span>/sbin</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li><p>解压hadoop</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@master ~]$ tar -zxvf hadoop-2.7.1.tar.gz</span><br><span class="line">检查hadoop是否可用,显示版本就是正常</span><br><span class="line">[hadoop@master ~]$ ./hadoop-2.7.1/bin/hadoop version</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建目录，三台服务器都执行，以master服务器为例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@master ~]$ mkdir -p /home/hadoop/hadoop_data</span><br><span class="line">[hadoop@master ~]$ mkdir -p /home/hadoop/hadoop_data</span><br><span class="line">[hadoop@master ~]$ mkdir -p /home/hadoop/hadoop_name</span><br><span class="line">[hadoop@master ~]$ mkdir -p /home/hadoop/hadoop_tmp</span><br><span class="line">[hadoop@master ~]$ mkdir -p /home/hadoop/hbase_tmp</span><br><span class="line">[hadoop@master ~]$ mkdir -p /home/hadoop/zookeeper_data</span><br><span class="line">[hadoop@master ~]$ mkdir -p /home/hadoop/zookeeper_logs</span><br><span class="line">[hadoop@master ~]$ sudo mkdir -p /var/hadoop/pids</span><br><span class="line">[hadoop@master ~]$ sudo chown -R hadoop:hadoop /var/hadoop</span><br><span class="line">[hadoop@master ~]$ sudo chmod -R 777 /var/hadoop</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加环境变量，三台服务器都执行，以master服务器为例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@master ~]$ vi ~/.bash_profile</span><br><span class="line">export HADOOP_HOME=/home/hadoop/hadoop-2.7.1</span><br><span class="line">export HADOOP_INSTALL=$HADOOP_HOME</span><br><span class="line">export HADOOP_COMMON_HOME=$HADOOP_HOME</span><br><span class="line">export HADOOP_HDFS_HOME=$HADOOP_HOME</span><br><span class="line">export HADOOP_MAPRED_HOME=$HADOOP_HOME</span><br><span class="line">export YARN_HOME=$HADOOP_HOME</span><br><span class="line">export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native</span><br><span class="line">export HADOOP_OPTS=&quot;-Djava.library.path=$HADOOP_HOME/lib&quot;</span><br><span class="line">export HADOOP_CONF_DIR=$&#123;HADOOP_HOME&#125;/etc/hadoop</span><br><span class="line">export HDFS_CONF_DIR=$&#123;HADOOP_HOME&#125;/etc/hadoop</span><br><span class="line">export YARN_CONF_DIR=$&#123;HADOOP_HOME&#125;/etc/hadoop</span><br><span class="line"></span><br><span class="line">export ZOOKEEPER=/home/hadoop/zookeeper-3.4.6</span><br><span class="line">export HIVE_HOME=/home/hadoop/hive-2.3.4</span><br><span class="line">export HBASE_HOME=/home/hadoop/hbase-1.2.1</span><br><span class="line">export PIG_HOME=/home/hadoop/pig-0.17.0</span><br><span class="line">export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$HBASE_HOME/bin:$HIVE_HOME/bin:$ZOOKEEPER/bin:$PIG_HOME/bin</span><br><span class="line"></span><br><span class="line">[hadoop@master ~]$ source ~/.bash_profile</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改hadoop-env.sh，修改如下三个参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@master ~]$ cd hadoop-2.7.1/etc/hadoop/</span><br><span class="line"></span><br><span class="line">export JAVA_HOME=/usr/java/jdk1.8.0_77</span><br><span class="line">export HADOOP_CONF_DIR=/home/hadoop/hadoop-2.7.1/etc/hadoop</span><br><span class="line">export HADOOP_PID_DIR=/var/hadoop/pids</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改core-site.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;fs.defaultFS&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;hdfs://master:9000&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;file:/home/hadoop/hadoop_tmp&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;io.file.buffer.size&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;131702&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;hadoop.proxyuser.hduser.hosts&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;*&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;hadoop.proxyuser.hduser.groups&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;*&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;ha.zookeeper.quorum&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;master:2181,slave1:2181,slave2:2181&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">hdfs-site.xml</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.ha.automatic-failover.enabled&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;true&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;file:/home/hadoop/hadoop_name&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;file:/home/hadoop/hadoop_data&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.replication&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;2&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.namenode.secondary.http-address&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;master:9001&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.webhdfs.enabled&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;true&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;ha.zookeeper.quorum&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;master:2181,slave1:2181,slave2:2181&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;hadoop.proxyuser.hduser.hosts&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;*&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;hadoop.proxyuser.hduser.groups&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;*&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;ha.zookeeper.quorum&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;master:2181,slave1:2181,slave2:2181&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改hdfs-site.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.ha.automatic-failover.enabled&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;true&lt;/value&gt; </span><br><span class="line">&lt;/property&gt; </span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;file:/home/hadoop/hadoop_name&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;file:/home/hadoop/hadoop_data&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.replication&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;2&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.namenode.secondary.http-address&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;master:9001&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.webhdfs.enabled&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;true&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt; </span><br><span class="line">        &lt;name&gt;ha.zookeeper.quorum&lt;/name&gt; </span><br><span class="line">        &lt;value&gt;master:2181,slave1:2181,slave2:2181&lt;/value&gt; </span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改mapred-site.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@master hadoop]$ cp mapred-site.xml.template mapred-site.xml</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;mapreduce.framework.name&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;yarn&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;     </span><br><span class="line">  &lt;name&gt;mapreduce.jobhistory.address&lt;/name&gt;   </span><br><span class="line">  &lt;value&gt;master:10020&lt;/value&gt;  </span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;     </span><br><span class="line">  &lt;name&gt;mapreduce.jobhistory.webapp.address&lt;/name&gt;   </span><br><span class="line">  &lt;value&gt;master:19888&lt;/value&gt;  </span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改yarn-site.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">&lt;property&gt;     </span><br><span class="line">  &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;   </span><br><span class="line">  &lt;value&gt;mapreduce_shuffle&lt;/value&gt;  </span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;     </span><br><span class="line">  &lt;name&gt;yarn.nodemanager.auxservices.mapreduce.shuffle.class&lt;/name&gt;   </span><br><span class="line">  &lt;value&gt;org.apache.hadoop.mapred.ShuffleHandler&lt;/value&gt;  </span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;     </span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.address&lt;/name&gt;   </span><br><span class="line">  &lt;value&gt;master:8032&lt;/value&gt;  </span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;     </span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.scheduler.address&lt;/name&gt;   </span><br><span class="line">  &lt;value&gt;master:8030&lt;/value&gt;  </span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;     </span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.resource-tracker.address&lt;/name&gt;   </span><br><span class="line">  &lt;value&gt;master:8031&lt;/value&gt;  </span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;     </span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.admin.address&lt;/name&gt;   </span><br><span class="line">  &lt;value&gt;master:8033&lt;/value&gt;  </span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;     </span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.webapp.address&lt;/name&gt;   </span><br><span class="line">  &lt;value&gt;master:8088&lt;/value&gt;  </span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt; </span><br><span class="line">        &lt;name&gt;ha.zookeeper.quorum&lt;/name&gt; </span><br><span class="line">        &lt;value&gt;master:2181,slave1:2181,slave2:2181&lt;/value&gt; </span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.zk-state-store.address&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;master:2181,slave1:2181,slave2:2181&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.store.class&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;org.apache.hadoop.yarn.server.resourcemanager.recovery.ZKRMStateStore&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.zk-address&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;master:2181,slave1:2181,slave2:2181&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改slaves </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">slave1</span><br><span class="line">slave2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>同步所有节点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@master hadoop]$ scp -r /home/hadoop/hadoop-2.7.1 slave1:/home/hadoop/</span><br><span class="line">[hadoop@master hadoop]$ scp -r /home/hadoop/hadoop-2.7.1 slave2:/home/hadoop/</span><br></pre></td></tr></table></figure>
+<h1 id="部署zookeeper"><a href="#部署zookeeper" class="headerlink" title="部署zookeeper"></a>部署zookeeper</h1></li>
+<li><p>解压</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@master hadoop]$ cd</span><br><span class="line">[hadoop@master ~]$ tar -zxvf zookeeper-3.4.6.tar.gz</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编辑zoo.cfg</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@master ~]$ cd zookeeper-3.4.6/conf/</span><br><span class="line">[hadoop@master conf]$ cp zoo_sample.cfg zoo.cfg</span><br><span class="line"></span><br><span class="line">tickTime=2000</span><br><span class="line">initLimit=5</span><br><span class="line">syncLimit=2</span><br><span class="line">dataDir=/home/hadoop/zookeeper_data</span><br><span class="line">dataLogDir=/home/hadoop/zookeeper_logs</span><br><span class="line">clientPort=2181</span><br><span class="line">server.1=master:2888:3888</span><br><span class="line">server.2=slave1:2888:3888</span><br><span class="line">server.3=slave2:2888:3888</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编辑myid</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">master服务器上执行</span><br><span class="line">[hadoop@master conf]$ echo 1 &gt; /home/hadoop/zookeeper_data/myid</span><br><span class="line"></span><br><span class="line">slave1服务器上执行</span><br><span class="line">[hadoop@slave1 ~]$ echo 2 &gt; /home/hadoop/zookeeper_data/myid</span><br><span class="line"></span><br><span class="line">slave2服务器上执行</span><br><span class="line">[hadoop@slave1 ~]$ echo 3 &gt; /home/hadoop/zookeeper_data/myid</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>同步所有节点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@master conf]$ scp -r /home/hadoop/zookeeper-3.4.6 slave1:/home/hadoop/</span><br><span class="line">[hadoop@master conf]$ scp -r /home/hadoop/zookeeper-3.4.6 slave2:/home/hadoop/</span><br></pre></td></tr></table></figure>
+<h1 id="部署hbase"><a href="#部署hbase" class="headerlink" title="部署hbase"></a>部署hbase</h1><ol>
+<li><p>解压Hbase</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@master conf]$ cd</span><br><span class="line">[hadoop@master ~]$ tar -zxvf hbase-1.2.1-bin.tar.gz</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置regionservers</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@master ~]$ cd hbase-1.2.1/conf/</span><br><span class="line">slave1</span><br><span class="line">slave2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编辑hbase-site.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;hbase.rootdir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;hdfs://master:9000/hbase&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;hbase.cluster.distributed&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;true&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;hbase.tmp.dir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;/home/hadoop/hbase_tmp&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;hbase.zookeeper.quorum&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;master,slave1,slave2&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;hbase.zookeeper.property.clientPort&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;2181&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;hbase.zookeeper.property.dataDir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;/home/hadoop/zookeeper_data&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编辑hbase-env.sh</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/java/jdk1.8.0_77</span><br><span class="line">export HBASE_MANAGES_ZK=false</span><br><span class="line">export HBASE_CLASSPATH=/home/hadoop/hadoop-2.7.1/etc/hadoop</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>同步所有节点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@master conf]$ scp -r /home/hadoop/hbase-1.2.1 slave1:/home/hadoop/</span><br><span class="line">[hadoop@master conf]$ scp -r /home/hadoop/hbase-1.2.1 slave2:/home/hadoop/</span><br></pre></td></tr></table></figure>
+<h1 id="部署hive"><a href="#部署hive" class="headerlink" title="部署hive"></a>部署hive</h1><ol>
+<li><p>解压Hive</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@master conf]$ cd</span><br><span class="line">[hadoop@master ~]$ tar -zxvf apache-hive-2.3.4-bin.tar.gz</span><br><span class="line">[hadoop@master ~]$ mv apache-hive-2.3.4-bin hive-2.3.4</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编辑hive-env.sh</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@master ~]$ cd hive-2.3.4/conf/</span><br><span class="line">[hadoop@master conf]$ cp hive-env.sh.template hive-env.sh</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<pre><code>3. 编辑hive-site.xml
+
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@master conf]$ cp hive-default.xml.template hive-site.xml</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;hive.metastore.warehouse.dir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;hdfs://master:9000/user/hive/warehouse&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;datanucleus.readOnlyDatastore&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;false&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;datanucleus.fixedDatastore&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;false&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;datanucleus.autoCreateSchema&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;true&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;datanucleus.autoCreateTables&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;true&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;datanucleus.autoCreateColumns&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;true&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;javax.jdo.option.ConnectionURL&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;jdbc:mysql://192.168.139.100:3306/hive?createDatabaseIfNotExist=true&amp;amp;useSSL=false&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;javax.jdo.option.ConnectionDriverName&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;com.mysql.jdbc.Driver&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;javax.jdo.option.ConnectionUserName&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;hive&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;javax.jdo.option.ConnectionPassword&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;hive&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;hive.metastore.uris&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;thrift://master:9083&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;hive.zookeeper.quorum&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;master,slave1,slave2&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;datanucleus.schema.autoCreateAll&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;true&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+
+4. 添加mysql驱动
+
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@master conf]$ cd</span><br><span class="line">[hadoop@master conf]$ cp /home/hadoop/mysql-connector-java.jar /home/hadoop/hive-2.3.4/lib/</span><br></pre></td></tr></table></figure>
+
+
+
+5. 复制jar包
+
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@master conf]$ cd</span><br><span class="line">[hadoop@master ~]$ cp /home/hadoop/hbase-1.2.1/lib/hbase-client-1.2.1.jar /home/hadoop/hive-2.3.4/lib/</span><br><span class="line">[hadoop@master ~]$ cp /home/hadoop/hbase-1.2.1/lib/hbase-common-1.2.1.jar /home/hadoop/hive-2.3.4/lib/</span><br><span class="line">[hadoop@master ~]$ scp $JAVA_HOME/lib/tools.jar /home/hadoop/hive-2.3.4/lib/</span><br><span class="line"></span><br><span class="line">[hadoop@master ~]$ cp /home/hadoop/hive-2.3.4/lib/jline-2.12.jar /home/hadoop/hadoop-2.7.1/share/hadoop/yarn/lib/</span><br><span class="line">[hadoop@master ~]$ scp /home/hadoop/hive-2.3.4/lib/jline-2.12.jar slave1:/home/hadoop/hadoop-2.7.1/share/hadoop/yarn/lib/</span><br><span class="line">[hadoop@master ~]$ scp /home/hadoop/hive-2.3.4/lib/jline-2.12.jar slave2:/home/hadoop/hadoop-2.7.1/share/hadoop/yarn/lib/</span><br></pre></td></tr></table></figure>
+
+6. 同步所有节点
+
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@master conf]$ scp -r /home/hadoop/hive-2.3.4 slave1:/home/hadoop/</span><br><span class="line">[hadoop@master conf]$ scp -r /home/hadoop/hive-2.3.4 slave2:/home/hadoop/</span><br></pre></td></tr></table></figure>
+
+   # 启动
+
+   1. 启动zookeeper，三台服务器都执行，如下以master为例
+
+      <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@master ~]$ zkServer.sh start</span><br></pre></td></tr></table></figure>
+
+      &gt; 输入jps，会显示启动进程
+      &gt;
+      &gt; QuorumPeerMain
+
+   2. 启动hadoop，只在master执行
+
+      &gt; 首次启动需要先在 Master 节点执行 NameNode 的格式化
+
+      <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@master ~]$ hdfs namenode -format</span><br><span class="line">日志最后几行会显示如下信息:</span><br><span class="line">Storage directory /home/hadoop/hadoop_name has been successfully formatted</span><br><span class="line">启动hadoop</span><br><span class="line">[hadoop@master ~]$ start-all.sh</span><br></pre></td></tr></table></figure>
+
+      &gt; 浏览器输入如下地址查看集群明细
+      &gt;
+      &gt; [名称节点信息](http://192.168.139.100:50070)
+      &gt;
+      &gt; [集群信息](http://192.168.139.100:8088/)
+      &gt;
+      &gt; 输入jps，master会显示启动进程
+      &gt;
+      &gt; QuorumPeerMain、NameNode、SecondaryNameNode、ResourceManager
+      &gt;
+      &gt; 输入jps，slave1、slave2会显示启动进程
+      &gt;
+      &gt; QuorumPeerMain、DataNode、NodeManager
+
+   3. 启动hbase，只在master执行
+
+      <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@master ~]$ start-hbase.sh</span><br></pre></td></tr></table></figure>
+
+      &gt; 输入jps，master会显示启动进程
+      &gt;
+      &gt; QuorumPeerMain、NameNode、SecondaryNameNode、ResourceManager、HMaster
+      &gt;
+      &gt; 输入jps，slave1、slave2会显示启动进程
+      &gt;
+      &gt; QuorumPeerMain、DataNode、NodeManager、HRegionServer
+
+      <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">进入Hbase命令行</span><br><span class="line">[hadoop@master ~]$ hbase shell</span><br><span class="line">查看表</span><br><span class="line">hbase(main):001:0&gt; list</span><br><span class="line">创建表&apos;mytable&apos;，含有一个列族hb</span><br><span class="line">hbase(main):003:0&gt; create &apos;mytable&apos;,&apos;hb&apos;</span><br><span class="line">添加行</span><br><span class="line">hbase(main):008:0&gt; put &apos;mytable&apos;,&apos;first&apos;,&apos;hb:data&apos;,&apos;hello HBase&apos;</span><br><span class="line">查看表中所有数据</span><br><span class="line">hbase(main):013:0&gt; scan &apos;mytable&apos;</span><br><span class="line">按照行键查询数据</span><br><span class="line">hbase(main):014:0&gt; get &apos;mytable&apos;,&apos;first&apos;</span><br></pre></td></tr></table></figure>
+
+   4. 启动hive，启动方式有5种
+
+      <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">在hdfs上创建hive存储数据目录</span><br><span class="line">查看hdfs的数据目录</span><br><span class="line">[hadoop@master ~]$ hadoop fs -ls /</span><br><span class="line">[hadoop@master ~]$ hadoop fs -mkdir /tmp</span><br><span class="line">[hadoop@master ~]$ hadoop fs -mkdir -p /user/hadoop/hive/warehouse</span><br><span class="line">元数据初始化</span><br><span class="line">[hadoop@master ~]$ schematool -dbType mysql -initSchema</span><br><span class="line">以metastore方式启动hive，nohup是指不挂断(用户退出)，&amp;是指后台运行</span><br><span class="line">[hadoop@master ~]$ nohup hive --service metastore &amp;&gt; /home/hadoop/metastore.log &amp;</span><br><span class="line">输入jps，会显示RunJar进程</span><br><span class="line">hive命令行连接</span><br><span class="line">[hadoop@master ~]$ hive</span><br><span class="line">查看进程会有两个RunJar进程</span><br><span class="line">hive&gt; show databases;</span><br><span class="line">会显示所有的数据库</span><br></pre></td></tr></table></figure>
+
+   5. 测试
+
+      <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">创建输入、输出目录</span><br><span class="line">[hadoop@master ~]$ hdfs dfs -mkdir /in</span><br><span class="line">[hadoop@master ~]$ hdfs dfs -mkdir /out</span><br><span class="line">将本地文件拷贝到hdfs中</span><br><span class="line">[hadoop@master ~]$ hdfs dfs -copyFromLocal /home/hadoop/hadoop-2.7.1/LICENSE.txt /in</span><br><span class="line">用wordcount分析LICENSE.txt</span><br><span class="line">[hadoop@master ~]$ hadoop jar /home/hadoop/hadoop-2.7.1/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.1.jar wordcount /in/LICENSE.txt /out</span><br><span class="line">查看结果</span><br><span class="line">[hadoop@master ~]$ hdfs dfs -cat /out/part-r-00000</span><br></pre></td></tr></table></figure>
+</code></pre>
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="http://blog.go2sts.com">lleej</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="http://blog.go2sts.com/2019/04/12/hadoop集群安装/">http://blog.go2sts.com/2019/04/12/hadoop集群安装/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/大数据/">大数据</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2019/04/25/Vue工程化实践之项目组织/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Vue工程化实践之项目组织</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2019/04/03/01-面向对象/">
+        <span class="next-text nav-default">01.Javascript的面向对象</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:lleej@qq.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/lleej" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2018 - 
+    
+    2020
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">lleej</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.2"></script>
+
+  </body>
+</html>

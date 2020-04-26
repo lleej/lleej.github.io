@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="102.Go命令之go install">
+
+
+
+
+  <meta name="keywords" content="技术博客 前端 Node Python AI">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深思阁">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.2">
+
+
+
+<link rel="canonical" href="http://blog.go2sts.com/2020/04/09/102Go命令install/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.2">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "qhKGP5WaH1jdzfAxC8naEyh8-gzGzoHsz",
+      appKey: "c1ffihM5AQSGtv4rwj3aaHeI"
+    });
+  </script>
+
+
+
+
+
+<script>
+  window.config = {"leancloud":{"app_id":"qhKGP5WaH1jdzfAxC8naEyh8-gzGzoHsz","app_key":"c1ffihM5AQSGtv4rwj3aaHeI"},"toc":true,"fancybox":true,"pjax":true};
+</script>
+
+    <title> 102.Go命令之go install - 深思阁 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">深思阁</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">深思阁</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          102.Go命令之go install
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2020-04-09
+        </span>
+        
+          <span class="post-category">
+            
+              <a href="/categories/Go命令/">Go命令</a>
+            
+          </span>
+        
+        
+        <span class="post-visits" data-url="/2020/04/09/102Go命令install/" data-title="102.Go命令之go install">
+          阅读次数 0
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#用途"><span class="toc-text">用途</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#命令输出"><span class="toc-text">命令输出</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#库代码包"><span class="toc-text">库代码包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命令代码包"><span class="toc-text">命令代码包</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#命令标记"><span class="toc-text">命令标记</span></a></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <p>摘要：本节介绍<code>Go</code>命令中常用的<code>go install</code>安装命令…</p>
+<a id="more"></a>
+<h2 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h2><p>用于编译并安装指定的代码包及它们的依赖包。只比<code>go build</code>命令多做了一件事，即：安装编译后的结果文件到指定目录，也就是将静态链接库<code>.a</code>文件输出到工作区的<code>pkg</code>目录中（<code>go build</code>保存在临时目录中）</p>
+<p><strong>命令格式</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ go install [包名]</span><br></pre></td></tr></table></figure>
+<p>命令参数只接收<strong>导入路径</strong>形式的代码包，<strong>不支持源文件格式</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在任何目录下可以执行</span></span><br><span class="line">$ go install hello/other</span><br><span class="line"><span class="comment"># 在包目录下，可以省略包名</span></span><br><span class="line"><span class="built_in">cd</span> hello/other</span><br><span class="line">$ go install</span><br></pre></td></tr></table></figure>
+<h2 id="命令输出"><a href="#命令输出" class="headerlink" title="命令输出"></a>命令输出</h2><p>不同于<code>go build</code>只显式输出命令代码包，<code>go install</code>可以输出库代码包和命令代码包</p>
+<h3 id="库代码包"><a href="#库代码包" class="headerlink" title="库代码包"></a>库代码包</h3><p>包名是库代码包时，将编译后的静态链接文件（或称为归档文件<code>.a</code>）保存到工作目录中的<code>pkg</code>子目录中。该文件存放的具体目录如下：</p>
+<ul>
+<li>创建平台相关目录，目录名为<code>${GOOS}_${GOARCH}</code></li>
+<li>创建归档文件<code>.a</code>，并将文件保存到平台相关目录中</li>
+<li>若包名有层次结构（含有<code>/</code>），则在平台相关目录中创建子目录</li>
+<li>示例：<code>go install x/y/z</code>则创建x/y目录，归档文件为<code>z.a</code></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ go install hello/other</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出后的目录结构</span></span><br><span class="line">├── pkg</span><br><span class="line">│   ├── windows_amd64 <span class="comment"># 平台相关目录</span></span><br><span class="line">│   │   ├── hello</span><br><span class="line">│   │   |   ├── other.a <span class="comment"># 安装的other包</span></span><br></pre></td></tr></table></figure>
+<h3 id="命令代码包"><a href="#命令代码包" class="headerlink" title="命令代码包"></a>命令代码包</h3><p>与<code>go build</code>命令的执行效果是相同的，唯一的不同之处在于：</p>
+<ul>
+<li><code>go build</code>将可执行文件保存在执行命令的目录中</li>
+<li><code>go install</code>将可执行文件保存在<code>$GOBIN</code>所在的目录下(或保存在<code>$GOPATH</code>中的<code>bin</code>子目录下)</li>
+</ul>
+<p>注意：当<code>$GOPATH</code>设置多个目录时，必须设置<code>$GOBIN</code>环境变量，这样<code>go install</code>才能将可执行文件保存到正确的位置，否则无法知道将可执行文件输出到哪里，会提示<code>GOBIN not set</code>错误</p>
+<h2 id="命令标记"><a href="#命令标记" class="headerlink" title="命令标记"></a>命令标记</h2><p>与<code>go build</code>命令基本相同，除了<code>-o</code>指定输出文件</p>
+<table>
+<thead>
+<tr>
+<th>标记名称</th>
+<th>标记描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-v</td>
+<td>显示构建包名</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>安装依赖包</td>
+</tr>
+<tr>
+<td>-work</td>
+<td>显示临时工作目录</td>
+</tr>
+<tr>
+<td>-p n</td>
+<td>指定编译任务并行数量</td>
+</tr>
+<tr>
+<td>-n -x</td>
+<td>输出编译期间执行的指令，-n只显示不执行</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="http://blog.go2sts.com">lleej</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="http://blog.go2sts.com/2020/04/09/102Go命令install/">http://blog.go2sts.com/2020/04/09/102Go命令install/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Go命令/">Go命令</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2020/04/10/104Go命令clean/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">104.Go命令之go clean</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2020/04/09/103Go命令get/">
+        <span class="next-text nav-default">103.Go命令之go get</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:lleej@qq.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/lleej" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2018 - 
+    
+    2020
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">lleej</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.2"></script>
+
+  </body>
+</html>
